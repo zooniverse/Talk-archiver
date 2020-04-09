@@ -1,0 +1,20 @@
+---
+title: Discussion board
+layout: default
+pagination:
+  data: boards.chat
+  size: 1
+  alias: board
+permalink: "boards/{{ board.zooniverse_id }}/"
+---
+<h1>{{ board.title }}</h1>
+<p>{{ board.description }}</p>
+
+<ul>
+  {%- for discussion in board.discussions -%}
+    <li>
+      <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
+      <hr>
+    </li>
+  {%- endfor -%}
+</ul>

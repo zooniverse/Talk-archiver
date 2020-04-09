@@ -1,0 +1,21 @@
+---
+title: Discussion boards
+layout: default
+---
+<ul>
+  {%- for category, categoryBoards in boards -%}
+  <li>
+    <h2>{{ category }}</h2>
+    <hr>
+    <ul>
+      {%- for board in categoryBoards -%}
+        <li>
+          <p><a href="./{{ board.zooniverse_id }}">{{ board.title }}</a></p>
+          <p>{{ board.description }}</p>
+          <hr>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </li>
+  {%- endfor -%}
+</ul>
