@@ -1,12 +1,12 @@
 {
-  "name": "elevenpack",
-  "version": "1.1.0",
-  "description": "Publish a website using Eleventy, webpack and PostCSS",
-  "author": "Adrian Gheorghe",
-  "license": "MIT",
+  "name": "Talk-archiver",
+  "version": "0.1.0",
+  "description": "Archive an Ouroboros project Talk forum, using Eleventy, webpack and PostCSS",
+  "author": "Zooniverse <contact@zooniverse.org> (https://www.zooniverse.org/)",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/deviousdodo/elevenpack"
+    "url": "https://github.com/zooniverse/Talk-archiver"
   },
   "scripts": {
     "build": "npm-run-all clean build:assets build:site",
