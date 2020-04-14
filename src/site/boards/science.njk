@@ -3,17 +3,21 @@ title: Discussion board
 layout: default
 pagination:
   data: boards.science
+  resolve: values
   size: 1
   alias: board
 permalink: "/boards/{{ board.zooniverse_id }}/"
 ---
 <h1>{{ board.title }}</h1>
 <p>{{ board.description }}</p>
+<p>{{ board.discussions.length }} conversations</p>
 
 <ul class="container">
   {%- for discussion in board.discussions -%}
     <li>
       <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
+      <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+      <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
       <hr>
     </li>
   {%- endfor -%}

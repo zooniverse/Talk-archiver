@@ -5,12 +5,12 @@ layout: default
 <ul>
   {%- for category, categoryBoards in boards -%}
   <li>
-    <h2>{{ category }}</h2>
+    <h2>{{ category | capitalize }}</h2>
     <hr>
-    <ul>
-      {%- for board in categoryBoards -%}
+    <ul class="container">
+      {%- for boardID, board in categoryBoards -%}
         <li>
-          <p><a href="./{{ board.zooniverse_id }}">{{ board.title }}</a></p>
+          <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
           <p>{{ board.description }}</p>
           <hr>
         </li>
