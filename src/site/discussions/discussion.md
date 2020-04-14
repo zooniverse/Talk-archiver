@@ -5,7 +5,7 @@ pagination:
   data: discussions
   size: 1
   alias: discussion
-permalink: "boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/"
+permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/"
 ---
 <h1 class="text-lg">{{ discussion.title }}</h1>
 <p>{{ discussion.description }}</p>
