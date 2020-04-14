@@ -5,7 +5,7 @@ layout: default
 <ul>
   {%- for category, categoryBoards in boards -%}
   <li>
-    <h2>{{ category }}</h2>
+    <h2>{{ category | capitalize }}</h2>
     <hr>
     <ul>
       {%- for board in categoryBoards -%}

@@ -14,6 +14,8 @@ permalink: "/boards/{{ board.zooniverse_id }}/"
   {%- for discussion in board.discussions -%}
     <li>
       <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
+      <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+      <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
       <hr>
     </li>
   {%- endfor -%}
