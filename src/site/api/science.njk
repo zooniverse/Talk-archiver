@@ -1,0 +1,8 @@
+---
+pagination:
+  data: boards.science
+  size: 1
+  alias: board
+permalink: "/api/boards/{{ board.zooniverse_id }}.json"
+---
+{{ board | dump | safe }}

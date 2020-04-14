@@ -1,0 +1,8 @@
+---
+pagination:
+  data: discussions
+  size: 1
+  alias: discussion
+permalink: "/api/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}.json"
+---
+{{ discussion | dump | safe }}

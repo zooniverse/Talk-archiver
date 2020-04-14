@@ -29,9 +29,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.setBrowserSyncConfig({ files: [manifestPath] });
 
   // A debug utility.
-  eleventyConfig.addFilter("dump", obj => {
-    return util.inspect(obj);
-  });
+  // eleventyConfig.addFilter("dump", obj => {
+//     return util.inspect(obj);
+//   });
 
   eleventyConfig.addFilter("log", obj => {
     console.log(obj);
