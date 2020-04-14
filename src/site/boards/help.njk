@@ -10,6 +10,7 @@ permalink: "/boards/{{ board.zooniverse_id }}/"
 ---
 <h1>{{ board.title }}</h1>
 <p>{{ board.description }}</p>
+<p>{{ board.discussions.length }} conversations</p>
 
 <ul class="container">
   {%- for discussion in board.discussions -%}
