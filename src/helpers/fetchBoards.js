@@ -8,9 +8,10 @@ const CATEGORIES = [
 ]
 async function discussionBoard(board) {
   if ( board.zooniverse_id && board.discussions ) {
-    const pages = Math.ceil(board.discussions / 10) || 1
+    const discussionsCount = board.discussions_count || board.discussions;
+    const pages = Math.ceil(discussionsCount / 10) || 1
     const fullBoard = await fetchBoard(board, pages);
-    console.log('board discussions', board.zooniverse_id, board.discussions.length)
+    console.log('board discussions', board.zooniverse_id, discussionsCount)
     return fullBoard
   }
   return board;

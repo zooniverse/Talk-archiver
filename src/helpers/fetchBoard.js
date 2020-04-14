@@ -14,7 +14,8 @@ module.exports = async function fetchBoard(board, pages) {
     const pageData = await fetchPage(board.zooniverse_id, page);
 
     for (discussion of pageData.discussions) {
-      const pages = Math.ceil(discussion.comments_count / 10) || 1;
+      const commentsCount = discussion.comments_count || discussion.comments;
+      const pages = Math.ceil(commentsCount / 10) || 1;
       const fullDiscussion = await fetchDiscussion(board, discussion, pages);
       discussions.push(fullDiscussion);
     }
