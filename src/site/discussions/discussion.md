@@ -13,7 +13,7 @@ permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zoonive
 {%- for comment in discussion.comments -%}
 <li class="container mb-4 border-b">
 
-{{ comment.body }}
+{{ comment.body | safe }}
 
 </li>
 {%- endfor -%}
