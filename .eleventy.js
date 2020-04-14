@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const moment = require('moment');
 
 const manifestPath = path.resolve(__dirname, "dist", "assets", "manifest.json");
 const manifest = JSON.parse(
@@ -35,6 +36,10 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter("log", obj => {
     console.log(obj);
+  });
+
+  eleventyConfig.addFilter("date", timestamp => {
+    return moment(timestamp).format('LLL');
   });
 
   return {

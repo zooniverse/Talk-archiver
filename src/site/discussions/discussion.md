@@ -16,6 +16,7 @@ permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zoonive
 
 {{ comment.body | safe }}
 
+Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
 </li>
 {%- endfor -%}
 </ul>

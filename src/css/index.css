@@ -9,6 +9,10 @@ a {
   @apply underline;
 }
 
+p {
+  @apply mb-2;
+}
+
 .container {
   @apply max-w-xl mx-auto;
 }
