@@ -3,6 +3,7 @@ title: Discussion board
 layout: default
 pagination:
   data: discussions
+  resolve: values
   size: 1
   alias: discussion
 permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/"
