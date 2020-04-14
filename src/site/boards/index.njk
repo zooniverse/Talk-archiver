@@ -7,7 +7,7 @@ layout: default
   <li>
     <h2>{{ category | capitalize }}</h2>
     <hr>
-    <ul>
+    <ul class="container">
       {%- for board in categoryBoards -%}
         <li>
           <p><a href="./{{ board.zooniverse_id }}">{{ board.title }}</a></p>

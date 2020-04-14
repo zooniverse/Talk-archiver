@@ -9,12 +9,16 @@ a {
   @apply underline;
 }
 
+li {
+  @apply ml-8;
+}
+
 p {
   @apply mb-2;
 }
 
 .container {
-  @apply max-w-xl mx-auto;
+  @apply max-w-3xl mx-auto;
 }
 
 .comment {
