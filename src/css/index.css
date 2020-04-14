@@ -4,6 +4,11 @@
 /* purgecss end ignore */
 
 /* Your custom CSS comes right here */
+a {
+  @apply text-blue-700;
+  @apply underline;
+}
+
 .container {
   @apply max-w-xl mx-auto;
 }
