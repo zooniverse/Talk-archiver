@@ -20,12 +20,12 @@ module.exports = async function fetchBoard(board, pages) {
       const pages = Math.ceil(commentsCount / 10) || 1;
       const fullDiscussion = await fetchDiscussion(board, discussion, pages);
       store.discussions[fullDiscussion.zooniverse_id] = fullDiscussion;
-      discussions.push(fullDiscussion);
+      discussions.push(fullDiscussion.zooniverse_id);
     }
 
     fullBoard = pageData;
   }
 
-  return Object.assign({}, fullBoard, { discussions });
+  return Object.assign({}, fullBoard, { links: { discussions } });
 }
 

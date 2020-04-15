@@ -10,14 +10,14 @@ permalink: "/boards/{{ board.zooniverse_id }}/"
 ---
 <h1>{{ board.title }}</h1>
 <p>{{ board.description }}</p>
-<p>{{ board.discussions.length }} conversations</p>
+<p>{{ board.links.discussions.length }} conversations</p>
 
 <ul class="container">
-  {%- for discussion in board.discussions -%}
+  {%- for discussionID in board.links.discussions -%}
     <li>
-      <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
-      <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
-      <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+      <p><a href="./discussions/{{ discussions[discussionID].zooniverse_id }}">{{ discussions[discussionID].title }}</a></p>
+      <p>{{ discussions[discussionID].comments.length }} posts / {{ discussions[discussionID].users }} participants</p>
+      <p>Last post {{ discussions[discussionID].last_comment.created_at | date }} by {{ discussions[discussionID].last_comment.user_name }}</p>
       <hr>
     </li>
   {%- endfor -%}
