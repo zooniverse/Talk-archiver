@@ -1,4 +1,5 @@
 module.exports = {
   boards: {},
-  discussions: {}
+  discussions: {},
+  subjects: {}
 };

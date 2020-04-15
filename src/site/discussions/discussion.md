@@ -10,6 +10,9 @@ permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zoonive
 ---
 <h1 class="text-lg">{{ discussion.title }}</h1>
 <p>{{ discussion.description }}</p>
+<div class="focus container">
+  <img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}>
+</div>
 <ul class="container">
 {%- for comment in discussion.comments -%}
 <li id={{ comment._id }} class="comment">

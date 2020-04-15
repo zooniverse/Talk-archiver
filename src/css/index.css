@@ -26,4 +26,12 @@ p {
   @apply border-b;
 }
 
+.focus {
+  @apply float-left;
+  @apply w-1/3;
+}
+
+.focus img {
+  @apply max-w-sm;
+}
 @tailwind utilities;
