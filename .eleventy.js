@@ -42,6 +42,10 @@ module.exports = function(eleventyConfig) {
     return moment(timestamp).format('LLL');
   });
 
+  eleventyConfig.addFilter("limit", (array, limit) => {
+    return array.slice(0, limit);
+  })
+
   return {
     dir: {
       input: "src/site",
