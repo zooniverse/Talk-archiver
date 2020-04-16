@@ -42,4 +42,9 @@ p {
 .focus img {
   @apply max-w-sm;
 }
+
+.subject {
+  @apply max-w-sm
+}
+
 @tailwind utilities;

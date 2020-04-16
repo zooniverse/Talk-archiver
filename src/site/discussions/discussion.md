@@ -12,7 +12,7 @@ permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zoonive
 <p>{{ discussion.description }}</p>
 {% if discussion.focus and discussion.focus.base_type == 'Subject' %}
 <div class="focus container">
-  <img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}>
+  <a href="/subjects/{{ discussion.focus.zooniverse_id }}"><img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}></a>
 </div>
 {% endif %}
 <ul class="container">
