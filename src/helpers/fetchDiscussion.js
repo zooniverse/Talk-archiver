@@ -24,8 +24,10 @@ module.exports = async function fetchDiscussion(board, discussion, pages) {
 
   for (comment of comments) {
     const { user_name } = comment;
-    const user = await API.get(`users/${user_name}`);
-    store.users[user_name] = user;
+    if (!store.users[user_name]) {
+      const user = await API.get(`users/${user_name}`);
+      store.users[user_name] = user;
+    }
   }
 
   return Object.assign({}, discussion, fullDiscussion, { comments });

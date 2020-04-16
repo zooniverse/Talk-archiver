@@ -1,0 +1,9 @@
+---
+pagination:
+  data: userCollections
+  resolve: values
+  size: 1
+  alias: userCollection
+permalink: "/api/collections/{{ userCollection.zooniverse_id }}.json"
+---
+{{ userCollection | dump | safe }}
