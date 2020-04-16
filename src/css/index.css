@@ -17,6 +17,14 @@ p {
   @apply mb-2;
 }
 
+.collection {
+  @apply max-w-6xl mx-auto;
+}
+
+.collection li {
+  @apply inline-block;
+}
+
 .container {
   @apply max-w-3xl mx-auto;
 }

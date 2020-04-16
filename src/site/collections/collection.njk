@@ -1,0 +1,20 @@
+---
+title: Collection
+layout: default
+pagination:
+  data: userCollections
+  resolve: values
+  size: 1
+  alias: userCollection
+permalink: "/collections/{{ userCollection.zooniverse_id}}/"
+---
+<h1 class="text-lg">{{ userCollection.title }}</h1>
+<p>{{ userCollection.description }}</p>
+
+<ul class="collection">
+{%- for subject in userCollection.subjects -%}
+  <li id={{ subject.zooniverse_id }} class="subject">
+    <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a> 
+  </li>
+{%- endfor -%}
+</ul>
