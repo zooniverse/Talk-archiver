@@ -22,6 +22,12 @@ module.exports = async function fetchDiscussion(board, discussion, pages) {
     store.subjects[subject.zooniverse_id] = subject;
   }
 
+  for (comment of comments) {
+    const { user_name } = comment;
+    const user = await API.get(`users/${user_name}`);
+    store.users[user_name] = user;
+  }
+
   return Object.assign({}, discussion, fullDiscussion, { comments });
 }
 
