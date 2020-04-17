@@ -11,7 +11,7 @@ renderData:
 ---
 <h1 class="text-lg">{{ user.name }}</h1>
 
-<h2>Collections</h2>
+<h2>Collections({{ user.my_collections.length }})</h2>
 <ul>
 {%- for collection in user.my_collections -%}
   <li>
