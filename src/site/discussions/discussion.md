@@ -1,5 +1,4 @@
 ---
-title: Discussion board
 layout: default
 pagination:
   data: discussions
@@ -7,6 +6,9 @@ pagination:
   size: 1
   alias: discussion
 permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/"
+renderData:
+  title: "{{ discussion.title}}"
+  description: "{{ discussion.description }}"
 ---
 <h1 class="text-lg">{{ discussion.title }}</h1>
 <p>{{ discussion.description }}</p>

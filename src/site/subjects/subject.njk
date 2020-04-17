@@ -1,5 +1,4 @@
 ---
-title: Subject
 layout: default
 pagination:
   data: subjects
@@ -7,6 +6,8 @@ pagination:
   size: 1
   alias: subject
 permalink: "/subjects/{{ subject.zooniverse_id }}/"
+renderData:
+  title: "Subject {{ subject.zooniverse_id }}"
 ---
 <h1 class="text-lg">{{ subject.zooniverse_id }}</h1>
 

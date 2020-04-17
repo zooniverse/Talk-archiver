@@ -1,5 +1,4 @@
 ---
-title: Collection
 layout: default
 pagination:
   data: userCollections
@@ -7,6 +6,9 @@ pagination:
   size: 1
   alias: userCollection
 permalink: "/collections/{{ userCollection.zooniverse_id}}/"
+renderData:
+  title: "{{ userCollection.title }}"
+  description: "{{ userCollection.description }}"
 ---
 <h1 class="text-lg">{{ userCollection.title }}</h1>
 <p>{{ userCollection.description }}</p>

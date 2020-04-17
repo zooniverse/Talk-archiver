@@ -1,5 +1,4 @@
 ---
-title: Discussion board
 layout: default
 pagination:
   data: boards.help
@@ -7,6 +6,9 @@ pagination:
   size: 1
   alias: board
 permalink: "/boards/{{ board.zooniverse_id }}/"
+renderData:
+  title: "{{ board.title }}"
+  description: "{{ board.description }}"
 ---
 <h1>{{ board.title }}</h1>
 <p>{{ board.description }}</p>

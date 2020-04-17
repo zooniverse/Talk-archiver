@@ -1,5 +1,4 @@
 ---
-title: User
 layout: default
 pagination:
   data: users
@@ -7,6 +6,8 @@ pagination:
   size: 1
   alias: user
 permalink: "/users/{{ user.name }}/"
+renderData:
+  title: "{{ user.name }}"
 ---
 <h1 class="text-lg">{{ user.name }}</h1>
 
