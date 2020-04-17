@@ -22,7 +22,11 @@ p {
 }
 
 .collection li {
-  @apply inline-block;
+  @apply inline-block h-40;
+}
+
+.collection li img {
+  @apply h-full;
 }
 
 .container {

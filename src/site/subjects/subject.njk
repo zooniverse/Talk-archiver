@@ -40,7 +40,7 @@ renderData:
           {%- for collectionSubject in collection.subjects | limit(4) -%}
             <li id={{ collectionSubject.zooniverse_id }} class="subject">
               <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-                <img width=50 src={{ collectionSubject.location.thumb}}>
+                <img src={{ collectionSubject.location.thumb}}>
               </a>
             </li>
           {%- endfor -%}

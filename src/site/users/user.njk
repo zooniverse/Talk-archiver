@@ -19,7 +19,7 @@ renderData:
     <ul class="collection">
       {%- for subject in collection.subjects | limit(4) -%}
         <li id={{ subject.zooniverse_id }} class="subject">
-          <a href="/subjects/{{ subject.zooniverse_id }}"><img width=50 src={{ subject.location.thumb}}></a> 
+          <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a>
         </li>
       {%- endfor -%}
     </ul>
