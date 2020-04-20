@@ -1,0 +1,9 @@
+---
+pagination:
+  data: users
+  resolve: values
+  size: 1
+  alias: user
+permalink: "/users/{{ user.zooniverse_id }}.json"
+---
+{{ user | dump | safe }}

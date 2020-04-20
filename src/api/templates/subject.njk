@@ -1,0 +1,9 @@
+---
+pagination:
+  data: subjects
+  resolve: values
+  size: 1
+  alias: subject
+permalink: "/subjects/{{ subject.zooniverse_id }}.json"
+---
+{{ subject | dump | safe }}

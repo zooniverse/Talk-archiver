@@ -44,11 +44,15 @@ module.exports = async function fetchUsers() {
       const { user_name } = comment;
       if (!store.users[user_name]) {
         const user = await API.get(`users/${user_name}`);
-        const userCollections = await listCollections(user);
-        const userSubjects = await listSubjects(user);
-        user.my_collections && user.my_collections.push(...userCollections);
-        user.subjects && user.subjects.push(...userSubjects)
-        store.users[user_name] = user;
+        if (user.name) {
+          const userCollections = await listCollections(user);
+          const userSubjects = await listSubjects(user);
+          user.my_collections && user.my_collections.push(...userCollections);
+          user.subjects && user.subjects.push(...userSubjects)
+          store.users[user.name] = user;
+        } else {
+          console.log(`*** Invalid response for user ${user_name}`)
+        }
       }
     }
   }
