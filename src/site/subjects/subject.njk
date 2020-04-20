@@ -16,7 +16,7 @@ renderData:
 
   <h2>Comments</h2>
   <ul>
-  {%- for comment in subject.discussion.comments -%}
+  {%- for comment in subject.discussion.comments | reverse -%}
   <li id={{ comment._id }} class="comment">
     <a href="/users/{{ comment.user_name }}">
       <img width=20 height=20 src="https://api.zooniverse.org/talk/avatars/{{ comment.user_zooniverse_id }}" class="avatar" onerror="window.defaultAvatar(this)"></a> by <a href="/users/{{ comment.user_name }}">{{ comment.user_name }}
