@@ -2,10 +2,16 @@ const fs = require("fs");
 const path = require("path");
 const moment = require('moment');
 
+let manifest = {};
 const manifestPath = path.resolve(__dirname, "dist", "assets", "manifest.json");
-const manifest = JSON.parse(
-  fs.readFileSync(manifestPath, { encoding: "utf8" })
-);
+try {
+  manifest = JSON.parse(
+    fs.readFileSync(manifestPath, { encoding: "utf8" })
+  );
+} catch (e) {
+  console.log(e);
+}
+
 
 module.exports = function(eleventyConfig) {
   // Layout aliases make templates more portable.
