@@ -11,6 +11,7 @@
   "scripts": {
     "build": "npm-run-all clean build:assets build:site",
     "build:assets": "NODE_ENV=production webpack --mode=production",
+    "build:data": "NODE_ENV=production eleventy --input=src/api --output=src/site/_data",
     "build:site": "NODE_ENV=production eleventy",
     "clean": "rm -rf ./dist",
     "dev": "npm-run-all clean webpack:assets --parallel dev:*",
