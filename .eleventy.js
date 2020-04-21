@@ -52,6 +52,19 @@ module.exports = function(eleventyConfig) {
     return array.slice(0, limit);
   });
 
+  eleventyConfig.addFilter("focus", (discussions, focusID) => {
+    const boards = {
+      chat: [],
+      science: [],
+      help: []
+    }
+    const focusDiscussions = Object.values(discussions).filter(item => item.focus._id === focusID);
+    focusDiscussions.forEach(discussion => {
+      boards[discussion.board.category].push(discussion);
+    });
+    return boards;
+  });
+
   // build collections from tagged subjects.
 
   function hasTag(item, tag) {

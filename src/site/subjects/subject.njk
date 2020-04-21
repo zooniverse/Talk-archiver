@@ -11,9 +11,11 @@ renderData:
 ---
 <h1 class="text-lg">{{ subject.zooniverse_id }}</h1>
 
-<div class="container">
+<div class=" focus container">
   <img class="subject" src={{ subject.location.standard }} >
+</div>
 
+<div class="container">
   <h2>Tags</h2>
   <ul>
     {% for tag in subject.tags %}
@@ -37,6 +39,7 @@ renderData:
   </li>
   {%- endfor -%}
   </ul>
+
   <h2>Collections</h2>
   <ul>
     {%- for collection in subject.collections -%}
@@ -54,4 +57,19 @@ renderData:
       </li>
     {%- endfor -%}
   </ul>
+
+  <h2>Board Discussions</h2>
+  {% for category, categoryDiscussions in discussions | focus(subject.zooniverse_id) %}
+    <h3>{{ category | capitalize }}</h3>
+    <ul>
+      {% for discussion in categoryDiscussions %}
+        <li>
+          <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
+          <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+          <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+          <hr>
+        </li>
+      {% endfor  %}
+    </ul>
+  {% endfor %}
 </div>
