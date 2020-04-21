@@ -50,7 +50,47 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addFilter("limit", (array, limit) => {
     return array.slice(0, limit);
-  })
+  });
+
+  // build collections from tagged subjects.
+
+  function hasTag(item, tag) {
+    const matchingTags = item.tags && item.tags.filter(itemTag => tag === itemTag._id);
+    return matchingTags && matchingTags.length > 0;
+  }
+
+  function pageData(collection) {
+    const [ item ] = collection.getAll();
+    const { subjects, discussions, userCollections } = item.data;
+    return { subjects, discussions, userCollections };
+  }
+
+  function uniqueTags(data) {
+    const tags = {};
+    const { subjects } = data;
+    for (subject of Object.values(subjects)) {
+      subject.tags && subject.tags.forEach(tag => {
+        tags[tag._id] = tag;
+      });
+    }
+    return Object.keys(tags);
+  }
+
+  function buildTagCollection(tag, collection, { subjects }) {
+    const taggedSubjects = Object.values(subjects).filter(subject => hasTag(subject, tag));
+    return taggedSubjects;
+  }
+
+  eleventyConfig.addCollection("taggedContent", collection => {
+    const taggedItems = {};
+    const tagNames = uniqueTags(pageData(collection));
+    for (tag of tagNames) {
+      taggedItems[tag] = {
+        subjects: buildTagCollection(tag, collection, pageData(collection))
+      }
+    }
+    return taggedItems;
+  });
 
   return {
     dir: {
