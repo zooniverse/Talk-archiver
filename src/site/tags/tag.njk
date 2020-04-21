@@ -9,7 +9,7 @@ renderData:
   title: "{{ tag }}"
 ---
 <h1>Tag: {{ tag }}</h1>
-<h2><a href="/tags/{{ tag }}/subjects.html">Subjects</a></h2>
+<h2><a href="/tags/{{ tag }}/subjects.html">Subjects</a> ({{ collections.taggedContent[tag].subjects.length }})</h2>
 <ul class="collection">
   {% for subject in collections.taggedContent[tag].subjects | limit(6) %}
     <li id={{ subject.zooniverse_id }} class="subject">
@@ -18,7 +18,7 @@ renderData:
   {% endfor %}
 </ul>
 
-<h2><a href="/tags/{{ tag }}/discussions.html">Discussions</a></h2>
+<h2><a href="/tags/{{ tag }}/discussions.html">Discussions</a> ({{ collections.taggedContent[tag].discussions.length }})</h2>
 <ul>
   {% for discussion in collections.taggedContent[tag].discussions | limit(6) %}
     <li>
@@ -30,7 +30,7 @@ renderData:
   {% endfor %}
 </ul>
 
-<h2><a href="/tags/{{ tag }}/collections.html">Collections</a></h2>
+<h2><a href="/tags/{{ tag }}/collections.html">Collections</a> ({{ collections.taggedContent[tag].userCollections.length }})</h2>
 <ul>
   {% for collection in collections.taggedContent[tag].userCollections | limit(6) %}
     <li>
