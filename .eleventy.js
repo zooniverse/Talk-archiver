@@ -55,6 +55,9 @@ module.exports = function(eleventyConfig) {
   // build collections from tagged subjects.
 
   function hasTag(item, tag) {
+    if (item.tags && item.tags.indexOf(tag) > -1) {
+      return true;
+    }
     const matchingTags = item.tags && item.tags.filter(itemTag => tag === itemTag._id);
     return matchingTags && matchingTags.length > 0;
   }
@@ -67,7 +70,7 @@ module.exports = function(eleventyConfig) {
 
   function uniqueTags(data) {
     const tags = {};
-    const { discussions, subjects } = data;
+    const { discussions, subjects, userCollections } = data;
 
     for (subject of Object.values(subjects)) {
       subject.tags && subject.tags.forEach(tag => {
@@ -82,18 +85,24 @@ module.exports = function(eleventyConfig) {
         });
       })
     }
+
+    for (userCollection of Object.values(userCollections)) {
+      userCollection.tags && userCollection.tags.forEach(tag => {
+        tags[tag] = tag;
+      })
+    }
+
     return Object.keys(tags);
   }
 
   function buildTagCollection(tag, collection, data) {
     const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
     const discussions = Object.values(data.discussions).filter(discussion => {
-      const taggedComments = discussion.comments.filter(comment => {
-        return comment.tags && comment.tags.indexOf(tag) > -1;
-      });
+      const taggedComments = discussion.comments.filter(comment => hasTag(comment, tag));
       return taggedComments.length > 0;
     });
-    return { discussions, subjects };
+    const userCollections = Object.values(data.userCollections).filter(userCollection => hasTag(userCollection, tag));
+    return { discussions, subjects, userCollections };
   }
 
   eleventyConfig.addCollection("taggedContent", collection => {
