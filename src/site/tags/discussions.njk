@@ -4,23 +4,14 @@ pagination:
   data: collections.taggedContent
   size: 1
   alias: tag
-permalink: "/tags/{{ tag }}/"
+permalink: "/tags/{{ tag }}/discussions.html"
 renderData:
   title: "{{ tag }}"
 ---
 <h1>Tag: {{ tag }}</h1>
-<h2><a href="/tags/{{ tag }}/subjects.html">Subjects</a></h2>
-<ul class="collection">
-  {% for subject in collections.taggedContent[tag].subjects | limit(6) %}
-    <li id={{ subject.zooniverse_id }} class="subject">
-      <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a> 
-    </li>
-  {% endfor %}
-</ul>
-
-<h2><a href="/tags/{{ tag }}/discussions.html">Discussions</a></h2>
+<h2>Discussions</h2>
 <ul>
-  {% for discussion in collections.taggedContent[tag].discussions | limit(6) %}
+  {% for discussion in collections.taggedContent[tag].discussions %}
     <li>
       <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
       <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>

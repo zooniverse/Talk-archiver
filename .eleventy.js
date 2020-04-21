@@ -67,27 +67,40 @@ module.exports = function(eleventyConfig) {
 
   function uniqueTags(data) {
     const tags = {};
-    const { subjects } = data;
+    const { discussions, subjects } = data;
+
     for (subject of Object.values(subjects)) {
       subject.tags && subject.tags.forEach(tag => {
         tags[tag._id] = tag;
       });
     }
+
+    for (discussion of Object.values(discussions)) {
+      discussion.comments.forEach(comment => {
+        comment.tags && comment.tags.forEach(tag => {
+          tags[tag] = tag;
+        });
+      })
+    }
     return Object.keys(tags);
   }
 
-  function buildTagCollection(tag, collection, { subjects }) {
-    const taggedSubjects = Object.values(subjects).filter(subject => hasTag(subject, tag));
-    return taggedSubjects;
+  function buildTagCollection(tag, collection, data) {
+    const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
+    const discussions = Object.values(data.discussions).filter(discussion => {
+      const taggedComments = discussion.comments.filter(comment => {
+        return comment.tags && comment.tags.indexOf(tag) > -1;
+      });
+      return taggedComments.length > 0;
+    });
+    return { discussions, subjects };
   }
 
   eleventyConfig.addCollection("taggedContent", collection => {
     const taggedItems = {};
     const tagNames = uniqueTags(pageData(collection));
     for (tag of tagNames) {
-      taggedItems[tag] = {
-        subjects: buildTagCollection(tag, collection, pageData(collection))
-      }
+      taggedItems[tag] = buildTagCollection(tag, collection, pageData(collection));
     }
     return taggedItems;
   });
