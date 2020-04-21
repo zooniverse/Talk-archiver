@@ -68,29 +68,27 @@ module.exports = function(eleventyConfig) {
     return { subjects, discussions, userCollections };
   }
 
-  function uniqueTags(data) {
-    const tags = {};
-    const { discussions, subjects, userCollections } = data;
-
-    for (subject of Object.values(subjects)) {
-      subject.tags && subject.tags.forEach(tag => {
-        tags[tag._id] = tag;
+  function uniqueTags(items, tags) {
+    for (item of items) {
+      item.tags && item.tags.forEach(tag => {
+        tagName = tag._id || tag;
+        tags[tagName] = tag;
       });
     }
+    return tags;
+  }
+
+  function allUniqueTags(data) {
+    let tags = {};
+    const { discussions, subjects, userCollections } = data;
+
+    tags = uniqueTags(Object.values(subjects), tags);
 
     for (discussion of Object.values(discussions)) {
-      discussion.comments.forEach(comment => {
-        comment.tags && comment.tags.forEach(tag => {
-          tags[tag] = tag;
-        });
-      })
+      tags = uniqueTags(discussion.comments, tags);
     }
 
-    for (userCollection of Object.values(userCollections)) {
-      userCollection.tags && userCollection.tags.forEach(tag => {
-        tags[tag] = tag;
-      })
-    }
+    tags = uniqueTags(Object.values(userCollections), tags);
 
     return Object.keys(tags);
   }
@@ -107,7 +105,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addCollection("taggedContent", collection => {
     const taggedItems = {};
-    const tagNames = uniqueTags(pageData(collection));
+    const tagNames = allUniqueTags(pageData(collection));
     for (tag of tagNames) {
       taggedItems[tag] = buildTagCollection(tag, collection, pageData(collection));
     }
