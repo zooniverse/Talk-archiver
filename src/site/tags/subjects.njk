@@ -1,0 +1,19 @@
+---
+layout: default
+pagination:
+  data: collections.taggedContent
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag }}/subjects.html"
+renderData:
+  title: "{{ tag }}"
+---
+<h1>Tag: {{ tag }}</h1>
+<h2>Subjects</h2>
+<ul class="collection">
+  {% for subject in collections.taggedContent[tag].subjects %}
+    <li id={{ subject.zooniverse_id }} class="subject">
+      <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a> 
+    </li>
+  {% endfor %}
+</ul>

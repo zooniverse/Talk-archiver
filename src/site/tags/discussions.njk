@@ -1,0 +1,22 @@
+---
+layout: default
+pagination:
+  data: collections.taggedContent
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag }}/discussions.html"
+renderData:
+  title: "{{ tag }}"
+---
+<h1>Tag: {{ tag }}</h1>
+<h2>Discussions</h2>
+<ul>
+  {% for discussion in collections.taggedContent[tag].discussions %}
+    <li>
+      <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
+      <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+      <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+      <hr>
+    </li>
+  {% endfor %}
+</ul>

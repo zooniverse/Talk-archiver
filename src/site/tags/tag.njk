@@ -1,0 +1,50 @@
+---
+layout: default
+pagination:
+  data: collections.taggedContent
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag }}/"
+renderData:
+  title: "{{ tag }}"
+---
+<h1>Tag: {{ tag }}</h1>
+<h2><a href="/tags/{{ tag }}/subjects.html">Subjects</a> ({{ collections.taggedContent[tag].subjects.length }})</h2>
+<ul class="collection">
+  {% for subject in collections.taggedContent[tag].subjects | limit(6) %}
+    <li id={{ subject.zooniverse_id }} class="subject">
+      <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a> 
+    </li>
+  {% endfor %}
+</ul>
+
+<h2><a href="/tags/{{ tag }}/discussions.html">Discussions</a> ({{ collections.taggedContent[tag].discussions.length }})</h2>
+<ul>
+  {% for discussion in collections.taggedContent[tag].discussions | limit(6) %}
+    <li>
+      <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
+      <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+      <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+      <hr>
+    </li>
+  {% endfor %}
+</ul>
+
+<h2><a href="/tags/{{ tag }}/collections.html">Collections</a> ({{ collections.taggedContent[tag].userCollections.length }})</h2>
+<ul>
+  {% for collection in collections.taggedContent[tag].userCollections | limit(6) %}
+    <li>
+      <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
+      <ul class="collection">
+        {%- for collectionSubject in collection.subjects | limit(4) -%}
+          <li id={{ collectionSubject.zooniverse_id }} class="subject">
+            <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
+              <img src={{ collectionSubject.location.thumb}}>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </li>
+  {% endfor %}
+</ul>
+
