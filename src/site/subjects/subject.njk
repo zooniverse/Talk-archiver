@@ -14,6 +14,12 @@ renderData:
 <div class="container">
   <img class="subject" src={{ subject.location.standard }} >
 
+  <h2>Tags</h2>
+  <ul>
+    {% for tag in subject.tags %}
+      <li><a href="/tags/{{ tag._id}}">{{ tag._id }}</a></li>
+    {% endfor %}
+  </ul>
   <h2>Comments</h2>
   <ul>
   {%- for comment in subject.discussion.comments | reverse -%}
