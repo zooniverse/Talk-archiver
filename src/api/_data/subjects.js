@@ -28,9 +28,25 @@ async function subjectUsers(discussion) {
         const userCollections = await listCollections(user_name);
         user.my_collections && user.my_collections.push(...userCollections);
         store.users[user.name] = user;
+        for (collection of user.my_collections) {
+          if (!store.userCollections[collection.zooniverse_id]) {
+            const userCollection = await API.get(`collections/${collection.zooniverse_id}`)
+            store.userCollections[collection.zooniverse_id] = userCollection;
+          }
+        }
       } else {
         console.log(`*** Invalid response for user ${user_name}`)
       }
+    }
+  }
+}
+
+async function collectionSubjects(collection) {
+  for (subject of collection.subjects) {
+    if (!store.subjects[subject.zooniverse_id]) {
+      const fullSubject = await API.get(`subjects/${subject.zooniverse_id}`)
+      await subjectUsers(fullSubject.discussion);
+      store.subjects[subject.zooniverse_id] = fullSubject;
     }
   }
 }
@@ -39,13 +55,11 @@ module.exports = async function fetchSubjects() {
   const collections = await fetchUserCollections();
 
   for (collection of Object.values(collections)) {
-    for (subject of collection.subjects) {
-      if (!store.subjects[subject.zooniverse_id]) {
-        const fullSubject = await API.get(`subjects/${subject.zooniverse_id}`)
-        await subjectUsers(fullSubject.discussion);
-        store.subjects[subject.zooniverse_id] = fullSubject;
-      }
-    }
+    await collectionSubjects(collection);
+  }
+
+  for (collection of Object.values(store.userCollections)) {
+    await collectionSubjects(collection);
   }
 
   return store.subjects;
