@@ -23,7 +23,7 @@ renderData:
 <ul class="container">
 {%- for comment in discussion.comments -%}
 <li id={{ comment._id }} class="comment">
-<a href="/users/{{ comment.user_name }}"><img width=20 height=20 src="https://api.zooniverse.org/talk/avatars/{{ comment.user_zooniverse_id }}" class="avatar" alt="{{ comment.user_name }}"></a> by <a href="/users/{{ comment.user_name }}">{{ comment.user_name }}</a> {% if comment.response_to %}<a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>{% endif %}
+<a href="/users/{{ comment.user_name }}">{% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}</a> by <a href="/users/{{ comment.user_name }}">{{ comment.user_name }}</a> {% if comment.response_to %}<a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>{% endif %}
 
 {{ comment.body | safe }}
 
