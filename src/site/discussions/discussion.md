@@ -10,13 +10,16 @@ renderData:
   title: "{{ discussion.title}}"
   description: "{{ discussion.description }}"
 ---
-<h1 class="text-lg">{{ discussion.title }}</h1>
-<p>{{ discussion.description }}</p>
-{% if discussion.focus and discussion.focus.base_type == 'Subject' %}
+<div class="subject-page">
 <div class="focus container">
-  <a href="/subjects/{{ discussion.focus.zooniverse_id }}"><img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}></a>
-</div>
+{% if discussion.focus and discussion.focus.base_type == 'Subject' %}
+<a href="/subjects/{{ discussion.focus.zooniverse_id }}">{{ discussion.focus.zooniverse_id }}</a>
+<a href="/subjects/{{ discussion.focus.zooniverse_id }}"><img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}></a>
 {% endif %}
+</div>
+<div>
+<h1>{{ discussion.title }}</h1>
+<p>{{ discussion.description }}</p>
 <ul class="container">
 {%- for comment in discussion.comments -%}
 <li id={{ comment._id }} class="comment">
@@ -28,3 +31,5 @@ Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</
 </li>
 {%- endfor -%}
 </ul>
+</div>
+</div>
