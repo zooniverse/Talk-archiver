@@ -12,7 +12,7 @@ renderData:
 <div class="subject-page">
   <div class=" focus container">
     <h1 class="text-lg">{{ subject.zooniverse_id }}</h1>
-    <img class="subject" src={{ subject.location.standard }} >
+    <img class="subject" alt="{{ subject.zooniverse_id }}" src={{ subject.location.standard }} >
 
     <h2>Comments</h2>
     <ul>
@@ -50,7 +50,7 @@ renderData:
             {%- for collectionSubject in collection.subjects | limit(4) -%}
               <li id={{ collectionSubject.zooniverse_id }} class="subject">
                 <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-                  <img src={{ collectionSubject.location.thumb}}>
+                  <img alt="Subject {{ collectionSubject.zooniverse_id }}" src={{ collectionSubject.location.thumb}}>
                 </a>
               </li>
             {%- endfor -%}
