@@ -9,68 +9,69 @@ permalink: "/subjects/{{ subject.zooniverse_id }}/"
 renderData:
   title: "Subject {{ subject.zooniverse_id }}"
 ---
-<h1 class="text-lg">{{ subject.zooniverse_id }}</h1>
+<div class="subject-page">
+  <div class=" focus container">
+    <h1 class="text-lg">{{ subject.zooniverse_id }}</h1>
+    <img class="subject" src={{ subject.location.standard }} >
 
-<div class=" focus container">
-  <img class="subject" src={{ subject.location.standard }} >
-
-  <h2>Comments</h2>
-  <ul>
-  {%- for comment in subject.discussion.comments | reverse -%}
-  <li id={{ comment._id }} class="comment">
-    <a href="/users/{{ comment.user_name }}">
-      <img width=20 height=20 src="https://api.zooniverse.org/talk/avatars/{{ comment.user_zooniverse_id }}" class="avatar" onerror="window.defaultAvatar(this)"></a> by <a href="/users/{{ comment.user_name }}">{{ comment.user_name }}
-      </a> 
-      {% if comment.response_to %}
-        <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
-      {% endif %}
-
-      {{ comment.body | safe }}
-
-      Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
-  </li>
-  {%- endfor -%}
-  </ul>
-</div>
-
-<div class="container">
-  <h2>Tags</h2>
-  <ul>
-    {% for tag in subject.tags %}
-      <li><a href="/tags/{{ tag._id}}">{{ tag._id }}</a></li>
-    {% endfor %}
-  </ul>
-
-  <h2><a href="./collections.html">Collections</a></h2>
-  <ul>
-    {%- for collection in subject.collections | limit(3) -%}
-      <li>
-        <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.user_name }}: {{ collection.title }}</a></p>
-        <ul class="collection">
-          {%- for collectionSubject in collection.subjects | limit(4) -%}
-            <li id={{ collectionSubject.zooniverse_id }} class="subject">
-              <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-                <img src={{ collectionSubject.location.thumb}}>
-              </a>
-            </li>
-          {%- endfor -%}
-        </ul>
-      </li>
-    {%- endfor -%}
-  </ul>
-
-  <h2>Board Discussions</h2>
-  {% for category, categoryDiscussions in discussions | focus(subject.zooniverse_id) %}
-    <h3>{{ category | capitalize }}</h3>
+    <h2>Comments</h2>
     <ul>
-      {% for discussion in categoryDiscussions %}
-        <li>
-          <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
-          <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
-          <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
-          <hr>
-        </li>
-      {% endfor  %}
+    {%- for comment in subject.discussion.comments | reverse -%}
+    <li id={{ comment._id }} class="comment">
+      <a href="/users/{{ comment.user_name }}">
+        <img width=20 height=20 src="https://api.zooniverse.org/talk/avatars/{{ comment.user_zooniverse_id }}" class="avatar" onerror="window.defaultAvatar(this)"></a> by <a href="/users/{{ comment.user_name }}">{{ comment.user_name }}
+        </a> 
+        {% if comment.response_to %}
+          <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
+        {% endif %}
+
+        {{ comment.body | safe }}
+
+        Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
+    </li>
+    {%- endfor -%}
     </ul>
-  {% endfor %}
+  </div>
+
+  <div class="container">
+    <h2>Tags</h2>
+    <ul>
+      {% for tag in subject.tags %}
+        <li><a href="/tags/{{ tag._id}}">{{ tag._id }}</a></li>
+      {% endfor %}
+    </ul>
+
+    <h2><a href="./collections.html">Collections</a></h2>
+    <ul>
+      {%- for collection in subject.collections | limit(3) -%}
+        <li>
+          <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.user_name }}: {{ collection.title }}</a></p>
+          <ul class="collection">
+            {%- for collectionSubject in collection.subjects | limit(4) -%}
+              <li id={{ collectionSubject.zooniverse_id }} class="subject">
+                <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
+                  <img src={{ collectionSubject.location.thumb}}>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <h2>Board Discussions</h2>
+    {% for category, categoryDiscussions in discussions | focus(subject.zooniverse_id) %}
+      <h3>{{ category | capitalize }}</h3>
+      <ul>
+        {% for discussion in categoryDiscussions %}
+          <li>
+            <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
+            <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+            <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+            <hr>
+          </li>
+        {% endfor  %}
+      </ul>
+    {% endfor %}
+  </div>
 </div>

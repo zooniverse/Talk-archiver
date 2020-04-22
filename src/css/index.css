@@ -28,6 +28,11 @@ p {
   @apply mb-2;
 }
 
+.subject-page {
+  @apply grid;
+  grid-template-columns: 1fr 2fr;
+}
+
 .collection {
   @apply max-w-6xl mx-auto;
 }
@@ -40,16 +45,8 @@ p {
   @apply h-full;
 }
 
-.container {
-  @apply max-w-3xl mx-auto;
-}
-
 .comment {
   @apply mb-4 border-b;
-}
-
-.focus {
-  @apply float-left w-1/3;
 }
 
 .focus img {
