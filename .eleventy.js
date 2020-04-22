@@ -49,7 +49,7 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addFilter("limit", (array, limit) => {
-    return array.slice(0, limit);
+    return (array && array.slice) ? array.slice(0, limit) : array;
   });
 
   eleventyConfig.addFilter("focus", (discussions, focusID) => {

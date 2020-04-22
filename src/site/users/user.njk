@@ -9,11 +9,11 @@ permalink: "/users/{{ user.name | slug }}/"
 renderData:
   title: "{{ user.name }}"
 ---
-<h1 class="text-lg">{{ user.name }}</h1>
+<h1>{{ user.name }}</h1>
 
-<h2>Subject comments ({{ user.subjects.length }})</h2>
+<h2><a href="./comments.html">Subject comments ({{ user.subjects.length }})</a></h2>
 <ul class="collection">
-{%- for subject in user.subjects -%}
+{%- for subject in user.subjects | limit(5) -%}
   <li id={{ subject.focus.zooniverse_id }} class="subject">
     <a href="/subjects/{{ subject.focus.zooniverse_id }}">
       <img src={{ subject.focus.location.thumb}}>
@@ -25,9 +25,9 @@ renderData:
   </li>
 {%- endfor -%}
 </ul>
-<h2>Collectionsb({{ user.my_collections.length }})</h2>
+<h2><a href="./collections.html">Collections ({{ user.my_collections.length }})</a></h2>
 <ul>
-{%- for collection in user.my_collections -%}
+{%- for collection in user.my_collections | limit(3) -%}
   <li>
     <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
     <ul class="collection">

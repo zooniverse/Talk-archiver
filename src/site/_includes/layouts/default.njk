@@ -8,10 +8,10 @@
     <title>{{ renderData.title or title }}</title>
     <meta name="description" content="{{ renderData.description or description }}">
   </head>
-  <body>
-    <div class="container mt-8 mb-8">
-      <h1 class="text-5xl">Science Gossip</h1>
-    </div>
+  <body class="container mx-auto">
+    <header>
+      <h1>Science Gossip</h1>
+    </header>
     {{ content | safe }}
     <script src="{% webpackAsset 'main.js' %}"></script>
   </body>

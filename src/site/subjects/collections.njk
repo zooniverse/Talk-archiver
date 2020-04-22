@@ -5,13 +5,15 @@ pagination:
   resolve: values
   size: 1
   alias: subject
-permalink: "/subjects/{{ subject.zooniverse_id }}/"
+permalink: "/subjects/{{ subject.zooniverse_id }}/collections.html"
 renderData:
-  title: "Subject {{ subject.zooniverse_id }}"
+  title: "Subject {{ subject.zooniverse_id }}: Collections"
 ---
 <div class="subject-page">
   <div class=" focus container">
-    <h1 class="text-lg">{{ subject.zooniverse_id }}</h1>
+    <h1 class="text-lg">
+      <a href="/subjects/{{ subject.zooniverse_id }}">{{ subject.zooniverse_id }}</a>
+    </h1>
     <img class="subject" src={{ subject.location.standard }} >
 
     <h2>Comments</h2>
@@ -20,7 +22,7 @@ renderData:
     <li id={{ comment._id }} class="comment">
       <a href="/users/{{ comment.user_name }}">
         <img width=20 height=20 src="https://api.zooniverse.org/talk/avatars/{{ comment.user_zooniverse_id }}" class="avatar" onerror="window.defaultAvatar(this)"></a> by <a href="/users/{{ comment.user_name }}">{{ comment.user_name }}
-        </a> 
+        </a>
         {% if comment.response_to %}
           <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
         {% endif %}
@@ -34,16 +36,10 @@ renderData:
   </div>
 
   <div class="container">
-    <h2>Tags</h2>
-    <ul>
-      {% for tag in subject.tags %}
-        <li><a href="/tags/{{ tag._id}}">{{ tag._id }}</a></li>
-      {% endfor %}
-    </ul>
 
-    <h2><a href="./collections.html">Collections</a></h2>
+    <h2>Collections</h2>
     <ul>
-      {%- for collection in subject.collections | limit(3) -%}
+      {%- for collection in subject.collections -%}
         <li>
           <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.user_name }}: {{ collection.title }}</a></p>
           <ul class="collection">
@@ -58,20 +54,5 @@ renderData:
         </li>
       {%- endfor -%}
     </ul>
-
-    <h2>Board Discussions</h2>
-    {% for category, categoryDiscussions in discussions | focus(subject.zooniverse_id) %}
-      <h3>{{ category | capitalize }}</h3>
-      <ul>
-        {% for discussion in categoryDiscussions %}
-          <li>
-            <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
-            <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
-            <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
-            <hr>
-          </li>
-        {% endfor  %}
-      </ul>
-    {% endfor %}
   </div>
 </div>
