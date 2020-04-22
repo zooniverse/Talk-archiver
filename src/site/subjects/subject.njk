@@ -13,15 +13,7 @@ renderData:
 
 <div class=" focus container">
   <img class="subject" src={{ subject.location.standard }} >
-</div>
 
-<div class="container">
-  <h2>Tags</h2>
-  <ul>
-    {% for tag in subject.tags %}
-      <li><a href="/tags/{{ tag._id}}">{{ tag._id }}</a></li>
-    {% endfor %}
-  </ul>
   <h2>Comments</h2>
   <ul>
   {%- for comment in subject.discussion.comments | reverse -%}
@@ -39,12 +31,21 @@ renderData:
   </li>
   {%- endfor -%}
   </ul>
+</div>
 
-  <h2>Collections</h2>
+<div class="container">
+  <h2>Tags</h2>
   <ul>
-    {%- for collection in subject.collections -%}
+    {% for tag in subject.tags %}
+      <li><a href="/tags/{{ tag._id}}">{{ tag._id }}</a></li>
+    {% endfor %}
+  </ul>
+
+  <h2><a href="./collections.html">Collections</a></h2>
+  <ul>
+    {%- for collection in subject.collections | limit(3) -%}
       <li>
-        <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
+        <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.user_name }}: {{ collection.title }}</a></p>
         <ul class="collection">
           {%- for collectionSubject in collection.subjects | limit(4) -%}
             <li id={{ collectionSubject.zooniverse_id }} class="subject">
