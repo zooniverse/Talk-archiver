@@ -16,6 +16,16 @@ renderData:
 <a href="/subjects/{{ discussion.focus.zooniverse_id }}">{{ discussion.focus.zooniverse_id }}</a>
 <a href="/subjects/{{ discussion.focus.zooniverse_id }}"><img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}></a>
 {% endif %}
+{% if discussion.focus and discussion.focus.base_type == 'Collection' %}
+<a href="/collections/{{ discussion.focus.zooniverse_id }}">{{ discussion.focus.zooniverse_id }}</a>
+<ul class="collection">
+{%- for subject in discussion.focus.subjects | limit(4) -%}
+<li id={{ subject.zooniverse_id }} class="subject">
+<a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a>
+</li>
+{%- endfor -%}
+</ul>
+{% endif %}
 </div>
 <div>
 <h1>{{ discussion.title }}</h1>
