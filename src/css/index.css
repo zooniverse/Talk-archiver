@@ -34,11 +34,11 @@ p {
 }
 
 .collection {
-  @apply max-w-6xl mx-auto;
+  @apply grid gap-1 grid-cols-6 grid-flow-row;
 }
 
 .collection li {
-  @apply inline-block h-40;
+  @apply h-40;
 }
 
 .collection li img {
