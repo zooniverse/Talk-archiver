@@ -10,7 +10,7 @@ renderData:
   title: "{{ discussion.title}}"
   description: "{{ discussion.description }}"
 ---
-<div class="subject-page">
+<div class="page-grid">
 <div class="focus container">
 {% if discussion.focus and discussion.focus.base_type == 'Subject' %}
 <a href="/subjects/{{ discussion.focus.zooniverse_id }}">{{ discussion.focus.zooniverse_id }}</a>

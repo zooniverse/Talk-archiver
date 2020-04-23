@@ -28,7 +28,7 @@ p {
   @apply mb-2;
 }
 
-.subject-page {
+.page-grid {
   @apply grid;
   grid-template-columns: 1fr 2fr;
 }
