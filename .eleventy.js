@@ -151,6 +151,15 @@ module.exports = function(eleventyConfig) {
     return taggedItems;
   });
 
+  // custom markdown setup
+  let markdownIt = require("markdown-it");
+  let options = {
+    html: true,
+    breaks: true,
+    linkify: true
+  };
+  eleventyConfig.setLibrary("md", markdownIt(options));
+
   return {
     dir: {
       input: "src/site",
