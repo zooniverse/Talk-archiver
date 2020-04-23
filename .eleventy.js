@@ -152,13 +152,14 @@ module.exports = function(eleventyConfig) {
   });
 
   // custom markdown setup
-  let markdownIt = require("markdown-it");
-  let options = {
+  const markdownIt = require("markdown-it");
+  const markdownItEmoji = require("markdown-it-emoji");
+  const options = {
     html: true,
     breaks: true,
     linkify: true
   };
-  eleventyConfig.setLibrary("md", markdownIt(options));
+  eleventyConfig.setLibrary("md", markdownIt(options).use(markdownItEmoji));
 
   return {
     dir: {
