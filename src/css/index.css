@@ -57,4 +57,7 @@ p {
   @apply max-w-sm
 }
 
+.tag-list {
+  @apply grid grid-cols-3 grid-flow-row;
+}
 @tailwind utilities;

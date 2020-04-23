@@ -23,7 +23,17 @@ renderData:
       </li>
     {% endfor %}
     </ul>
+
+    <h2>Popular hashtags</h2>
+    <ul class="tag-list">
+    {% for tag in board.tags %}
+      <li>
+        <a href="/tags/{{ tag._id }}">{{ tag._id }}</a>
+      </li>
+    {% endfor %}
+    </ul>
   </div>
+
   <div>
     <h2>{{ board.title }}</h2>
     <p>{{ board.description }}</p>
