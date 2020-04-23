@@ -29,7 +29,7 @@ p {
 }
 
 .page-grid {
-  @apply grid;
+  @apply grid gap-2;
   grid-template-columns: 1fr 2fr;
 }
 
