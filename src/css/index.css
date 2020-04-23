@@ -28,8 +28,8 @@ p {
   @apply mb-2;
 }
 
-.subject-page {
-  @apply grid;
+.page-grid {
+  @apply grid gap-2;
   grid-template-columns: 1fr 2fr;
 }
 
@@ -57,4 +57,11 @@ p {
   @apply max-w-sm
 }
 
+.pinned-discussion:before {
+  content: "\1f4cc";
+}
+
+.tag-list {
+  @apply grid grid-cols-3 grid-flow-row;
+}
 @tailwind utilities;
