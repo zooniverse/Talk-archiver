@@ -10,13 +10,52 @@ renderData:
   title: "{{ userCollection.title }}"
   description: "{{ userCollection.description }}"
 ---
-<h1 class="text-lg">{{ userCollection.title }}</h1>
+<h1>{{ userCollection.title }}</h1>
 <p>{{ userCollection.description }}</p>
+<div class="page-grid">
+  <div>
+    <h2>Comments</h2>
+    <ul>
+    {%- for comment in userCollection.discussion.comments | reverse -%}
+    <li id={{ comment._id }} class="comment">
+      <a href="/users/{{ comment.user_name }}">
+        {% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}
+      </a>
+      by
+      <a href="/users/{{ comment.user_name }}">
+        {{ comment.user_name }}
+      </a>
+        {% if comment.response_to %}
+          <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
+        {% endif %}
 
-<ul class="collection">
-{%- for subject in userCollection.subjects -%}
-  <li id={{ subject.zooniverse_id }} class="subject">
-    <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a> 
-  </li>
-{%- endfor -%}
-</ul>
+        {{ comment.body | safe }}
+
+        Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
+    </li>
+    {%- endfor -%}
+    </ul>
+
+    <h2>Board Discussions</h2>
+    {% for category, categoryDiscussions in discussions | focus(userCollection.zooniverse_id) %}
+      <h3>{{ category | capitalize }}</h3>
+      <ul>
+        {% for discussion in categoryDiscussions %}
+          <li>
+            <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
+            <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+            <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+            <hr>
+          </li>
+        {% endfor  %}
+      </ul>
+    {% endfor %}
+  </div>
+  <ul class="collection">
+  {%- for subject in userCollection.subjects -%}
+    <li id={{ subject.zooniverse_id }} class="subject">
+      <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a> 
+    </li>
+  {%- endfor -%}
+  </ul>
+</div>
