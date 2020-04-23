@@ -73,6 +73,11 @@ module.exports = function(eleventyConfig) {
     return discussions.filter(discussion => discussion.board._id !== boardID);
   });
 
+  eleventyConfig.addFilter("notFeatured", (discussionIDs, featured) => {
+    const featuredIDs = featured.map(discussion => discussion.zooniverse_id);
+    return discussionIDs.filter(discussionID => featuredIDs.indexOf(discussionID) === -1);
+  });
+
   // custom tags
 
   eleventyConfig.addShortcode('avatar', (username, url) => {

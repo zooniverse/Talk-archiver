@@ -49,7 +49,7 @@ renderData:
     </ul>
 
     <ul class="container">
-      {%- for discussionID in board.links.discussions -%}
+      {%- for discussionID in board.links.discussions | notFeatured(board.featured) -%}
         <li>
           <p><a href="./discussions/{{ discussions[discussionID].zooniverse_id }}">{{ discussions[discussionID].title }}</a></p>
           <p>{{ discussions[discussionID].comments.length }} posts / {{ discussions[discussionID].users }} participants</p>
