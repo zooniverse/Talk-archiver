@@ -65,6 +65,14 @@ module.exports = function(eleventyConfig) {
     return boards;
   });
 
+  eleventyConfig.addFilter("pinned", (discussions, boardID) => {
+    return discussions.filter(discussion => discussion.board._id === boardID);
+  });
+
+  eleventyConfig.addFilter("featured", (discussions, boardID) => {
+    return discussions.filter(discussion => discussion.board._id !== boardID);
+  });
+
   // custom tags
 
   eleventyConfig.addShortcode('avatar', (username, url) => {

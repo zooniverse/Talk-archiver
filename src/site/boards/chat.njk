@@ -15,7 +15,7 @@ renderData:
   <div>
     <h2>Featured chat discussions</h2>
     <ul>
-    {% for discussion in board.featured %}
+    {% for discussion in board.featured | featured(board.zooniverse_id) %}
       <li>
         <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
         <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
@@ -37,6 +37,16 @@ renderData:
     <h2>{{ board.title }}</h2>
     <p>{{ board.description }}</p>
     <p>{{ board.links.discussions.length }} conversations</p>
+
+    <ul>
+    {% for discussion in board.featured | pinned(board.zooniverse_id) %}
+      <li>
+        <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
+        <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+        <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+      </li>
+    {% endfor %}
+    </ul>
 
     <ul class="container">
       {%- for discussionID in board.links.discussions -%}
