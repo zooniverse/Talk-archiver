@@ -57,6 +57,10 @@ p {
   @apply max-w-sm
 }
 
+.pinned-discussion:before {
+  content: "\1f4cc";
+}
+
 .tag-list {
   @apply grid grid-cols-3 grid-flow-row;
 }

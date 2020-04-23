@@ -41,8 +41,10 @@ renderData:
     <ul>
     {% for discussion in board.featured | pinned(board.zooniverse_id) %}
       <li>
-        <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
-        <p>{{ discussion.comments }} posts / {{ discussion.users }} participants</p>
+        <p class="pinned-discussion">
+          <a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a>
+        </p>
+        <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
         <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
       </li>
     {% endfor %}
