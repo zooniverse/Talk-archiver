@@ -14,6 +14,15 @@ renderData:
 <div class="page-grid">
   <div>
     <h2>Featured chat discussions</h2>
+    <ul>
+    {% for discussion in board.featured %}
+      <li>
+        <p><a href="./discussions/{{ discussion.zooniverse_id }}">{{ discussion.title }}</a></p>
+        <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
+        <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+      </li>
+    {% endfor %}
+    </ul>
   </div>
   <div>
     <h2>{{ board.title }}</h2>
@@ -26,7 +35,6 @@ renderData:
           <p><a href="./discussions/{{ discussions[discussionID].zooniverse_id }}">{{ discussions[discussionID].title }}</a></p>
           <p>{{ discussions[discussionID].comments.length }} posts / {{ discussions[discussionID].users }} participants</p>
           <p>Last post {{ discussions[discussionID].last_comment.created_at | date }} by {{ discussions[discussionID].last_comment.user_name }}</p>
-          <hr>
         </li>
       {%- endfor -%}
     </ul>
