@@ -18,20 +18,24 @@ renderData:
     <ul>
     {%- for comment in subject.discussion.comments | reverse -%}
     <li id={{ comment._id }} class="comment">
-      <a href="/users/{{ comment.user_name }}">
-        {% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}
-      </a>
-      by
-      <a href="/users/{{ comment.user_name }}">
-        {{ comment.user_name }}
-      </a>
+      <p>
+        <a href="/users/{{ comment.user_name }}">
+          {% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}
+        </a>
+        by
+        <a href="/users/{{ comment.user_name }}">
+          {{ comment.user_name }}
+        </a>
         {% if comment.response_to %}
           <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
         {% endif %}
+      </p>
 
+      {%- markdown -%}
         {{ comment.body | safe }}
+      {%- endmarkdown -%}
 
-        Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
+        <p>Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time></p>
     </li>
     {%- endfor -%}
     </ul>
@@ -39,7 +43,7 @@ renderData:
 
   <div class="container">
     <h2>Tags</h2>
-    <ul>
+    <ul class="tag-list">
       {% for tag in subject.tags %}
         <li><a href="/tags/{{ tag._id}}">{{ tag._id }}</a></li>
       {% endfor %}

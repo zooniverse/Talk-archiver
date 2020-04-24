@@ -151,6 +151,64 @@ module.exports = function(eleventyConfig) {
     return taggedItems;
   });
 
+  // custom markdown setup
+  const markdownIt = require("markdown-it");
+  const markdownItEmoji = require("markdown-it-emoji");
+  const markdownItRegex = require('markdown-it-regex').default;
+  const options = {
+    html: true,
+    breaks: true,
+    linkify: true
+  };
+
+  const mentionUsers = {
+    name: 'mentionUsers',
+    regex: /@(\w+)\b/,
+    replace: (match) => {
+      const url = `/users/${match}`;
+      return `<a href="${url}">@${match}</a>`;
+    }
+  }
+
+  const mentionTags = {
+    name: 'mentionTags',
+    regex: /#(\w+)\b/,
+    replace: (match) => {
+      const url = `/tags/${match.toLowerCase()}`;
+      return `<a href="${url}">#${match}</a>`;
+    }
+  }
+
+  const mentionSubjects = {
+    name: 'mentionSubjects',
+    // match any subject ID that doesn't begin with / or end in ]
+    regex: /\b(?<!\/)(ASC\w+)(?!\])\b/,
+    replace: (match) => {
+      const url = `/subjects/${match}`;
+      return `<a href="${url}">${match}</a>`;
+    }
+  }
+
+  const mentionCollections = {
+    name: 'mentionCollections',
+    regex: /\b(?<!\/)(CSC\w+)(?!\])\b/,
+    replace: (match) => {
+      const url = `/collections/${match}`;
+      return `<a href="${url}">${match}</a>`;
+    }
+  }
+
+  const md = markdownIt(options)
+    .use(markdownItEmoji)
+    .use(markdownItRegex, mentionUsers)
+    .use(markdownItRegex, mentionTags)
+    .use(markdownItRegex, mentionSubjects)
+    .use(markdownItRegex, mentionCollections);
+  eleventyConfig.setLibrary("md", md);
+  eleventyConfig.addPairedShortcode("markdown", content => {
+    return md.render(content.trim());
+  });
+
   return {
     dir: {
       input: "src/site",
