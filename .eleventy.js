@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const markdownItRegex = require('markdown-it-regex').default;
 const moment = require('moment');
 
 let manifest = {};
@@ -159,7 +160,29 @@ module.exports = function(eleventyConfig) {
     breaks: true,
     linkify: true
   };
-  const md = markdownIt(options).use(markdownItEmoji)
+
+  const mentionUsers = {
+    name: 'mentionUsers',
+    regex: /@(\w+)\b/,
+    replace: (match) => {
+      const url = `/users/${match}`;
+      return `<a href="${url}">@${match}</a>`;
+    }
+  }
+
+  const mentionTags = {
+    name: 'mentionTags',
+    regex: /#(\w+)\b/,
+    replace: (match) => {
+      const url = `/tags/${match.toLowerCase()}`;
+      return `<a href="${url}">#${match}</a>`;
+    }
+  }
+
+  const md = markdownIt(options)
+    .use(markdownItEmoji)
+    .use(markdownItRegex, mentionUsers)
+    .use(markdownItRegex, mentionTags);
   eleventyConfig.setLibrary("md", md);
   eleventyConfig.addPairedShortcode("markdown", content => md.render(content.trim()));
 
