@@ -50,8 +50,8 @@ p {
 }
 
 .comments-list img {
-  max-width: 100px;
-  @apply h-40;
+  max-height: 10rem;
+  max-width: 10rem;
 }
 
 .comment {
