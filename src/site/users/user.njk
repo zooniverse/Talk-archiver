@@ -12,14 +12,16 @@ renderData:
 <h1>{{ user.name }}</h1>
 
 <h2><a href="./comments.html">Subject comments ({{ user.subjects.length }})</a></h2>
-<ul class="collection">
+<ul class="comments-list">
 {%- for subject in user.subjects | limit(5) -%}
-  <li id={{ subject.focus.zooniverse_id }} class="subject">
+  <li id={{ subject.focus.zooniverse_id }}>
     <a href="/subjects/{{ subject.focus.zooniverse_id }}">
       <img src={{ subject.focus.location.thumb}}>
     </a>
     <p>
-      {{ subject.comment.body }}
+      {%- markdown -%}
+        {{ subject.comment.body }}
+      {%- endmarkdown -%}
     </p>
     <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
   </li>
