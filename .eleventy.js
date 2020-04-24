@@ -179,12 +179,35 @@ module.exports = function(eleventyConfig) {
     }
   }
 
+  const mentionSubjects = {
+    name: 'mentionSubjects',
+    // match any subject ID that doesn't begin with / or end in ]
+    regex: /\b(?<!\/)(ASC\w+)(?!\])\b/,
+    replace: (match) => {
+      const url = `/subjects/${match}`;
+      return `<a href="${url}">${match}</a>`;
+    }
+  }
+
+  const mentionCollections = {
+    name: 'mentionCollections',
+    regex: /\b(?<!\/)(CSC\w+)(?!\])\b/,
+    replace: (match) => {
+      const url = `/collections/${match}`;
+      return `<a href="${url}">${match}</a>`;
+    }
+  }
+
   const md = markdownIt(options)
     .use(markdownItEmoji)
     .use(markdownItRegex, mentionUsers)
-    .use(markdownItRegex, mentionTags);
+    .use(markdownItRegex, mentionTags)
+    .use(markdownItRegex, mentionSubjects)
+    .use(markdownItRegex, mentionCollections);
   eleventyConfig.setLibrary("md", md);
-  eleventyConfig.addPairedShortcode("markdown", content => md.render(content.trim()));
+  eleventyConfig.addPairedShortcode("markdown", content => {
+    return md.render(content.trim());
+  });
 
   return {
     dir: {
