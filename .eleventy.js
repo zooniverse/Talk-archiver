@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const markdownItRegex = require('markdown-it-regex').default;
 const moment = require('moment');
 
 let manifest = {};
@@ -155,6 +154,7 @@ module.exports = function(eleventyConfig) {
   // custom markdown setup
   const markdownIt = require("markdown-it");
   const markdownItEmoji = require("markdown-it-emoji");
+  const markdownItRegex = require('markdown-it-regex').default;
   const options = {
     html: true,
     breaks: true,
