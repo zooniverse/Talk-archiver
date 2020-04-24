@@ -159,7 +159,9 @@ module.exports = function(eleventyConfig) {
     breaks: true,
     linkify: true
   };
-  eleventyConfig.setLibrary("md", markdownIt(options).use(markdownItEmoji));
+  const md = markdownIt(options).use(markdownItEmoji)
+  eleventyConfig.setLibrary("md", md);
+  eleventyConfig.addPairedShortcode("markdown", content => md.render(content.trim()));
 
   return {
     dir: {
