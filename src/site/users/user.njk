@@ -11,34 +11,60 @@ renderData:
 ---
 <h1>{{ user.name }}</h1>
 
-<h2><a href="./comments.html">Subject comments ({{ user.subjects.length }})</a></h2>
-<ul class="collection">
-{%- for subject in user.subjects | limit(5) -%}
-  <li id={{ subject.focus.zooniverse_id }} class="subject">
-    <a href="/subjects/{{ subject.focus.zooniverse_id }}">
-      <img src={{ subject.focus.location.thumb}}>
-    </a>
-    <p>
-      {{ subject.comment.body }}
-    </p>
-    <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
-  </li>
-{%- endfor -%}
-</ul>
-<h2><a href="./collections.html">Collections ({{ user.my_collections.length }})</a></h2>
-<ul>
-{%- for collection in user.my_collections | limit(3) -%}
-  <li>
-    <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
-    <ul class="collection">
-      {%- for subject in collection.subjects | limit(4) -%}
-        <li class="subject">
-          <a href="/subjects/{{ subject.zooniverse_id }}">
-            <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+<div class="page-grid">
+  <div>
+    <h2>Discussions</h2>
+    <ul>
+    {% for discussion in user.boards %}
+      <li>
+        <p>
+          <a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id }}/#{{ discussion.comment._id }}">
+            {{ discussion.title }}
           </a>
-        </li>
-      {%- endfor -%}
+        </p>
+        <p>
+          Posted in
+          <a href="/boards/{{ discussion.board._id }}">{{ discussion.focus.name }}</a>
+          <time datetime={{ discussion.last_comment.created_at }}>{{ discussion.last_comment.created_at | date }}</time>
+        </p>
+      </li>
+    {% endfor %}
     </ul>
-  </li>
-{%- endfor -%}
-</ul>
+  </div>
+  <div>
+    <h2><a href="./comments.html">Subject comments ({{ user.subjects.length }})</a></h2>
+    <ul class="comments-list">
+    {%- for subject in user.subjects | limit(5) -%}
+      <li id={{ subject.focus.zooniverse_id }}>
+        <a href="/subjects/{{ subject.focus.zooniverse_id }}">
+          <img src={{ subject.focus.location.thumb}}>
+        </a>
+        <p>
+          {%- markdown -%}
+            {{ subject.comment.body }}
+          {%- endmarkdown -%}
+        </p>
+        <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
+      </li>
+    {%- endfor -%}
+    </ul>
+
+    <h2><a href="./collections.html">Collections ({{ user.my_collections.length }})</a></h2>
+    <ul>
+    {%- for collection in user.my_collections | limit(3) -%}
+      <li>
+        <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
+        <ul class="collection">
+          {%- for subject in collection.subjects | limit(4) -%}
+            <li class="subject">
+              <a href="/subjects/{{ subject.zooniverse_id }}">
+                <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </li>
+    {%- endfor -%}
+    </ul>
+  </div>
+</div>

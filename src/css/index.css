@@ -45,6 +45,15 @@ p {
   @apply h-full;
 }
 
+.comments-list {
+  @apply grid gap-1 grid-cols-5 grid-flow-row;
+}
+
+.comments-list img {
+  max-height: 10rem;
+  max-width: 10rem;
+}
+
 .comment {
   @apply mb-4 border-b;
 }
