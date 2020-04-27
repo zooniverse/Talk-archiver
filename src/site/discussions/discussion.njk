@@ -34,6 +34,30 @@ renderData:
     {%- endfor -%}
     </ul>
   {% endif %}
+  {% if discussion.focus and discussion.focus.base_type == 'Board' %}
+    <h2>Featured discussions</h2>
+    <ul>
+    {% for discussion in discussion.featured %}
+      <li>
+        <p>
+          <a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id }}">
+            {{ discussion.title }}
+          </a>
+        </p>
+        <p>{{ discussion.comments }} posts / {{ discussion.users }} participants</p>
+        <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
+      </li>
+    {% endfor %}
+    </ul>
+    <h2>Popular hashtags</h2>
+    <ul class="tag-list">
+    {% for tag in discussion.tags %}
+      <li>
+        <a href="/tags/{{ tag._id }}">{{ tag._id }}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
   </div>
   <div>
     <h1>{{ discussion.title }}</h1>
