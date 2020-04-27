@@ -34,6 +34,13 @@ renderData:
     {%- endfor -%}
     </ul>
   {% endif %}
+  {% if discussion.focus and discussion.focus.base_type == 'Board' %}
+    <h2>Featured discussions</h2>
+    {%- featuredDiscussions discussion.featured -%}
+
+    <h2>Popular hashtags</h2>
+    {%- tags discussion.tags -%}
+  {% endif %}
   </div>
   <div>
     <h1>{{ discussion.title }}</h1>

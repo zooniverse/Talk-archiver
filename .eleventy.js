@@ -91,6 +91,9 @@ module.exports = function(eleventyConfig) {
     return `<img class="avatar" alt="${alt}" src="${src}" width=20 height=20 />`
   });
 
+  eleventyConfig.addShortcode('featuredDiscussions', require('./src/site/components/featuredDiscussions'));
+  eleventyConfig.addShortcode('tags', require('./src/site/components/tagList'));
+
   // build collections from tagged subjects.
 
   function hasTag(item, tag) {
