@@ -33,6 +33,20 @@ p {
 /* purgecss end ignore */
 
 /* Your custom CSS comes right here */
+header {
+  background: #000;
+  @apply font-bold text-base px-2 py-4;
+}
+
+header svg {
+  color: #b2b2b2;
+  @apply inline-block mx-2 my-1;
+}
+
+header a {
+  color: #b2b2b2;
+  @apply mx-2 my-1;
+}
 .page-grid {
   @apply grid gap-2;
   grid-template-columns: 1fr 2fr;
