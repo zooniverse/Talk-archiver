@@ -92,6 +92,7 @@ module.exports = function(eleventyConfig) {
   });
 
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/site/components/featuredDiscussions'));
+  eleventyConfig.addShortcode('tags', require('./src/site/components/tagList'));
 
   // build collections from tagged subjects.
 
