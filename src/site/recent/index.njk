@@ -14,8 +14,8 @@ layout: default
     <h2>Subject comments</h2>
     <ul class="comments-list grid-cols-3">
     {%- for subject in recents.subjects -%}
-      <li id={{ subject.focus.zooniverse_id }}>
-        <a href="/subjects/{{ subject.focus.zooniverse_id }}">
+      <li>
+        <a href="/subjects/{{ subject.focus._id }}">
           <img src={{ subject.focus.location.thumb}}>
         </a>
         <p>
@@ -58,7 +58,7 @@ layout: default
       <ul class="comments-list grid-cols-2">
       {%- for collection in recents.collections -%}
         <li>
-          <p><a href="/collections/{{ collection.focus.zooniverse_id }}">{{ collection.focus.zooniverse_id }} {{ collection.focus.title }}</a></p>
+          <p><a href="/collections/{{ collection.focus._id }}">{{ collection.focus._id }} {{ collection.focus.name }}</a></p>
           <ul class="collection grid-cols-4">
             {%- for subject in collection.focus.subjects | limit(4) -%}
               <li class="subject">
