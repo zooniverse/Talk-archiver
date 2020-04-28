@@ -1,0 +1,85 @@
+---
+title: Science Gossip Talk
+layout: default
+---
+<div class="page-grid">
+  <aside>
+    <h2>Featured discussions</h2>
+    {%- featuredDiscussions recents.featured -%}
+
+    <h2>Popular hashtags</h2>
+    {%- tags recents.tags -%}
+  </aside>
+  <main>
+    <h2>Subject comments</h2>
+    <ul class="comments-list grid-cols-3">
+    {%- for subject in recents.subjects -%}
+      <li id={{ subject.focus.zooniverse_id }}>
+        <a href="/subjects/{{ subject.focus.zooniverse_id }}">
+          <img src={{ subject.focus.location.thumb}}>
+        </a>
+        <p>
+          {%- markdown -%}
+            {{ subject.comment.body }}
+          {%- endmarkdown -%}
+        </p>
+        <p>
+          <time datetime="{{ subject.comment.created_at }}">{{ subject.comment.created_at | date }}</time>
+          by
+          <a href="/users/{{ subject.comment.user_name }}">{{ subject.comment.user_name }}</a>
+        </p>
+      </li>
+    {%- endfor -%}
+    </ul>
+
+    <h2>Board Discussions</h2>
+    {% for category, categoryDiscussions in recents.discussions %}
+      <h3>{{ category | capitalize }}</h3>
+      <ul>
+        {% for discussion in categoryDiscussions %}
+          <li>
+            <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
+            <p>
+            {%- markdown -%}
+              {{ discussion.comment.body | truncate(100) }}
+            {%- endmarkdown -%}
+            </p>
+            <p>
+              <time datetime="{{ discussion.comment.created_at }}">{{ discussion.comment.created_at | date }}</time>
+              by
+              <a href="/users/{{ discussion.comment.user_name }}">{{ discussion.comment.user_name }}</a>
+            </p>
+          </li>
+        {% endfor  %}
+      </ul>
+    {% endfor %}
+    
+    <h2>Collections</h2>
+      <ul class="comments-list grid-cols-2">
+      {%- for collection in recents.collections -%}
+        <li>
+          <p><a href="/collections/{{ collection.focus.zooniverse_id }}">{{ collection.focus.zooniverse_id }} {{ collection.focus.title }}</a></p>
+          <ul class="collection grid-cols-4">
+            {%- for subject in collection.focus.subjects | limit(4) -%}
+              <li class="subject">
+                <a href="/subjects/{{ subject.zooniverse_id }}">
+                  <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+          <p>
+          {%- markdown -%}
+            {{ collection.comment.body }}
+          {%- endmarkdown -%}
+          </p>
+          <p>
+            <time datetime="{{ collection.comment.created_at }}">{{ collection.comment.created_at | date }}</time>
+            by
+            <a href="/users/{{ collection.comment.user_name }}">{{ collection.comment.user_name }}</a>
+          </p>
+        </li>
+      {%- endfor -%}
+      </ul>
+  </main>
+</div>
