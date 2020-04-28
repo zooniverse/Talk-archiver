@@ -5,7 +5,7 @@ pagination:
   resolve: values
   size: 1
   alias: user
-permalink: "/users/{{ user.name | slug }}/comments.html"
+permalink: "/users/{{ user.name }}/comments.html"
 renderData:
   title: "{{ user.name }} comments"
 ---
