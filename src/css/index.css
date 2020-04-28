@@ -34,6 +34,7 @@ p {
 
 /* Your custom CSS comes right here */
 header {
+  align-items: center;
   background: #000;
   @apply font-bold text-base px-2 py-4;
 }
