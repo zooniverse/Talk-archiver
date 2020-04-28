@@ -37,7 +37,7 @@ renderData:
     {%- for subject in user.subjects | limit(5) -%}
       <li id={{ subject.focus.zooniverse_id }}>
         <a href="/subjects/{{ subject.focus.zooniverse_id }}">
-          <img src={{ subject.focus.location.thumb}}>
+          <img alt="Subject {{ subject.focus.zooniverse_id }}" src={{ subject.focus.location.thumb}}>
         </a>
         <p>
           {%- markdown -%}

@@ -12,8 +12,10 @@ renderData:
 <h2>Subjects</h2>
 <ul class="collection">
   {% for subject in collections.taggedContent[tag].subjects %}
-    <li id={{ subject.zooniverse_id }} class="subject">
-      <a href="/subjects/{{ subject.zooniverse_id }}"><img src={{ subject.location.thumb}}></a> 
+    <li class="subject">
+      <a href="/subjects/{{ subject.zooniverse_id }}">
+        <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+      </a> 
     </li>
   {% endfor %}
 </ul>

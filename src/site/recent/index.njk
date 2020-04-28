@@ -16,7 +16,7 @@ layout: default
     {%- for subject in recents.subjects -%}
       <li>
         <a href="/subjects/{{ subject.focus._id }}">
-          <img src={{ subject.focus.location.thumb}}>
+          <img alt="Subject {{ subject.focus._id }}" src={{ subject.focus.location.thumb}}>
         </a>
         <p>
           {%- markdown -%}
