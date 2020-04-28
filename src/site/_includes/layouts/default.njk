@@ -3,6 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property='og:url' content="https://talk.sciencegossip.org{{ page.url }}" />
+    <meta property='og:title' content="{{ renderData.title or title }}" />
+    <meta property='og:description' content="{{ renderData.description or description }}" />
+    {%- if renderData.ogImage -%}
+    <meta property='og:image' content="{{ renderData.ogImage }}" />
+    {%- endif -%}
     <link rel="icon" href="/img/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700">
     <link rel="stylesheet" href="{% webpackAsset 'main.css' %}">
