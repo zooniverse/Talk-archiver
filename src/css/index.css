@@ -2,19 +2,19 @@
 @tailwind base;
 
 html {
-  @apply font-body text-sm text-dark-5;
+  @apply font-body text-sm leading-snug text-dark-5;
 }
 
 h1 {
-  @apply text-2xl;
-}
-
-h2 {
   @apply text-xl;
 }
 
+h2 {
+  @apply text-lg uppercase font-semibold leading-tight;
+}
+
 h3 {
-  @apply text-lg;
+  @apply text-base uppercase font-semibold leading-tight;
 }
 
 a {
