@@ -85,7 +85,7 @@ header a {
 }
 
 .focus img {
-  @apply max-w-sm;
+  @apply max-w-sm mb-4;
 }
 
 .subject {
