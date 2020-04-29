@@ -22,7 +22,7 @@ a {
 }
 
 li {
-  @apply ml-8;
+  @apply ml-2;
 }
 
 p {
