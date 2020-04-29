@@ -2,7 +2,7 @@
 @tailwind base;
 
 html {
-  @apply font-body text-sm;
+  @apply font-body text-sm text-dark-5;
 }
 
 h1 {
@@ -18,7 +18,7 @@ h3 {
 }
 
 a {
-  @apply text-blue-700 underline;
+  @apply text-brand underline;
 }
 
 li {
