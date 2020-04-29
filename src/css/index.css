@@ -14,7 +14,7 @@ h2 {
 }
 
 h3 {
-  @apply text-base uppercase font-semibold leading-tight border-b-2 mb-2;
+  @apply text-base uppercase font-semibold leading-tight border-b mb-2;
 }
 
 a {
@@ -81,7 +81,7 @@ header a {
 }
 
 .comment {
-  @apply mb-4 border-b;
+  @apply mb-4 border-b border-light-3;
 }
 
 .focus img {
