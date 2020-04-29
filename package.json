@@ -28,6 +28,7 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@fullhuman/postcss-purgecss": "^2.1.0",
+    "@zooniverse/grommet-theme": "^2.2.0",
     "autoprefixer": "^9.7.5",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.4.2",
