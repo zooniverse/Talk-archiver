@@ -10,15 +10,19 @@ h1 {
 }
 
 h2 {
-  @apply text-lg uppercase font-semibold leading-tight;
+  @apply text-lg uppercase font-semibold leading-tight border-b-2 mb-4;
 }
 
 h3 {
-  @apply text-base uppercase font-semibold leading-tight;
+  @apply text-base uppercase font-semibold leading-tight border-b-2 mb-2;
 }
 
 a {
   @apply text-brand underline;
+}
+
+ul {
+  @apply mb-4;
 }
 
 li {
@@ -36,7 +40,7 @@ p {
 header {
   align-items: center;
   background: #000;
-  @apply font-bold text-base px-2 py-4;
+  @apply font-bold text-base px-2 py-4 mb-4;
 }
 
 header svg {

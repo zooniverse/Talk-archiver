@@ -14,39 +14,33 @@ layout: default
   <ul>
     <li>
       <h2>Help</h2>
-      <hr>
-      <ul class="container">
+      <ul>
         {% for boardID, board in boards.help %}
           <li>
             <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
             <p>{{ board.description }}</p>
-            <hr>
           </li>
         {% endfor %}
       </ul>
     </li>
     <li>
       <h2>Research</h2>
-      <hr>
-      <ul class="container">
+      <ul>
         {% for boardID, board in boards.science %}
           <li>
             <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
             <p>{{ board.description }}</p>
-            <hr>
           </li>
         {% endfor %}
       </ul>
     </li>
     <li>
       <h2>Chat</h2>
-      <hr>
-      <ul class="container">
+      <ul>
         {% for boardID, board in boards.chat %}
           <li>
             <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
             <p>{{ board.description }}</p>
-            <hr>
           </li>
         {% endfor %}
       </ul>

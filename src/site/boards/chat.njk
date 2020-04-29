@@ -36,7 +36,7 @@ renderData:
     {% endfor %}
     </ul>
 
-    <ul class="container">
+    <ul>
       {%- for discussionID in board.links.discussions | notFeatured(board.featured) -%}
         <li>
           <p><a href="./discussions/{{ discussions[discussionID].zooniverse_id }}">{{ discussions[discussionID].title }}</a></p>
