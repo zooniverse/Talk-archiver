@@ -6,7 +6,7 @@ html {
 }
 
 h1 {
-  @apply text-xl;
+  @apply text-xl font-semibold leading-tight mb-4;
 }
 
 h2 {
