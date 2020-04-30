@@ -6,15 +6,15 @@ html {
 }
 
 h1 {
-  @apply text-xl font-semibold leading-tight mb-4;
+  @apply text-xl font-semibold leading-tight mb-6;
 }
 
 h2 {
-  @apply text-lg uppercase font-semibold leading-tight border-b-2 mb-4;
+  @apply text-lg uppercase font-semibold leading-tight border-b-2 mb-6;
 }
 
 h3 {
-  @apply text-base uppercase font-semibold leading-tight border-b mb-2;
+  @apply text-base uppercase font-semibold leading-tight border-b mb-4;
 }
 
 a {
@@ -22,7 +22,7 @@ a {
 }
 
 ul {
-  @apply mb-4;
+  @apply mb-8;
 }
 
 li {
@@ -30,7 +30,7 @@ li {
 }
 
 p {
-  @apply mb-2;
+  @apply mb-6;
 }
 
 @tailwind components;
@@ -40,7 +40,7 @@ p {
 header {
   align-items: center;
   background: #000;
-  @apply font-bold text-base px-2 py-4 mb-4;
+  @apply font-bold text-base px-2 py-4 mb-8;
 }
 
 header svg {
@@ -53,12 +53,12 @@ header a {
   @apply mx-2 my-1;
 }
 .page-grid {
-  @apply grid gap-2;
+  @apply grid gap-8;
   grid-template-columns: 1fr 2fr;
 }
 
 .collection {
-  @apply grid gap-3 grid-cols-6 grid-flow-row;
+  @apply grid gap-6 grid-cols-6 grid-flow-row;
 }
 
 .collection li {
@@ -67,12 +67,12 @@ header a {
 }
 
 .collection li img {
-  max-height: 8rem;
-  max-width: 8rem;
+  max-height: 6rem;
+  max-width: 6rem;
 }
 
 .comments-list {
-  @apply grid gap-1 grid-cols-5 grid-flow-row;
+  @apply grid gap-6 grid-cols-5 grid-flow-row;
 }
 
 .comments-list img {
@@ -84,8 +84,8 @@ header a {
   @apply mb-4 border-b border-light-3;
 }
 
-.focus img {
-  @apply max-w-sm mb-4;
+.focus .subject {
+  @apply max-w-sm mb-8;
 }
 
 .subject {
