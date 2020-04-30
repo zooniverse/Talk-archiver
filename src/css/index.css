@@ -57,6 +57,10 @@ header a {
   grid-template-columns: 1fr 2fr;
 }
 
+.split-column {
+  @apply grid gap-6 grid-cols-2 grid-flow-row;
+}
+
 .collection {
   @apply grid gap-6 grid-cols-6 grid-flow-row;
 }
