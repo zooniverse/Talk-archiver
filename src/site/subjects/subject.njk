@@ -77,22 +77,7 @@ renderData:
     <h2>Board Discussions</h2>
     {% for category, categoryDiscussions in discussions | focus(subject.zooniverse_id) %}
       <h3>{{ category | capitalize }}</h3>
-      <ul>
-        {% for discussion in categoryDiscussions %}
-          <li>
-            <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
-            <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
-            <p>
-              Last post
-              <time datetime={{ discussion.last_comment.created_at }}>
-                {{ discussion.last_comment.created_at | date }}
-              </time>
-              by
-              {{ discussion.last_comment.user_name }}
-            </p>
-          </li>
-        {% endfor  %}
-      </ul>
+      {% featuredDiscussions categoryDiscussions %}
     {% endfor %}
   </div>
 </div>
