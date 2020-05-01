@@ -44,10 +44,19 @@ header svg {
   @apply inline-block mx-2 my-1;
 }
 
-header a {
-  color: #b2b2b2;
-  @apply mx-2 my-1;
+header nav ul {
+  @apply mb-0;
 }
+
+header nav a {
+  color: #b2b2b2;
+  @apply mx-2 my-1 no-underline uppercase;
+}
+
+header nav a:hover {
+  @apply underline;
+}
+
 .page-grid {
   @apply grid gap-8;
   grid-template-columns: 1fr 2fr;
