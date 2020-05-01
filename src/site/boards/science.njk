@@ -25,7 +25,7 @@ renderData:
     <p>{{ board.description }}</p>
     <p>{{ board.links.discussions.length }} conversations</p>
 
-    <ul>
+    <ul class="discussion-list">
     {% for discussion in board.featured | pinned(board.zooniverse_id) %}
       <li>
         <p class="pinned-discussion">
@@ -37,7 +37,7 @@ renderData:
     {% endfor %}
     </ul>
 
-    <ul>
+    <ul class="discussion-list">
       {%- for discussionID in board.links.discussions | notFeatured(board.featured) -%}
         <li>
           <p><a href="./discussions/{{ discussions[discussionID].zooniverse_id }}">{{ discussions[discussionID].title }}</a></p>

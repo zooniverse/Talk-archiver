@@ -14,7 +14,7 @@ layout: default
   <ul>
     <li>
       <h2>Help</h2>
-      <ul>
+      <ul class="discussion-list">
         {% for boardID, board in boards.help %}
           <li>
             <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
@@ -25,7 +25,7 @@ layout: default
     </li>
     <li>
       <h2>Research</h2>
-      <ul>
+      <ul class="discussion-list">
         {% for boardID, board in boards.science %}
           <li>
             <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
@@ -36,7 +36,7 @@ layout: default
     </li>
     <li>
       <h2>Chat</h2>
-      <ul>
+      <ul class="discussion-list">
         {% for boardID, board in boards.chat %}
           <li>
             <p><a href="./{{ boardID }}">{{ board.title }}</a></p>

@@ -29,10 +29,6 @@ li {
   @apply ml-2;
 }
 
-p {
-  @apply mb-6;
-}
-
 @tailwind components;
 /* purgecss end ignore */
 
@@ -86,6 +82,13 @@ header a {
 
 .comment {
   @apply mb-4 border-b border-light-3;
+}
+
+.comment p {
+  @apply mb-2;
+}
+.discussion-list > * + * {
+  @apply mt-6;
 }
 
 .focus .subject {
