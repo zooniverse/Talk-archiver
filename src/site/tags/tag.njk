@@ -21,16 +21,7 @@ renderData:
 </ul>
 
 <h2><a href="/tags/{{ tag }}/discussions.html">Discussions</a> ({{ collections.taggedContent[tag].discussions.length }})</h2>
-<ul>
-  {% for discussion in collections.taggedContent[tag].discussions | limit(6) %}
-    <li>
-      <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>
-      <p>{{ discussion.comments.length }} posts / {{ discussion.users }} participants</p>
-      <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
-      <hr>
-    </li>
-  {% endfor %}
-</ul>
+{% featuredDiscussions collections.taggedContent[tag].discussions | limit(2) %}
 
 <h2><a href="/tags/{{ tag }}/collections.html">Collections</a> ({{ collections.taggedContent[tag].userCollections.length }})</h2>
 <ul>
