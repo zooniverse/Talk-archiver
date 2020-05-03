@@ -7,7 +7,9 @@ pagination:
   alias: user
 permalink: "/users/{{ user.name }}/comments.html"
 renderData:
-  title: "{{ user.name }} comments"
+  title: "Profile: {{ user.name }}: comments"
+  description: "Subject comments by {{ user.name }} on Science Gossip."
+  ogImage: "{{ user.subjects[0].focus.location.thumb }}"
 ---
 <h1><a href="/users/{{ user.name }}">{{ user.name }}</a></h1>
 
