@@ -11,10 +11,10 @@ renderData:
   description: "{{ userCollection.description }}"
   ogImage: "{{ userCollection.subjects[0].location.thumb }}"
 ---
-<h1>Collection: {{ userCollection.title }}</h1>
-<p>{{ userCollection.description }}</p>
-<div class="page-grid">
+<main class="page-grid">
   <div>
+    <h1>Collection: {{ userCollection.title }}</h1>
+    <p>{{ userCollection.description }}</p>
     <h2>Tags</h2>
     <ul class="tag-list">
       {% for tag in userCollection.tags %}
@@ -72,4 +72,4 @@ renderData:
     </li>
   {%- endfor -%}
   </ul>
-</div>
+</main>

@@ -9,22 +9,23 @@ permalink: "/users/{{ user.name }}/collections.html"
 renderData:
   title: "Profile: {{ user.name }}: collections"
 ---
-<h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
-
-<h2>Collections ({{ user.my_collections.length }})</h2>
-<ul>
-{%- for collection in user.my_collections -%}
-  <li>
-    <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
-    <ul class="collection">
-      {%- for subject in collection.subjects | limit(4) -%}
-        <li class="subject">
-          <a href="/subjects/{{ subject.zooniverse_id }}">
-            <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
-          </a>
-        </li>
-      {%- endfor -%}
-    </ul>
-  </li>
-{%- endfor -%}
-</ul>
+<main>
+  <h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
+  <h2>Collections ({{ user.my_collections.length }})</h2>
+  <ul>
+  {%- for collection in user.my_collections -%}
+    <li>
+      <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
+      <ul class="collection">
+        {%- for subject in collection.subjects | limit(4) -%}
+          <li class="subject">
+            <a href="/subjects/{{ subject.zooniverse_id }}">
+              <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </li>
+  {%- endfor -%}
+  </ul>
+</main>

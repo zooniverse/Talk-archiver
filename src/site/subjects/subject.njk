@@ -12,7 +12,7 @@ renderData:
   ogImage: "{{ subject.location.thumb }}"
 ---
 <div class="page-grid">
-  <div class="focus">
+  <main class="focus">
     <h1>Subject: {{ subject.zooniverse_id }}</h1>
     <img class="subject" alt="{{ subject.zooniverse_id }}" src={{ subject.location.standard }} >
 
@@ -41,9 +41,9 @@ renderData:
     </li>
     {%- endfor -%}
     </ul>
-  </div>
+  </main>
 
-  <div>
+  <aside>
     <div class="split-column">
       <div>
         <h2>Tags</h2>
@@ -79,5 +79,5 @@ renderData:
       <h3>{{ category | capitalize }}</h3>
       {% featuredDiscussions categoryDiscussions %}
     {% endfor %}
-  </div>
+  </aside>
 </div>

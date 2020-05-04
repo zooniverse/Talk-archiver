@@ -8,6 +8,8 @@ permalink: "/tags/{{ tag }}/discussions.html"
 renderData:
   title: "{{ tag }}"
 ---
-<h1><a href="/tags/{{ tag }}">Tag: {{ tag }}</a></h1>
-<h2>Discussions</h2>
-{% featuredDiscussions collections.taggedContent[tag].discussions %}
+<main>
+  <h1><a href="/tags/{{ tag }}">Tag: {{ tag }}</a></h1>
+  <h2>Discussions</h2>
+  {% featuredDiscussions collections.taggedContent[tag].discussions %}
+</main>

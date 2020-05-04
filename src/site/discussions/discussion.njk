@@ -10,14 +10,8 @@ renderData:
   title: "{{ discussion.title}}"
   description: "{{ discussion.comments[0].body | truncate(150) }}"
 ---
-<h1>
-  {{ discussion.board.category | capitalize }} board:
-  <a href="/boards/{{ discussion.board._id }}">
-    {{ discussion.board.name }}
-  </a>
-</h1>
 <div class="page-grid">
-  <div class="focus container">
+  <aside class="focus">
   {% if discussion.focus and discussion.focus.base_type == 'Subject' %}
     <h2>
       <a href="/subjects/{{ discussion.focus.zooniverse_id }}">
@@ -51,8 +45,14 @@ renderData:
     <h2>Popular hashtags</h2>
     {%- tags discussion.tags -%}
   {% endif %}
-  </div>
-  <div>
+  </aside>
+  <main>
+    <h1>
+      {{ discussion.board.category | capitalize }} board:
+      <a href="/boards/{{ discussion.board._id }}">
+        {{ discussion.board.name }}
+      </a>
+    </h1>
     <h1>{{ discussion.title }}</h1>
     <p>{{ discussion.description }}</p>
     <ul>
@@ -79,5 +79,5 @@ renderData:
       </li>
     {%- endfor -%}
     </ul>
-  </div>
+  </main>
 </div>

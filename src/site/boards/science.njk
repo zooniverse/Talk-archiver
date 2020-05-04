@@ -10,17 +10,9 @@ renderData:
   title: "{{ board.title }}"
   description: "{{ board.description }}"
 ---
-<h1>Research Board</h1>
 <div class="page-grid">
-  <div>
-    <h2>Featured research discussions</h2>
-    {%- featuredDiscussions board.featured | featured(board.zooniverse_id) -%}
-
-    <h2>Popular hashtags</h2>
-    {%- tags board.tags -%}
-  </div>
-
-  <div>
+  <main>
+    <h1>Research Board</h1>
     <h2>{{ board.title }}</h2>
     <p>{{ board.description }}</p>
     <p class="mb-8">{{ board.links.discussions.length }} conversations</p>
@@ -44,5 +36,12 @@ renderData:
       </li>
     {%- endfor -%}
     </ul>
-  </div>
+  </main>
+  <aside>
+    <h2>Featured research discussions</h2>
+    {%- featuredDiscussions board.featured | featured(board.zooniverse_id) -%}
+
+    <h2>Popular hashtags</h2>
+    {%- tags board.tags -%}
+  </aside>
 </div>

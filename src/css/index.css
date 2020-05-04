@@ -60,6 +60,20 @@ header nav a:hover {
 .page-grid {
   @apply grid gap-8;
   grid-template-columns: 1fr 2fr;
+  grid-template-areas: "heading heading" "aside main";
+}
+
+.page-grid > h1 {
+  grid-area: heading;
+  @apply mb-0;
+}
+
+.page-grid > aside {
+  grid-area: aside;
+}
+
+.page-grid > main {
+  grid-area: main;
 }
 
 .split-column {

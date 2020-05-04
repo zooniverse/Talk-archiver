@@ -8,14 +8,16 @@ permalink: "/tags/{{ tag }}/subjects.html"
 renderData:
   title: "{{ tag }}"
 ---
-<h1><a href="/tags/{{ tag }}">Tag: {{ tag }}</a></h1>
-<h2>Subjects</h2>
-<ul class="collection">
-  {% for subject in collections.taggedContent[tag].subjects %}
-    <li class="subject">
-      <a href="/subjects/{{ subject.zooniverse_id }}">
-        <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
-      </a> 
-    </li>
-  {% endfor %}
-</ul>
+<main>
+  <h1><a href="/tags/{{ tag }}">Tag: {{ tag }}</a></h1>
+  <h2>Subjects</h2>
+  <ul class="collection">
+    {% for subject in collections.taggedContent[tag].subjects %}
+      <li class="subject">
+        <a href="/subjects/{{ subject.zooniverse_id }}">
+          <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+        </a> 
+      </li>
+    {% endfor %}
+  </ul>
+</main>

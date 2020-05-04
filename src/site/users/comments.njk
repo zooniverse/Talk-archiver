@@ -11,21 +11,22 @@ renderData:
   description: "Subject comments by {{ user.name }} on Science Gossip."
   ogImage: "{{ user.subjects[0].focus.location.thumb }}"
 ---
-<h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
-
-<h2>Subject comments ({{ user.subjects.length }})</h2>
-<ul class="comments-list">
-{%- for subject in user.subjects -%}
-  <li id={{ subject.focus.zooniverse_id }}>
-    <a href="/subjects/{{ subject.focus.zooniverse_id }}">
-      <img alt="Subject {{ subject.focus.zooniverse_id }}" src={{ subject.focus.location.thumb}}>
-    </a>
-    <p>
-      {%- markdown -%}
-        {{ subject.comment.body }}
-      {%- endmarkdown -%}
-    </p>
-    <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
-  </li>
-{%- endfor -%}
-</ul>
+<main>
+  <h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
+  <h2>Subject comments ({{ user.subjects.length }})</h2>
+  <ul class="comments-list">
+  {%- for subject in user.subjects -%}
+    <li id={{ subject.focus.zooniverse_id }}>
+      <a href="/subjects/{{ subject.focus.zooniverse_id }}">
+        <img alt="Subject {{ subject.focus.zooniverse_id }}" src={{ subject.focus.location.thumb}}>
+      </a>
+      <p>
+        {%- markdown -%}
+          {{ subject.comment.body }}
+        {%- endmarkdown -%}
+      </p>
+      <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
+    </li>
+  {%- endfor -%}
+  </ul>
+</main>

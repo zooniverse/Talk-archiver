@@ -8,36 +8,41 @@ permalink: "/tags/{{ tag }}/"
 renderData:
   title: "{{ tag }}"
 ---
-<h1>Tag: {{ tag }}</h1>
-<h2><a href="/tags/{{ tag }}/subjects.html">Subjects</a> ({{ collections.taggedContent[tag].subjects.length }})</h2>
-<ul class="collection">
-  {% for subject in collections.taggedContent[tag].subjects | limit(6) %}
-    <li class="subject">
-      <a href="/subjects/{{ subject.zooniverse_id }}">
-        <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
-      </a> 
-    </li>
-  {% endfor %}
-</ul>
+<main class="page-grid">
+  <h1>Tag: {{ tag }}</h1>
+  <div>
+    <h2><a href="/tags/{{ tag }}/discussions.html">Discussions</a> ({{ collections.taggedContent[tag].discussions.length }})</h2>
+    {% featuredDiscussions collections.taggedContent[tag].discussions | limit(2) %}
+  </div>
+  <div>
+    <h2><a href="/tags/{{ tag }}/subjects.html">Subjects</a> ({{ collections.taggedContent[tag].subjects.length }})</h2>
+    <ul class="collection">
+      {% for subject in collections.taggedContent[tag].subjects | limit(6) %}
+        <li class="subject">
+          <a href="/subjects/{{ subject.zooniverse_id }}">
+            <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+          </a> 
+        </li>
+      {% endfor %}
+    </ul>
 
-<h2><a href="/tags/{{ tag }}/discussions.html">Discussions</a> ({{ collections.taggedContent[tag].discussions.length }})</h2>
-{% featuredDiscussions collections.taggedContent[tag].discussions | limit(2) %}
-
-<h2><a href="/tags/{{ tag }}/collections.html">Collections</a> ({{ collections.taggedContent[tag].userCollections.length }})</h2>
-<ul>
-  {% for collection in collections.taggedContent[tag].userCollections | limit(6) %}
-    <li>
-      <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
-      <ul class="collection">
-        {%- for collectionSubject in collection.subjects | limit(4) -%}
-          <li class="subject">
-            <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-              <img alt="Subject {{ collectionSubject.zooniverse_id }}" src={{ collectionSubject.location.thumb}}>
-            </a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    </li>
-  {% endfor %}
-</ul>
+    <h2><a href="/tags/{{ tag }}/collections.html">Collections</a> ({{ collections.taggedContent[tag].userCollections.length }})</h2>
+    <ul>
+      {% for collection in collections.taggedContent[tag].userCollections | limit(6) %}
+        <li>
+          <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
+          <ul class="collection">
+            {%- for collectionSubject in collection.subjects | limit(4) -%}
+              <li class="subject">
+                <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
+                  <img alt="Subject {{ collectionSubject.zooniverse_id }}" src={{ collectionSubject.location.thumb}}>
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</main>
 

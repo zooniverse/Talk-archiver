@@ -9,9 +9,8 @@ permalink: "/users/{{ user.name }}/"
 renderData:
   title: "Profile: {{ user.name }}"
 ---
-<h1>Profile: {{ user.name }}</h1>
-
-<div class="page-grid">
+<main class="page-grid">
+  <h1>Profile: {{ user.name }}</h1>
   <div>
     <h2>Discussions</h2>
     <ul class="discussion-list">
@@ -67,4 +66,4 @@ renderData:
     {%- endfor -%}
     </ul>
   </div>
-</div>
+</main>
