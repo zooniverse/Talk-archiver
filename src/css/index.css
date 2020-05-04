@@ -60,11 +60,20 @@ header nav a:hover {
 .page-grid {
   @apply grid gap-8;
   grid-template-columns: 1fr 2fr;
+}
+
+main.page-grid,
+div.page-grid {
   grid-template-areas: "heading heading" "aside main";
 }
 
-.subject-page-grid {
+div.subject-page-grid {
   grid-template-areas: "main aside";
+}
+
+div.page-grid > nav {
+  grid-area: heading;
+  @apply text-xl font-semibold leading-tight mb-0;
 }
 
 .page-grid > h1 {

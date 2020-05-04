@@ -11,48 +11,13 @@ renderData:
   description: "{{ discussion.comments[0].body | truncate(150) }}"
 ---
 <div class="page-grid">
-  <aside class="focus">
-  {% if discussion.focus and discussion.focus.base_type == 'Subject' %}
-    <h2>
-      <a href="/subjects/{{ discussion.focus.zooniverse_id }}">
-        Subject: {{ discussion.focus.zooniverse_id }}
-      </a>
-    </h2>
-    <a href="/subjects/{{ discussion.focus.zooniverse_id }}">
-      <img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}>
+  <nav>
+    {{ discussion.board.category | capitalize }} board:
+    <a href="/boards/{{ discussion.board._id }}">
+      {{ discussion.board.name }}
     </a>
-  {% endif %}
-  {% if discussion.focus and discussion.focus.base_type == 'Collection' %}
-    <h2>
-      <a href="/collections/{{ discussion.focus.zooniverse_id }}">
-        Collection: {{ discussion.focus.title }}
-      </a>
-    </h2>
-    <ul class="collection">
-    {%- for subject in discussion.focus.subjects | limit(4) -%}
-      <li id={{ subject.zooniverse_id }} class="subject">
-        <a href="/subjects/{{ subject.zooniverse_id }}">
-          <img src={{ subject.location.thumb}}>
-        </a>
-      </li>
-    {%- endfor -%}
-    </ul>
-  {% endif %}
-  {% if discussion.focus and discussion.focus.base_type == 'Board' %}
-    <h2>Featured discussions</h2>
-    {%- featuredDiscussions discussion.featured -%}
-
-    <h2>Popular hashtags</h2>
-    {%- tags discussion.tags -%}
-  {% endif %}
-  </aside>
+  </nav>
   <main>
-    <h1>
-      {{ discussion.board.category | capitalize }} board:
-      <a href="/boards/{{ discussion.board._id }}">
-        {{ discussion.board.name }}
-      </a>
-    </h1>
     <h1>{{ discussion.title }}</h1>
     <p>{{ discussion.description }}</p>
     <ul>
@@ -61,7 +26,7 @@ renderData:
         <p>
           <a href="/users/{{ comment.user_name }}">
             {% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}
-          </a> by 
+          </a> by
           <a href="/users/{{ comment.user_name }}">
             {{ comment.user_name }}
           </a>
@@ -80,4 +45,91 @@ renderData:
     {%- endfor -%}
     </ul>
   </main>
+  <aside class="focus">
+  {% if discussion.focus and discussion.focus.base_type == 'Subject' %}
+    <h2>
+      <a href="/subjects/{{ discussion.focus.zooniverse_id }}">
+        Subject: {{ discussion.focus.zooniverse_id }}
+      </a>
+    </h2>
+    <a href="/subjects/{{ discussion.focus.zooniverse_id }}">
+      <img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}>
+    </a>
+
+    <h3>Comments</h3>
+    <ul>
+    {%- for comment in discussion.focus.discussion.comments | reverse -%}
+    <li id={{ comment._id }} class="comment">
+      <p>
+        <a href="/users/{{ comment.user_name }}">
+          {% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}
+        </a>
+        by
+        <a href="/users/{{ comment.user_name }}">
+          {{ comment.user_name }}
+        </a>
+        {% if comment.response_to %}
+          <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
+        {% endif %}
+      </p>
+
+      {%- markdown -%}
+        {{ comment.body | safe }}
+      {%- endmarkdown -%}
+
+        <p>Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time></p>
+    </li>
+    {%- endfor -%}
+    </ul>
+  {% endif %}
+  {% if discussion.focus and discussion.focus.base_type == 'Collection' %}
+    <h2>
+      <a href="/collections/{{ discussion.focus.zooniverse_id }}">
+        Collection: {{ discussion.focus.title }}
+      </a>
+    </h2>
+    <ul class="collection">
+    {%- for subject in discussion.focus.subjects | limit(4) -%}
+      <li id={{ subject.zooniverse_id }} class="subject">
+        <a href="/subjects/{{ subject.zooniverse_id }}">
+          <img src={{ subject.location.thumb}}>
+        </a>
+      </li>
+    {%- endfor -%}
+    </ul>
+
+    <h3>Comments</h3>
+    <ul>
+    {%- for comment in discussion.focus.discussion.comments | reverse -%}
+    <li id={{ comment._id }} class="comment">
+      <p>
+        <a href="/users/{{ comment.user_name }}">
+          {% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}
+        </a>
+        by
+        <a href="/users/{{ comment.user_name }}">
+          {{ comment.user_name }}
+        </a>
+        {% if comment.response_to %}
+          <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
+        {% endif %}
+      </p>
+
+      {%- markdown -%}
+        {{ comment.body | safe }}
+      {%- endmarkdown -%}
+
+        <p>Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time></p>
+    </li>
+    {%- endfor -%}
+    </ul>
+  {% endif %}
+  {% if discussion.focus and discussion.focus.base_type == 'Board' %}
+    <h2>Featured discussions</h2>
+    {%- featuredDiscussions discussion.featured -%}
+
+    <h2>Popular hashtags</h2>
+    {%- tags discussion.tags -%}
+  {% endif %}
+  </aside>
 </div>
