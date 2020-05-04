@@ -10,6 +10,12 @@ renderData:
   title: "{{ discussion.title}}"
   description: "{{ discussion.description }}"
 ---
+<h1>
+  {{ discussion.board.category | capitalize }} board:
+  <a href="/boards/{{ discussion.board._id }}">
+    {{ discussion.board.name }}
+  </a>
+</h1>
 <div class="page-grid">
   <div class="focus container">
   {% if discussion.focus and discussion.focus.base_type == 'Subject' %}

@@ -23,7 +23,7 @@ renderData:
   <div>
     <h2>{{ board.title }}</h2>
     <p>{{ board.description }}</p>
-    <p>{{ board.links.discussions.length }} conversations</p>
+    <p class="mb-8">{{ board.links.discussions.length }} conversations</p>
 
     <ul class="discussion-list">
     {% for discussion in board.featured | pinned(board.zooniverse_id) %}
@@ -35,16 +35,14 @@ renderData:
         <p>Last post {{ discussion.last_comment.created_at | date }} by {{ discussion.last_comment.user_name }}</p>
       </li>
     {% endfor %}
-    </ul>
 
-    <ul class="discussion-list">
-      {%- for discussionID in board.links.discussions | notFeatured(board.featured) -%}
-        <li>
-          <p><a href="./discussions/{{ discussions[discussionID].zooniverse_id }}">{{ discussions[discussionID].title }}</a></p>
-          <p>{{ discussions[discussionID].comments.length }} posts / {{ discussions[discussionID].users }} participants</p>
-          <p>Last post {{ discussions[discussionID].last_comment.created_at | date }} by {{ discussions[discussionID].last_comment.user_name }}</p>
-        </li>
-      {%- endfor -%}
+    {%- for discussionID in board.links.discussions | notFeatured(board.featured) -%}
+      <li>
+        <p><a href="./discussions/{{ discussions[discussionID].zooniverse_id }}">{{ discussions[discussionID].title }}</a></p>
+        <p>{{ discussions[discussionID].comments.length }} posts / {{ discussions[discussionID].users }} participants</p>
+        <p>Last post {{ discussions[discussionID].last_comment.created_at | date }} by {{ discussions[discussionID].last_comment.user_name }}</p>
+      </li>
+    {%- endfor -%}
     </ul>
   </div>
 </div>
