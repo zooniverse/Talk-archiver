@@ -8,7 +8,7 @@ pagination:
 permalink: "/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/"
 renderData:
   title: "{{ discussion.title}}"
-  description: "{{ discussion.description }}"
+  description: "{{ discussion.comments[0].body | truncate(150) }}"
 ---
 <h1>
   {{ discussion.board.category | capitalize }} board:
