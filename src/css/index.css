@@ -63,6 +63,10 @@ header nav a:hover {
   grid-template-areas: "heading heading" "aside main";
 }
 
+.subject-page-grid {
+  grid-template-areas: "main aside";
+}
+
 .page-grid > h1 {
   grid-area: heading;
   @apply mb-0;

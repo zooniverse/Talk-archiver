@@ -11,7 +11,7 @@ renderData:
   description: "Subject {{ subject.zooniverse_id }} from Science Gossip."
   ogImage: "{{ subject.location.thumb }}"
 ---
-<div class="page-grid">
+<div class="page-grid subject-page-grid">
   <main class="focus">
     <h1>Subject: {{ subject.zooniverse_id }}</h1>
     <img class="subject" alt="{{ subject.zooniverse_id }}" src={{ subject.location.standard }} >
