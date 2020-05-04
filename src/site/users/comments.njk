@@ -11,7 +11,7 @@ renderData:
   description: "Subject comments by {{ user.name }} on Science Gossip."
   ogImage: "{{ user.subjects[0].focus.location.thumb }}"
 ---
-<h1><a href="/users/{{ user.name }}">{{ user.name }}</a></h1>
+<h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
 
 <h2>Subject comments ({{ user.subjects.length }})</h2>
 <ul class="comments-list">

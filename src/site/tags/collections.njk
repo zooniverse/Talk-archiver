@@ -8,7 +8,7 @@ permalink: "/tags/{{ tag }}/collections.html"
 renderData:
   title: "{{ tag }}"
 ---
-<h1>Tag: {{ tag }}</h1>
+<h1><a href="/tags/{{ tag }}">Tag: {{ tag }}</a></h1>
 <h2>Collections</h2>
 <ul>
   {% for collection in collections.taggedContent[tag].userCollections %}

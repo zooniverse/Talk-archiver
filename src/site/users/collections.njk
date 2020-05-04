@@ -7,9 +7,9 @@ pagination:
   alias: user
 permalink: "/users/{{ user.name }}/collections.html"
 renderData:
-  title: "{{ user.name }} collections"
+  title: "Profile: {{ user.name }}: collections"
 ---
-<h1><a href="/users/{{ user.name }}">{{ user.name }}</a></h1>
+<h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
 
 <h2>Collections ({{ user.my_collections.length }})</h2>
 <ul>
