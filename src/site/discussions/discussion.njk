@@ -12,7 +12,8 @@ renderData:
 ---
 <div class="page-grid">
   <nav>
-    {{ discussion.board.category | capitalize }} board:
+    <a href="/boards">Discussion boards</a>:
+    {{ discussion.board.category | capitalize }}:
     <a href="/boards/{{ discussion.board._id }}">
       {{ discussion.board.name }}
     </a>

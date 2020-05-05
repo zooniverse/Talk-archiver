@@ -11,9 +11,9 @@ renderData:
   description: "{{ board.description }}"
 ---
 <div class="page-grid">
+  <nav><a href="/boards">Discussion boards</a>: Chat</nav>
   <main>
-    <h1>Chat Board</h1>
-    <h2>{{ board.title }}</h2>
+    <h1>{{ board.title }}</h1>
     <p>{{ board.description }}</p>
     <p class="mb-8">{{ board.links.discussions.length }} conversations</p>
 

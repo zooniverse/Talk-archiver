@@ -2,9 +2,9 @@
 title: Discussion boards
 layout: default
 ---
-<div class="page-grid">
-  <main>
-    <h1>Discussion Boards</h1>
+<main class="page-grid">
+  <h1>Discussion Boards</h1>
+  <section>
     <ul>
       <li>
         <h2>Help</h2>
@@ -40,7 +40,7 @@ layout: default
         </ul>
       </li>
     </ul>
-  </main>
+  </section>
   <aside>
     <h2>Featured discussions</h2>
     {%- featuredDiscussions boards.featured -%}
@@ -48,4 +48,4 @@ layout: default
     <h2>Popular hashtags</h2>
     {%- tags boards.tags -%}
   </aside>
-</div>
+</main>
