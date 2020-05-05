@@ -25,7 +25,7 @@ renderData:
           {{ subject.comment.body }}
         {%- endmarkdown -%}
       </p>
-      <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
+      <time datetime={{ subject.comment.created_at }}>{{ subject.comment.created_at | date }}</time>
     </li>
   {%- endfor -%}
   </ul>
