@@ -4,16 +4,20 @@ const fetchUsers = require('./users');
 
 module.exports = async function fetchCollections() {
   const users = await fetchUsers();
+  const collectionURLs = [];
   for (user of Object.values(users)) {
-    try {
-      for (collection of user.my_collections) {
-        if (!store.userCollections[collection.zooniverse_id]) {
-          const userCollection = await API.get(`collections/${collection.zooniverse_id}`)
-          store.userCollections[collection.zooniverse_id] = userCollection;
-        }
+    for (collection of user.my_collections) {
+      if (!store.userCollections[collection.zooniverse_id]) {
+        collectionURLs.push(`collections/${collection.zooniverse_id}`);
       }
-    } catch (e) {
-      console.error(e);
+    }
+  }
+
+  const uniqueURLs = collectionURLs.filter((url, index, self) => self.indexOf(url) === index);
+  const userCollections = await API.batchedGet(uniqueURLs);
+  for (userCollection of userCollections) {
+    if (!store.userCollections[userCollection.zooniverse_id]) {
+      store.userCollections[userCollection.zooniverse_id] = userCollection;
     }
   }
   return store.userCollections;

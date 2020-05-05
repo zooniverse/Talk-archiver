@@ -20,12 +20,16 @@ async function listCollections(user_name) {
 }
 
 async function subjectUsers(discussion) {
-  for (comment of discussion.comments) {
-    const { user_name } = comment;
-    if (!store.users[user_name]) {
-      const user = await API.get(`users/${user_name}`);
+  const userURLs = discussion.comments
+    .filter(comment => !store.users[comment.user_name])
+    .map(comment => `users/${comment.user_name}`);
+  const uniqueURLs = userURLs.filter((url, index, self) => self.indexOf(url) === index);
+  const users = await API.batchedGet(uniqueURLs);
+
+  for (user of users) {
+    if (!store.users[user.name]) {
       if (user.name) {
-        const userCollections = await listCollections(user_name);
+        const userCollections = await listCollections(user.name);
         user.my_collections && user.my_collections.push(...userCollections);
         store.users[user.name] = user;
         for (collection of user.my_collections) {
@@ -35,18 +39,23 @@ async function subjectUsers(discussion) {
           }
         }
       } else {
-        console.log(`*** Invalid response for user ${user_name}`)
+        console.log(`*** Invalid response for user ${user.name}`)
       }
     }
   }
 }
 
 async function collectionSubjects(collection) {
-  for (subject of collection.subjects) {
-    if (!store.subjects[subject.zooniverse_id]) {
-      const fullSubject = await API.get(`subjects/${subject.zooniverse_id}`)
+  const subjectURLs = collection.subjects
+    .filter(subject => !store.subjects[subject.zooniverse_id])
+    .map(subject => `subjects/${subject.zooniverse_id}`);
+    const uniqueURLs = subjectURLs.filter((url, index, self) => self.indexOf(url) === index);
+  const fullSubjects = await API.batchedGet(uniqueURLs);
+
+  for (fullSubject of fullSubjects) {
+    if (!store.subjects[fullSubject.zooniverse_id]) {
       await subjectUsers(fullSubject.discussion);
-      store.subjects[subject.zooniverse_id] = fullSubject;
+      store.subjects[fullSubject.zooniverse_id] = fullSubject;
     }
   }
 }

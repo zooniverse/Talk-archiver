@@ -38,22 +38,29 @@ async function listSubjects(user) {
 
 module.exports = async function fetchUsers() {
   const { discussions } = await store;
+  const userURLs = [];
 
   for (discussion of Object.values(discussions)) {
     for (comment of discussion.comments) {
       const { user_name } = comment;
+      const userURL = `users/${user_name}`;
       if (!store.users[user_name]) {
-        const user = await API.get(`users/${user_name}`);
-        if (user.name) {
-          const userCollections = await listCollections(user);
-          const userSubjects = await listSubjects(user);
-          user.my_collections && user.my_collections.push(...userCollections);
-          user.subjects && user.subjects.push(...userSubjects)
-          store.users[user.name] = user;
-        } else {
-          console.log(`*** Invalid response for user ${user_name}`)
-        }
+        userURLs.push(`users/${user_name}`);
       }
+    }
+  }
+
+  const uniqueURLs = userURLs.filter((url, index, self) => self.indexOf(url) === index);
+  const users = await API.batchedGet(uniqueURLs);
+  for (user of users) {
+    if (user.name) {
+      const userCollections = await listCollections(user);
+      const userSubjects = await listSubjects(user);
+      user.my_collections && user.my_collections.push(...userCollections);
+      user.subjects && user.subjects.push(...userSubjects)
+      store.users[user.name] = user;
+    } else {
+      console.log(`*** Invalid response for user ${user_name}`);
     }
   }
 
