@@ -35,22 +35,25 @@ li {
 /* Your custom CSS comes right here */
 header {
   align-items: center;
-  background: #000;
-  @apply font-bold text-base px-2 py-4 mb-8;
+  color: white;
+  @apply bg-brand text-base px-8 py-10 mb-8;
+}
+
+header p {
+  @apply text-4xl;
 }
 
 header svg {
-  color: #b2b2b2;
-  @apply inline-block mx-2 my-1;
+  @apply float-left block mr-6 text-4xl;
 }
 
 header nav ul {
-  @apply mb-0;
+  @apply grid gap-4 grid-flow-row grid-cols-6 mb-0;
 }
 
 header nav a {
-  color: #b2b2b2;
-  @apply mx-2 my-1 no-underline uppercase;
+  color: white;
+  @apply font-bold mx-2 my-1 no-underline uppercase;
 }
 
 header nav a:hover {
