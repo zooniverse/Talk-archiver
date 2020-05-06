@@ -48,7 +48,8 @@ header svg {
 }
 
 header nav ul {
-  @apply grid gap-4 grid-flow-row grid-cols-6 mb-0;
+  @apply grid gap-4 grid-flow-row mb-0;
+  grid-template-columns: repeat(2, minmax(min-content, max-content));
 }
 
 header nav a {
