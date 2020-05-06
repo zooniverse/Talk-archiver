@@ -8,8 +8,19 @@ async function fetchCollectionsPage(name, page) {
 }
 
 async function fetchSubjectsPage(name, page) {
-  const data = await API.get(`users/${name}?type=subjects&page=${page}`);
+  const data = API.get(`users/${name}?type=subjects&page=${page}`);
   return data;
+}
+
+async function fetchBatchedSubjects(user, start, end) {
+  const promises = [];
+  for (let page = start; page < end; page++) {
+    promises.push(fetchSubjectsPage(user.name, page))
+  }
+  const pages = await Promise.all(promises);
+  return pages
+    .map(page => page.subjects)
+    .filter(page => page.length > 0);
 }
 
 async function listCollections(user) {
@@ -26,12 +37,15 @@ async function listCollections(user) {
 
 async function listSubjects(user) {
   let userSubjects = [];
-  for (let page = 2; page <= 1000; page++) {
-    const { subjects } = await fetchSubjectsPage(user.name, page);
-    if (subjects.length === 0) {
-      return userSubjects
+  const batchSize = 10;
+  for (let page = 2; page <= 1000; page = page + batchSize) {
+    const pages = await fetchBatchedSubjects(user, page, page + batchSize);
+    for (subjectPage of pages) {
+      userSubjects = userSubjects.concat(subjectPage);
     }
-    userSubjects = userSubjects.concat(subjects);
+    if (pages.length < batchSize) {
+      return userSubjects;
+    }
   }
   return userSubjects
 }
