@@ -1,11 +1,12 @@
 const fetch = require('node-fetch');
 const { default: RequestQueue, END_EVENT, ITEM_EVENT } = require('limited-request-queue');
 
-const HOST = 'https://www.penguinwatch.org';
+const HOSTS = ['https://www.penguinwatch.org'];
 const PROJECT = 'illustratedlife';
 const CACHING = true;
 
 const apiCache = {};
+let requestCount = 0;
 
 const requestQueue = new RequestQueue({
   maxSockets: 10,
@@ -32,7 +33,9 @@ async function getURL(url) {
   }
 
   const promise = new Promise((resolve, reject) => {
-    requestQueue.enqueue(new URL(`${HOST}/_ouroboros_api/projects/${PROJECT}/talk/${url}`), { resolve });
+    const host = HOSTS[requestCount % HOSTS.length];
+    requestCount++;
+    requestQueue.enqueue(new URL(`${host}/_ouroboros_api/projects/${PROJECT}/talk/${url}`), { resolve });
   });
   return promise;
 }
