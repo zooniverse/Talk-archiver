@@ -50,8 +50,7 @@ module.exports = async function fetchUsers() {
     }
   }
 
-  const uniqueURLs = userURLs.filter((url, index, self) => self.indexOf(url) === index);
-  const users = await API.batchedGet(uniqueURLs);
+  const users = await API.batchedGet(userURLs);
   for (user of users) {
     if (user.name) {
       const userCollections = await listCollections(user);

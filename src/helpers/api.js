@@ -12,6 +12,7 @@ const requestQueue = new RequestQueue({
   maxSocketsPerHost: 10
 })
 .on(ITEM_EVENT, async function handleURL(url, promise, done) {
+  console.log('Requesting', url.toString());
   const response = await fetch(
       url,
     {
@@ -37,8 +38,8 @@ async function getURL(url) {
 }
 
 async function batchedGet(urls) {
-  console.log(`Batch Request: ${urls[0]}`);
-  const promises = urls.map(getURL)
+  const uniqueURLs = urls.filter((url, index, self) => self.indexOf(url) === index);
+  const promises = uniqueURLs.map(getURL)
   return Promise.all(promises);
 }
 

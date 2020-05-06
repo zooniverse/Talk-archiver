@@ -23,8 +23,7 @@ async function subjectUsers(discussion) {
   const userURLs = discussion.comments
     .filter(comment => !store.users[comment.user_name])
     .map(comment => `users/${comment.user_name}`);
-  const uniqueURLs = userURLs.filter((url, index, self) => self.indexOf(url) === index);
-  const users = await API.batchedGet(uniqueURLs);
+  const users = await API.batchedGet(userURLs);
 
   for (user of users) {
     if (!store.users[user.name]) {
@@ -49,8 +48,7 @@ async function collectionSubjects(collection) {
   const subjectURLs = collection.subjects
     .filter(subject => !store.subjects[subject.zooniverse_id])
     .map(subject => `subjects/${subject.zooniverse_id}`);
-    const uniqueURLs = subjectURLs.filter((url, index, self) => self.indexOf(url) === index);
-  const fullSubjects = await API.batchedGet(uniqueURLs);
+  const fullSubjects = await API.batchedGet(subjectURLs);
 
   for (fullSubject of fullSubjects) {
     if (!store.subjects[fullSubject.zooniverse_id]) {

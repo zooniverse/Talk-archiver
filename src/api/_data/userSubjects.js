@@ -12,8 +12,8 @@ module.exports = async function fetchUserSubjects() {
       }
     }
   }
-  const uniqueURLs = subjectURLs.filter((url, index, self) => self.indexOf(url) === index);
-  const subjects = await API.batchedGet(uniqueURLs);
+
+  const subjects = await API.batchedGet(subjectURLs);
   for (subject of subjects) {
     store.subjects[subject.zooniverse_id] = subject;
   }

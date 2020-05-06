@@ -13,8 +13,7 @@ module.exports = async function fetchCollections() {
     }
   }
 
-  const uniqueURLs = collectionURLs.filter((url, index, self) => self.indexOf(url) === index);
-  const userCollections = await API.batchedGet(uniqueURLs);
+  const userCollections = await API.batchedGet(collectionURLs);
   for (userCollection of userCollections) {
     if (!store.userCollections[userCollection.zooniverse_id]) {
       store.userCollections[userCollection.zooniverse_id] = userCollection;
