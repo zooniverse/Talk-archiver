@@ -2,31 +2,31 @@
 @tailwind base;
 
 html {
-  @apply font-body text-sm;
+  @apply font-body text-sm leading-snug text-dark-5;
 }
 
 h1 {
-  @apply text-2xl;
+  @apply text-xl font-semibold leading-tight mb-6;
 }
 
 h2 {
-  @apply text-xl;
+  @apply text-lg uppercase font-semibold leading-tight border-b-2 mb-6;
 }
 
 h3 {
-  @apply text-lg;
+  @apply text-base uppercase font-semibold leading-tight border-b mb-4;
 }
 
 a {
-  @apply text-blue-700 underline;
+  @apply text-brand underline;
+}
+
+ul {
+  @apply mb-8;
 }
 
 li {
-  @apply ml-8;
-}
-
-p {
-  @apply mb-2;
+  @apply ml-2;
 }
 
 @tailwind components;
@@ -35,26 +35,70 @@ p {
 /* Your custom CSS comes right here */
 header {
   align-items: center;
-  background: #000;
-  @apply font-bold text-base px-2 py-4;
+  color: white;
+  @apply bg-brand text-base px-8 py-10 mb-8;
+}
+
+header p {
+  @apply text-4xl;
 }
 
 header svg {
-  color: #b2b2b2;
-  @apply inline-block mx-2 my-1;
+  @apply float-left block mr-6 text-4xl;
 }
 
-header a {
-  color: #b2b2b2;
-  @apply mx-2 my-1;
+header nav ul {
+  @apply grid gap-4 grid-flow-row mb-0;
+  grid-template-columns: repeat(2, minmax(min-content, max-content));
 }
+
+header nav a {
+  color: white;
+  @apply font-bold mx-2 my-1 no-underline uppercase;
+}
+
+header nav a:hover {
+  @apply underline;
+}
+
 .page-grid {
-  @apply grid gap-2;
+  @apply grid gap-8;
   grid-template-columns: 1fr 2fr;
 }
 
+main.page-grid,
+div.page-grid {
+  grid-template-areas: "heading heading" "aside main";
+}
+
+div.subject-page-grid {
+  grid-template-areas: "main aside";
+}
+
+div.page-grid > nav {
+  grid-area: heading;
+  @apply text-xl font-semibold leading-tight mb-0;
+}
+
+.page-grid > h1 {
+  grid-area: heading;
+  @apply mb-0;
+}
+
+.page-grid > aside {
+  grid-area: aside;
+}
+
+.page-grid > main {
+  grid-area: main;
+}
+
+.split-column {
+  @apply grid gap-6 grid-cols-2 grid-flow-row;
+}
+
 .collection {
-  @apply grid gap-3 grid-cols-6 grid-flow-row;
+  @apply grid gap-6 grid-cols-6 grid-flow-row;
 }
 
 .collection li {
@@ -63,12 +107,12 @@ header a {
 }
 
 .collection li img {
-  max-height: 8rem;
-  max-width: 8rem;
+  max-height: 6rem;
+  max-width: 6rem;
 }
 
 .comments-list {
-  @apply grid gap-1 grid-cols-5 grid-flow-row;
+  @apply grid gap-6 grid-cols-5 grid-flow-row;
 }
 
 .comments-list img {
@@ -77,11 +121,18 @@ header a {
 }
 
 .comment {
-  @apply mb-4 border-b;
+  @apply mb-4 border-b border-light-3;
 }
 
-.focus img {
-  @apply max-w-sm;
+.comment p {
+  @apply mb-2;
+}
+.discussion-list > * + * {
+  @apply mt-6;
+}
+
+.focus .subject {
+  @apply max-w-sm mb-8;
 }
 
 .subject {

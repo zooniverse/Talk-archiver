@@ -7,14 +7,13 @@ pagination:
   alias: user
 permalink: "/users/{{ user.name }}/"
 renderData:
-  title: "{{ user.name }}"
+  title: "Profile: {{ user.name }}"
 ---
-<h1>{{ user.name }}</h1>
-
-<div class="page-grid">
+<main class="page-grid">
+  <h1>Profile: {{ user.name }}</h1>
   <div>
     <h2>Discussions</h2>
-    <ul>
+    <ul class="discussion-list">
     {% for discussion in user.boards %}
       <li>
         <p>
@@ -44,7 +43,7 @@ renderData:
             {{ subject.comment.body }}
           {%- endmarkdown -%}
         </p>
-        <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time>
+        <time datetime={{ subject.comment.created_at }}>{{ subject.comment.created_at | date }}</time>
       </li>
     {%- endfor -%}
     </ul>
@@ -67,4 +66,4 @@ renderData:
     {%- endfor -%}
     </ul>
   </div>
-</div>
+</main>

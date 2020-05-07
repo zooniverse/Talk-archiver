@@ -2,15 +2,18 @@ const moment = require('moment');
 
 function discussionSummary(discussion) {
   const lastPost = moment(discussion.last_comment.created_at).format('LLL');
+  const posts = discussion.comments.length || discussion.comments;
   return `
     <p>
       <a href="/boards/${ discussion.board._id }/discussions/${ discussion.zooniverse_id }">
         ${ discussion.title }
       </a>
     </p>
-    <p>${ discussion.comments } posts / ${ discussion.users } participants</p>
+    <p>${ posts } posts / ${ discussion.users } participants</p>
     <p>
-      Last post ${ lastPost } by
+      Last post
+      <time datetime="${discussion.last_comment.created_at}">${ lastPost }</time>
+      by
       <a href="/users/${discussion.last_comment.user_name}">
         ${ discussion.last_comment.user_name }
       </a>
@@ -21,7 +24,7 @@ function discussionSummary(discussion) {
 
 function listItem(discussion) {
   return `
-    <li>
+    <li class="discussion-preview">
       ${discussionSummary(discussion)}
     </li>
   `
@@ -29,7 +32,7 @@ function listItem(discussion) {
 
 module.exports = function featuredDiscussions(discussions) {
   return `
-    <ul>
+    <ul class="discussion-list">
       ${discussions.map(listItem).join('\n')}
     </ul>
   `

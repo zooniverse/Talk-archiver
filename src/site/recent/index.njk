@@ -36,7 +36,7 @@ layout: default
     <h2>Board Discussions</h2>
     {% for category, categoryDiscussions in recents.discussions %}
       <h3>{{ category | capitalize }}</h3>
-      <ul>
+      <ul class="discussion-list">
         {% for discussion in categoryDiscussions %}
           <li>
             <p><a href="/boards/{{ discussion.board._id }}/discussions/{{ discussion.zooniverse_id}}/">{{ discussion.title }}</a></p>

@@ -2,54 +2,50 @@
 title: Discussion boards
 layout: default
 ---
-<h1>Discussion Boards</h1>
-<div class="page-grid">
-  <div>
+<main class="page-grid">
+  <h1>Discussion Boards</h1>
+  <section>
+    <ul>
+      <li>
+        <h2>Help</h2>
+        <ul class="discussion-list">
+          {% for boardID, board in boards.help %}
+            <li>
+              <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
+              <p>{{ board.description }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <h2>Research</h2>
+        <ul class="discussion-list">
+          {% for boardID, board in boards.science %}
+            <li>
+              <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
+              <p>{{ board.description }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+      <li>
+        <h2>Chat</h2>
+        <ul class="discussion-list">
+          {% for boardID, board in boards.chat %}
+            <li>
+              <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
+              <p>{{ board.description }}</p>
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    </ul>
+  </section>
+  <aside>
     <h2>Featured discussions</h2>
     {%- featuredDiscussions boards.featured -%}
 
     <h2>Popular hashtags</h2>
     {%- tags boards.tags -%}
-  </div>
-  <ul>
-    <li>
-      <h2>Help</h2>
-      <hr>
-      <ul class="container">
-        {% for boardID, board in boards.help %}
-          <li>
-            <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
-            <p>{{ board.description }}</p>
-            <hr>
-          </li>
-        {% endfor %}
-      </ul>
-    </li>
-    <li>
-      <h2>Research</h2>
-      <hr>
-      <ul class="container">
-        {% for boardID, board in boards.science %}
-          <li>
-            <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
-            <p>{{ board.description }}</p>
-            <hr>
-          </li>
-        {% endfor %}
-      </ul>
-    </li>
-    <li>
-      <h2>Chat</h2>
-      <hr>
-      <ul class="container">
-        {% for boardID, board in boards.chat %}
-          <li>
-            <p><a href="./{{ boardID }}">{{ board.title }}</a></p>
-            <p>{{ board.description }}</p>
-            <hr>
-          </li>
-        {% endfor %}
-      </ul>
-    </li>
-  </ul>
-</div>
+  </aside>
+</main>

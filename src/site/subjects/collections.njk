@@ -12,9 +12,9 @@ renderData:
   ogImage: "{{ subject.location.thumb }}"
 ---
 <div class="page-grid">
-  <div class=" focus container">
-    <h1 class="text-lg">
-      <a href="/subjects/{{ subject.zooniverse_id }}">{{ subject.zooniverse_id }}</a>
+  <aside class=" focus">
+    <h1>
+      <a href="/subjects/{{ subject.zooniverse_id }}">Subject: {{ subject.zooniverse_id }}</a>
     </h1>
     <img class="subject" src={{ subject.location.standard }} >
 
@@ -43,10 +43,9 @@ renderData:
     </li>
     {%- endfor -%}
     </ul>
-  </div>
+  </aside>
 
-  <div class="container">
-
+  <main>
     <h2>Collections</h2>
     <ul>
       {%- for collection in subject.collections -%}
@@ -64,5 +63,5 @@ renderData:
         </li>
       {%- endfor -%}
     </ul>
-  </div>
+  </main>
 </div>

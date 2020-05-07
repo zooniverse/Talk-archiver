@@ -8,21 +8,23 @@ permalink: "/tags/{{ tag }}/collections.html"
 renderData:
   title: "{{ tag }}"
 ---
-<h1>Tag: {{ tag }}</h1>
-<h2>Collections</h2>
-<ul>
-  {% for collection in collections.taggedContent[tag].userCollections %}
-    <li>
-      <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
-      <ul class="collection">
-        {%- for collectionSubject in collection.subjects | limit(4) -%}
-          <li class="subject">
-            <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-              <img alt="Subject {{ collectionSubject.zooniverse_id }}" src={{ collectionSubject.location.thumb}}>
-            </a>
-          </li>
-        {%- endfor -%}
-      </ul>
-    </li>
-  {% endfor %}
-</ul>
+<main>
+  <h1><a href="/tags/{{ tag }}">Tag: {{ tag }}</a></h1>
+  <h2>Collections</h2>
+  <ul>
+    {% for collection in collections.taggedContent[tag].userCollections %}
+      <li>
+        <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
+        <ul class="collection">
+          {%- for collectionSubject in collection.subjects | limit(4) -%}
+            <li class="subject">
+              <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
+                <img alt="Subject {{ collectionSubject.zooniverse_id }}" src={{ collectionSubject.location.thumb}}>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </li>
+    {% endfor %}
+  </ul>
+</main>
