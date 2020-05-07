@@ -24,6 +24,7 @@ const requestQueue = new RequestQueue({
   }
   done();
 })
+.on(END_EVENT, () => console.log(requestCount, 'requests completed.'));
 
 async function getURL(url) {
   const promise = new Promise((resolve, reject) => {
