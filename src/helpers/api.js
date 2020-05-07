@@ -1,11 +1,9 @@
-const fetch = require('node-fetch');
+const CacheAsset = require("@11ty/eleventy-cache-assets");
 const { default: RequestQueue, END_EVENT, ITEM_EVENT } = require('limited-request-queue');
 
 const HOSTS = ['https://www.penguinwatch.org'];
 const PROJECT = 'illustratedlife';
-const CACHING = true;
 
-const apiCache = {};
 let requestCount = 0;
 
 const requestQueue = new RequestQueue({
@@ -14,28 +12,24 @@ const requestQueue = new RequestQueue({
 })
 .on(ITEM_EVENT, async function handleURL(url, promise, done) {
   console.log('Requesting', url.toString());
-  const response = await fetch(
-      url,
-    {
-      headers: { Accept: "application/json" }
-    }
-  );
-  const data = await response.json();
-  apiCache[url] = Object.assign({}, data);
-  promise.resolve(apiCache[url]);
+  try {
+    const data = await CacheAsset(url.toString(), {
+    	duration: "30d",
+    	type: "json"
+    });
+    promise.resolve(data);
+  } catch (e) {
+    console.log(e.message);
+    promise.resolve({});
+  }
   done();
 })
 
 async function getURL(url) {
-  if (CACHING && apiCache[url]) {
-    console.log('using cache')
-    return apiCache[url];
-  }
-
   const promise = new Promise((resolve, reject) => {
     const host = HOSTS[requestCount % HOSTS.length];
     requestCount++;
-    requestQueue.enqueue(new URL(`${host}/_ouroboros_api/projects/${PROJECT}/talk/${url}`), { resolve });
+    requestQueue.enqueue(new URL(`${host}/_ouroboros_api/projects/${PROJECT}/talk/${url}`), { resolve, reject });
   });
   return promise;
 }
