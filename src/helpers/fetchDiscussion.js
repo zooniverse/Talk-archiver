@@ -2,17 +2,21 @@ const API = require('./api');
 const store = require('./store');
 
 async function fetchPage(boardID, discussionID, page) {
-  const data = await API.get(`boards/${boardID}/discussions/${discussionID}?page=${page}`);
+  const data = API.get(`boards/${boardID}/discussions/${discussionID}?page=${page}`);
   return data;
 }
 
-module.exports = async function fetchDiscussion(board, discussion, pages) {
+module.exports = async function fetchDiscussion(board, discussion, numPages) {
   let comments = [];
   let fullDiscussion = {};
-  console.log('build comments', discussion.zooniverse_id, discussion.comments, pages)
+  let promises = [];
 
-  for (let page = 1; page <= pages; page++) {
-    const pageData = await fetchPage(discussion.board._id, discussion.zooniverse_id, page);
+  for (let page = 1; page <= numPages; page++) {
+    promises.push(fetchPage(discussion.board._id, discussion.zooniverse_id, page));
+  }
+
+  const pages = await Promise.all(promises);
+  for (pageData of pages) {
     comments = comments.concat(pageData.comments);
     fullDiscussion = pageData;
   }
