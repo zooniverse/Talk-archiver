@@ -1,5 +1,11 @@
+const csv = require('fast-csv');
+const fs = require('fs');
+const path = require('path');
+
 const API = require('../../helpers/api');
 const store = require('../../helpers/store');
+
+const userURLs = [];
 
 
 async function fetchCollectionsPage(name, page) {
@@ -50,32 +56,36 @@ async function listSubjects(user) {
   return userSubjects
 }
 
+function parseRow({ ouroboros_user_id }) {
+  const userURL = `users/${ouroboros_user_id}`;
+  userURLs.push(userURL);
+}
+
 module.exports = async function fetchUsers() {
-  const { discussions } = await store;
-  const userURLs = [];
+  const parseData = new Promise((resolve, reject) => {
+    fs.createReadStream(path.resolve(__dirname, '../../../.data', 'illustratedlife_user_ids.csv'))
+      .pipe(csv.parse({ headers: true }))
+      .on('error', error => reject(error))
+      .on('data', parseRow)
+      .on('end', (rowCount) => {
+        resolve(userURLs);
+        console.log(`Parsed ${rowCount} users`)
+      });
+  })
 
-  for (discussion of Object.values(discussions)) {
-    for (comment of discussion.comments) {
-      const { user_name } = comment;
-      const userURL = `users/${user_name}`;
-      if (!store.users[user_name]) {
-        userURLs.push(`users/${user_name}`);
-      }
-    }
-  }
+  const urls = await parseData;
+  const users = await API.batchedGet(urls);
 
-  const users = await API.batchedGet(userURLs);
   for (user of users) {
     if (user.name) {
       const userCollections = await listCollections(user);
       const userSubjects = await listSubjects(user);
       user.my_collections && user.my_collections.push(...userCollections);
-      user.subjects && user.subjects.push(...userSubjects)
+      user.subjects && user.subjects.push(...userSubjects);
       store.users[user.name] = user;
-    } else {
-      console.log(`*** Invalid response for user ${user_name}`);
     }
   }
 
   return store.users;
 }
+

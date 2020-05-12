@@ -6,6 +6,7 @@ module.exports = async function fetchCollections() {
   const users = await fetchUsers();
   const collectionURLs = [];
   for (user of Object.values(users)) {
+    user.my_collections = user.my_collections || [];
     for (collection of user.my_collections) {
       if (!store.userCollections[collection.zooniverse_id]) {
         collectionURLs.push(`collections/${collection.zooniverse_id}`);
