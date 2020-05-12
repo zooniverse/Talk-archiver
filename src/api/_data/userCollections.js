@@ -4,10 +4,10 @@ const readline = require('readline');
 
 const API = require('../../helpers/api');
 const store = require('../../helpers/store');
-const fetchSubjects = require('./subjects');
+const fetchUsers = require('./users');
 
 module.exports = async function fetchCollections() {
-  const users = await fetchSubjects();
+  const users = await fetchUsers();
   const collections = [];
 
   const rl = readline.createInterface({
@@ -20,8 +20,8 @@ module.exports = async function fetchCollections() {
     const collection = JSON.parse(line);
     console.log('Read collection', collection.zooniverse_id);
     store.userCollections[collection.zooniverse_id] = collection;
-    const owner = store.users[collection.user_name];
-    if (owner) {
+    const owner = users[collection.user_name];
+    if (owner && owner.my_collections.indexOf(collection) === -1) {
       owner.my_collections.push(collection);
     }
   });

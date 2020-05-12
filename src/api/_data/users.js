@@ -13,23 +13,25 @@ function parseRow({ ouroboros_user_id }) {
 }
 
 module.exports = async function fetchUsers() {
-  const parseData = new Promise((resolve, reject) => {
-    fs.createReadStream(path.resolve(__dirname, '../../../.data', 'illustratedlife_user_ids.csv'))
-      .pipe(csv.parse({ headers: true }))
-      .on('error', error => reject(error))
-      .on('data', parseRow)
-      .on('end', (rowCount) => {
-        resolve(userURLs);
-        console.log(`Parsed ${rowCount} users`)
-      });
-  })
+  if (Object.keys(store.users).length === 0) {
+    const parseData = new Promise((resolve, reject) => {
+      fs.createReadStream(path.resolve(__dirname, '../../../.data', 'illustratedlife_user_ids.csv'))
+        .pipe(csv.parse({ headers: true }))
+        .on('error', error => reject(error))
+        .on('data', parseRow)
+        .on('end', (rowCount) => {
+          resolve(userURLs);
+          console.log(`Parsed ${rowCount} users`)
+        });
+    })
 
-  const urls = await parseData;
-  const users = await API.batchedGet(urls);
+    const urls = await parseData;
+    const users = await API.batchedGet(urls);
 
-  for (user of users) {
-    if (user.name) {
-      store.users[user.name] = user;
+    for (user of users) {
+      if (user.name) {
+        store.users[user.name] = user;
+      }
     }
   }
 
