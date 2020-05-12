@@ -33,6 +33,7 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
+    "fast-csv": "^4.1.3",
     "limited-request-queue": "^5.1.0",
     "markdown-it-emoji": "^1.4.0",
     "markdown-it-regex": "^0.2.0",
