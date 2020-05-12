@@ -61,6 +61,12 @@ header nav a:hover {
   @apply underline;
 }
 
+h1 a,
+h2 a,
+h3 a {
+  @apply no-underline;
+}
+
 .page-grid {
   @apply grid gap-8;
   grid-template-columns: 1fr 2fr;
