@@ -21,7 +21,8 @@ module.exports = async function fetchCollections() {
     console.log('Read collection', collection.zooniverse_id);
     store.userCollections[collection.zooniverse_id] = collection;
     const owner = users[collection.user_name];
-    if (owner && owner.my_collections.indexOf(collection) === -1) {
+    const collectionExists = owner && owner.my_collections.find(userCollection => userCollection.zooniverse_id === collection.zooniverse_id);
+    if (owner && !collectionExists) {
       owner.my_collections.push(collection);
     }
   });
