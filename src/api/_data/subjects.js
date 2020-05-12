@@ -38,11 +38,19 @@ module.exports = async function fetchSubjects() {
         location: subject.location,
         zooniverse_id: subject.zooniverse_id
       }
-      const commentExists = author.subjects.find(subject => subject.comment._id === comment._id);
+      const commentExists = author.subjects.find(userSubject => userSubject.comment._id === comment._id);
       if (!commentExists) {
         author.subjects.push({ comment, focus });
       }
     }
+  }
+
+  for (user of Object.values(store.users)) {
+    user.subjects.sort(function sortSubjectComments(subject1, subject2) {
+      const date1 = new Date(subject1.comment.created_at);
+      const date2 = new Date(subject2.comment.created_at);
+      return date2 - date1;
+    });
   }
 
   return store.subjects;
