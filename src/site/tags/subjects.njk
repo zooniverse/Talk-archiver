@@ -2,17 +2,20 @@
 layout: default
 pagination:
   data: collections.taggedContent
+  resolve: values
   size: 1
   alias: tag
-permalink: "/tags/{{ tag }}/subjects.html"
+permalink: "/tags/{{ tag.name }}/subjects.html"
 renderData:
-  title: "{{ tag }}"
+  title: "Tag: {{ tag.name }}"
+  description: "Subjects tagged with #{{ tag.name }} on Science Gossip."
+  ogImage: "{{ tag.subjects[0].location.thumb }}"
 ---
 <main>
-  <h1><a href="/tags/{{ tag }}">Tag: {{ tag }}</a></h1>
+  <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
   <h2>Subjects</h2>
   <ul class="collection">
-    {% for subject in collections.taggedContent[tag].subjects %}
+    {% for subject in tag.subjects %}
       <li class="subject">
         <a href="/subjects/{{ subject.zooniverse_id }}">
           <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>

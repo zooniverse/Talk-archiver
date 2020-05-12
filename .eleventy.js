@@ -132,7 +132,7 @@ module.exports = function(eleventyConfig) {
       return taggedComments.length > 0;
     });
     const userCollections = Object.values(data.userCollections).filter(userCollection => hasTag(userCollection, tag));
-    return { discussions, subjects, userCollections };
+    return { name: tag, discussions, subjects, userCollections };
   }
 
   eleventyConfig.addCollection("taggedContent", collection => {
