@@ -2,8 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
-const API = require('../../helpers/api');
 const store = require('../../helpers/store');
+const discussionComments = require('../../helpers/discussionComments');
 const fetchUsers = require('./users');
 
 module.exports = async function fetchCollections() {
@@ -26,5 +26,14 @@ module.exports = async function fetchCollections() {
       owner.my_collections.push(collection);
     }
   });
+
+  rl.on('close', async () => {
+    const { collections } = await discussionComments;
+    for (discussion of collections) {
+      const collection = store.userCollections[discussion.focus._id];
+      collection.discussion = discussion;
+    }
+  })
+
   return store.userCollections;
 }
