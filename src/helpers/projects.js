@@ -3,12 +3,6 @@ const path = require('path');
 const readline = require('readline');
 
 async function fetchProjects() {
-/*
-  Read the discussions export and return all discussions filtered by type:
-    - board discussions.
-    - collection comments.
-    - subject comments.
-*/
   const projects = [];
 
   const rl = readline.createInterface({

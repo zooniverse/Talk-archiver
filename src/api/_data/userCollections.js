@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
+const project = require('../../helpers/project');
 const store = require('../../helpers/store');
 const discussionComments = require('../../helpers/discussionComments');
 const fetchUsers = require('./users');
@@ -17,11 +18,12 @@ function discussionTags(comments) {
 
 module.exports = async function fetchCollections() {
   if (Object.keys(store.userCollections).length === 0) {
+    const { name } = await project;
     const users = await fetchUsers();
     const collections = [];
 
     const rl = readline.createInterface({
-        input: fs.createReadStream(path.resolve(__dirname, '../../../.data', 'illustratedlife_collections.json')),
+        input: fs.createReadStream(path.resolve(__dirname, '../../../.data', `${name}_collections.json`)),
         output: process.stdout,
         terminal: false
     });

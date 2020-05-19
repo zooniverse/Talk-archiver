@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const API = require('../../helpers/api');
+const project = require('../../helpers/project');
 const store = require('../../helpers/store');
 const fetchUsers = require('./users');
 
@@ -14,10 +15,11 @@ function parseRow({ ouroboros_subject_id }) {
 }
 
 module.exports = async function fetchSubjects() {
+  const { name } = await project;
   const users = await fetchUsers();
 
   const parseData = new Promise((resolve, reject) => {
-    fs.createReadStream(path.resolve(__dirname, '../../../.data', 'illustratedlife_subject_ids.csv'))
+    fs.createReadStream(path.resolve(__dirname, '../../../.data', `${name}_subject_ids.csv`))
       .pipe(csv.parse({ headers: true }))
       .on('error', error => reject(error))
       .on('data', parseRow)

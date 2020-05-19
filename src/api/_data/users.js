@@ -2,6 +2,7 @@ const csv = require('fast-csv');
 const fs = require('fs');
 const path = require('path');
 
+const project = require('../../helpers/project');
 const API = require('../../helpers/api');
 const store = require('../../helpers/store');
 
@@ -13,9 +14,10 @@ function parseRow({ ouroboros_user_id }) {
 }
 
 module.exports = async function fetchUsers() {
+  const { name } = await project;
   if (Object.keys(store.users).length === 0) {
     const parseData = new Promise((resolve, reject) => {
-      fs.createReadStream(path.resolve(__dirname, '../../../.data', 'illustratedlife_user_ids.csv'))
+      fs.createReadStream(path.resolve(__dirname, '../../../.data', `${name}_user_ids.csv`))
         .pipe(csv.parse({ headers: true }))
         .on('error', error => reject(error))
         .on('data', parseRow)
