@@ -23,7 +23,7 @@
     "webpack:assets": "NODE_ENV=development webpack --mode=development"
   },
   "dependencies": {
-    "@11ty/eleventy": "^0.10.0",
+    "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-cache-assets": "^2.0.2",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
