@@ -8,7 +8,7 @@ pagination:
 permalink: "/users/{{ user.name }}/comments.html"
 renderData:
   title: "Profile: {{ user.name }}: comments"
-  description: "Subject comments by {{ user.name }} on Science Gossip."
+  description: "Subject comments by {{ user.name }} on {{ project.display_name }}."
   ogImage: "{{ user.subjects[0].focus.location.thumb }}"
 ---
 <main>

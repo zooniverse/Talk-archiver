@@ -8,7 +8,7 @@ pagination:
 permalink: "/subjects/{{ subject.zooniverse_id }}/"
 renderData:
   title: "Subject {{ subject.zooniverse_id }}"
-  description: "Subject {{ subject.zooniverse_id }} from Science Gossip."
+  description: "Subject {{ subject.zooniverse_id }} from {{ project.display_name }}."
   ogImage: "{{ subject.location.thumb }}"
 ---
 <div class="page-grid subject-page-grid">

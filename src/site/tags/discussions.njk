@@ -8,7 +8,7 @@ pagination:
 permalink: "/tags/{{ tag.name }}/discussions.html"
 renderData:
   title: "Tag: {{ tag.name }}"
-  description: "Discussions tagged with #{{ tag.name }} on Science Gossip."
+  description: "Discussions tagged with #{{ tag.name }} on {{ project.display_name }}."
   ogImage: "{{ subjects[tag.subjects[0]].location.thumb }}"
 ---
 <main>

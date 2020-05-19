@@ -7,7 +7,7 @@
     {% set metaDesc = renderData.description or description %}
 
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Science Gossip Talk" />
+    <meta property="og:site_name" content="{{ project.display_name }} Talk" />
     <meta property='og:url' content="https://talk.sciencegossip.org{{ page.url }}" />
     <meta property='og:title' content="{{ renderData.title or title }}" />
 
@@ -42,7 +42,7 @@
         </g>
       </svg>
       <p>
-        Science Gossip Talk
+        {{ project.display_name }} Talk
       </p>
       <nav>
         <ul>
