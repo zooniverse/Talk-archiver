@@ -1,4 +1,5 @@
 const awaitProjects = require('./projects');
+const config = require('../config');
 
 async function fetchProject(name) {
   const projects = await awaitProjects;
@@ -7,7 +8,7 @@ async function fetchProject(name) {
 }
 
 async function project() {
-  return await fetchProject('illustratedlife');
+  return await fetchProject(config.project.name);
 }
 
 module.exports = project();

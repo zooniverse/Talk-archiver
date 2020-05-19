@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const moment = require('moment');
+const config = require('./src/config');
 
 let manifest = {};
 const manifestPath = path.resolve(__dirname, "dist", "assets", "manifest.json");
@@ -12,7 +13,7 @@ try {
   console.log(e);
 }
 
-const PREFIX = 'SC';
+const PREFIX = config.project.prefix;
 
 module.exports = function(eleventyConfig) {
   // Layout aliases make templates more portable.
