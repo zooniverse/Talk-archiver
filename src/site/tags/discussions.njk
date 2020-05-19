@@ -6,7 +6,7 @@ pagination:
   size: 1
   alias: tag
 permalink: "/tags/{{ tag.name }}/discussions.html"
-renderData:
+eleventyComputed:
   title: "Tag: {{ tag.name }}"
   description: "Discussions tagged with #{{ tag.name }} on {{ project.display_name }}."
   ogImage: "{{ subjects[tag.subjects[0]].location.thumb }}"

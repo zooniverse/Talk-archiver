@@ -6,7 +6,7 @@ pagination:
   size: 1
   alias: user
 permalink: "/users/{{ user.name }}/comments.html"
-renderData:
+eleventyComputed:
   title: "Profile: {{ user.name }}: comments"
   description: "Subject comments by {{ user.name }} on {{ project.display_name }}."
   ogImage: "{{ user.subjects[0].focus.location.thumb }}"
