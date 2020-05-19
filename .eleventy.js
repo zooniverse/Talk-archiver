@@ -12,6 +12,7 @@ try {
   console.log(e);
 }
 
+const PREFIX = 'SC';
 
 module.exports = function(eleventyConfig) {
   // Layout aliases make templates more portable.
@@ -116,10 +117,13 @@ module.exports = function(eleventyConfig) {
     }
   }
 
+  const subjectRegex = new RegExp(`\\b(?<!\\/)(A${PREFIX}\\w+)(?!\\])\\b`);
+  const collectionRegex = new RegExp(`\\b(?<!\\/)(C${PREFIX}\\w+)(?!\\])\\b`);
+
   const mentionSubjects = {
     name: 'mentionSubjects',
     // match any subject ID that doesn't begin with / or end in ]
-    regex: /\b(?<!\/)(ASC\w+)(?!\])\b/,
+    regex: subjectRegex,
     replace: (match) => {
       const url = `/subjects/${match}`;
       return `<a href="${url}">${match}</a>`;
@@ -128,7 +132,7 @@ module.exports = function(eleventyConfig) {
 
   const mentionCollections = {
     name: 'mentionCollections',
-    regex: /\b(?<!\/)(CSC\w+)(?!\])\b/,
+    regex: collectionRegex,
     replace: (match) => {
       const url = `/collections/${match}`;
       return `<a href="${url}">${match}</a>`;
