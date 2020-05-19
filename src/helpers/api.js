@@ -1,9 +1,8 @@
 const CacheAsset = require("@11ty/eleventy-cache-assets");
 const { default: RequestQueue, END_EVENT, ITEM_EVENT } = require('limited-request-queue');
-const fetchProject = require('./fetchProject')
+const PROJECT = require('./project')
 
 const HOSTS = ['https://www.penguinwatch.org'];
-const PROJECT = fetchProject('illustratedlife');
 
 let requestCount = 0;
 

@@ -7,4 +7,8 @@ async function fetchProject(name) {
   });
 }
 
-module.exports = fetchProject;
+async function project() {
+  return await fetchProject('illustratedlife');
+}
+
+module.exports = project();

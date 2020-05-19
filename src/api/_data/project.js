@@ -1,6 +1,6 @@
-const fetchProject = require('../../helpers/fetchProject');
+const project = require('../../helpers/project');
 
 module.exports = async function () {
   console.log('getting project details');
-  return await fetchProject('illustratedlife');
+  return await project;
 }
