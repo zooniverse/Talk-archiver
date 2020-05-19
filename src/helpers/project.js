@@ -1,10 +1,9 @@
-const CacheAsset = require("@11ty/eleventy-cache-assets");
+const awaitProjects = require('./projects');
 
 async function fetchProject(name) {
-  return await CacheAsset(`https://www.penguinwatch.org/_ouroboros_api/projects/${name}`, {
-    	duration: "30d",
-    	type: "json"
-  });
+  const projects = await awaitProjects;
+  const [ project ] = projects.filter(project => project.name === name);
+  return project;
 }
 
 async function project() {
