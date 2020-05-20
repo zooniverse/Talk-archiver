@@ -6,6 +6,15 @@ const store = require('../../helpers/store');
 const discussionComments = require('../../helpers/discussionComments');
 const fetchUsers = require('./users');
 
+function discussionTags(comments) {
+  let allTags = [];
+  for (comment of comments) {
+    const { tags } = comment;
+    allTags = allTags.concat(tags);
+  }
+  return allTags;
+}
+
 module.exports = async function fetchCollections() {
   if (Object.keys(store.userCollections).length === 0) {
     const users = await fetchUsers();
@@ -28,13 +37,17 @@ module.exports = async function fetchCollections() {
       }
     });
 
-    rl.on('close', async () => {
-      const { collections } = await discussionComments;
-      for (discussion of collections) {
-        const collection = store.userCollections[discussion.focus._id];
-        collection.discussion = discussion;
-      }
-    })
+    return new Promise((resolve, reject) => {
+      rl.on('close', async () => {
+        const { collections } = await discussionComments;
+        for (discussion of collections) {
+          const collection = store.userCollections[discussion.focus._id];
+          collection.discussion = discussion;
+          collection.tags = discussionTags(discussion.comments);
+        }
+        resolve(store.userCollections);
+      });
+    });
   }
 
   return store.userCollections;
