@@ -78,71 +78,15 @@ module.exports = function(eleventyConfig) {
     return discussionIDs.filter(discussionID => featuredIDs.indexOf(discussionID) === -1);
   });
 
+  eleventyConfig.addFilter('mapKeys', (keys, object) => {
+    return keys.map(key => object[key]);
+  });
+
   // custom tags
 
   eleventyConfig.addShortcode('avatar', require('./src/site/components/avatar'));
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/site/components/featuredDiscussions'));
   eleventyConfig.addShortcode('tags', require('./src/site/components/tagList'));
-
-  // build collections from tagged subjects.
-
-  function hasTag(item, tag) {
-    if (item.tags && item.tags.indexOf(tag) > -1) {
-      return true;
-    }
-    const matchingTags = item.tags && item.tags.filter(itemTag => tag === itemTag._id);
-    return matchingTags && matchingTags.length > 0;
-  }
-
-  function pageData(collection) {
-    const [ item ] = collection.getAll();
-    const { subjects, discussions, userCollections } = item.data;
-    return { subjects, discussions, userCollections };
-  }
-
-  function uniqueTags(items, tags) {
-    for (item of items) {
-      item.tags && item.tags.forEach(tag => {
-        tagName = tag._id || tag;
-        tags[tagName] = tag;
-      });
-    }
-    return tags;
-  }
-
-  function allUniqueTags(data) {
-    let tags = {};
-    const { discussions, subjects, userCollections } = data;
-
-    tags = uniqueTags(Object.values(subjects), tags);
-
-    for (discussion of Object.values(discussions)) {
-      tags = uniqueTags(discussion.comments, tags);
-    }
-
-    tags = uniqueTags(Object.values(userCollections), tags);
-
-    return Object.keys(tags);
-  }
-
-  function buildTagCollection(tag, collection, data) {
-    const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
-    const discussions = Object.values(data.discussions).filter(discussion => {
-      const taggedComments = discussion.comments.filter(comment => hasTag(comment, tag));
-      return taggedComments.length > 0;
-    });
-    const userCollections = Object.values(data.userCollections).filter(userCollection => hasTag(userCollection, tag));
-    return { name: tag, discussions, subjects, userCollections };
-  }
-
-  eleventyConfig.addCollection("taggedContent", collection => {
-    const taggedItems = {};
-    const tagNames = allUniqueTags(pageData(collection));
-    for (tag of tagNames) {
-      taggedItems[tag] = buildTagCollection(tag, collection, pageData(collection));
-    }
-    return taggedItems;
-  });
 
   // custom markdown setup
   const markdownIt = require("markdown-it");

@@ -1,7 +1,7 @@
 ---
 layout: default
 pagination:
-  data: collections.taggedContent
+  data: userTags
   resolve: values
   size: 1
   alias: tag
@@ -9,10 +9,10 @@ permalink: "/tags/{{ tag.name }}/discussions.html"
 renderData:
   title: "Tag: {{ tag.name }}"
   description: "Discussions tagged with #{{ tag.name }} on Science Gossip."
-  ogImage: "{{ tag.subjects[0].location.thumb }}"
+  ogImage: "{{ subjects[tag.subjects[0]].location.thumb }}"
 ---
 <main>
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
   <h2>Discussions</h2>
-  {% featuredDiscussions tag.discussions %}
+  {% featuredDiscussions tag.discussions | mapKeys(discussions) %}
 </main>

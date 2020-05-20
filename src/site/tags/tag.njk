@@ -1,7 +1,7 @@
 ---
 layout: default
 pagination:
-  data: collections.taggedContent
+  data: userTags
   resolve: values
   size: 1
   alias: tag
@@ -9,18 +9,18 @@ permalink: "/tags/{{ tag.name }}/"
 renderData:
   title: "Tag: {{ tag.name }}"
   description: "Content tagged with #{{ tag.name }} on Science Gossip."
-  ogImage: "{{ tag.subjects[0].location.thumb }}"
+  ogImage: "{{ subjects[tag.subjects[0]].location.thumb }}"
 ---
 <main class="page-grid">
   <h1>Tag: {{ tag.name }}</h1>
   <div>
     <h2><a href="/tags/{{ tag.name }}/discussions.html">Discussions</a> ({{ tag.discussions.length }})</h2>
-    {% featuredDiscussions tag.discussions | limit(2) %}
+    {% featuredDiscussions tag.discussions | limit(2) | mapKeys(discussions) %}
   </div>
   <div>
     <h2><a href="/tags/{{ tag.name }}/subjects.html">Subjects</a> ({{ tag.subjects.length }})</h2>
     <ul class="collection">
-      {% for subject in tag.subjects | limit(6) %}
+      {% for subject in tag.subjects | limit(6) | mapKeys(subjects) %}
         <li class="subject">
           <a href="/subjects/{{ subject.zooniverse_id }}">
             <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
@@ -31,7 +31,7 @@ renderData:
 
     <h2><a href="/tags/{{ tag.name }}/collections.html">Collections</a> ({{ tag.userCollections.length }})</h2>
     <ul>
-      {% for collection in tag.userCollections | limit(6) %}
+      {% for collection in tag.userCollections | limit(6) | mapKeys(userCollections) %}
         <li>
           <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
           <ul class="collection">
