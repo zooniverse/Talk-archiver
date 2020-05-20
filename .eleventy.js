@@ -78,6 +78,10 @@ module.exports = function(eleventyConfig) {
     return discussionIDs.filter(discussionID => featuredIDs.indexOf(discussionID) === -1);
   });
 
+  eleventyConfig.addFilter('mapKeys', (keys, object) => {
+    return keys.map(key => object[key]);
+  });
+
   // custom tags
 
   eleventyConfig.addShortcode('avatar', require('./src/site/components/avatar'));
