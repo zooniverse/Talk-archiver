@@ -40,8 +40,8 @@ module.exports = async function fetchSubjects() {
         location: subject.location,
         zooniverse_id: subject.zooniverse_id
       }
-      const commentExists = author.subjects.find(userSubject => userSubject.comment._id === comment._id);
-      if (!commentExists) {
+      const commentExists = author && author.subjects.find(userSubject => userSubject.comment._id === comment._id);
+      if (author && !commentExists) {
         author.subjects.push({ comment, focus });
       }
     }
