@@ -19,7 +19,7 @@ async function discussionBoard(board) {
   return board;
 }
 
-module.exports = async function fetchBoards() {
+async function fetchBoards() {
   const boards = await API.get('boards/');
   for (category of CATEGORIES) {
     const categoryBoards = await Promise.all(boards[category].map(discussionBoard));
@@ -29,3 +29,6 @@ module.exports = async function fetchBoards() {
   store.boards.tags = boards.tags;
   return store.boards;
 }
+
+module.exports = fetchBoards();
+

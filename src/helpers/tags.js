@@ -1,4 +1,6 @@
 const store = require('./store');
+const awaitCollections = require('./collections');
+const awaitSubjects = require('./subjects');
 
 function hasTag(item, tag) {
   if (item.tags && item.tags.indexOf(tag) > -1) {
@@ -49,11 +51,14 @@ function buildTagCollection(tag) {
   };
 }
 
-module.exports = function tags() {
+async function tags() {
+  await Promise.all([awaitCollections, awaitSubjects]);
   const tagNames = allUniqueTags();
   for (tag of tagNames) {
     store.tags[tag] = buildTagCollection(tag);
   }
   return store.tags;
 }
+
+module.exports = tags();
 

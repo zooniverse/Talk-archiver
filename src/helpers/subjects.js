@@ -2,10 +2,10 @@ const csv = require('fast-csv');
 const fs = require('fs');
 const path = require('path');
 
-const API = require('../../helpers/api');
-const project = require('../../helpers/project');
-const store = require('../../helpers/store');
-const fetchUsers = require('./users');
+const API = require('./api');
+const project = require('./project');
+const store = require('./store');
+const awaitUsers = require('./users');
 
 const subjectURLs = [];
 
@@ -14,12 +14,12 @@ function parseRow({ ouroboros_subject_id }) {
   subjectURLs.push(subjectURL);
 }
 
-module.exports = async function fetchSubjects() {
+async function fetchSubjects() {
   const { name } = await project;
-  const users = await fetchUsers();
+  const users = await awaitUsers;
 
   const parseData = new Promise((resolve, reject) => {
-    fs.createReadStream(path.resolve(__dirname, '../../../.data', `${name}_subject_ids.csv`))
+    fs.createReadStream(path.resolve(__dirname, '../../.data', `${name}_subject_ids.csv`))
       .pipe(csv.parse({ headers: true }))
       .on('error', error => reject(error))
       .on('data', parseRow)
@@ -57,4 +57,7 @@ module.exports = async function fetchSubjects() {
 
   return store.subjects;
 }
+
+module.exports = fetchSubjects();
+
 
