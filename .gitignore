@@ -1,5 +1,7 @@
 # Data build directory
 src/site/_data
+.data
+src/site/.data-bkup
 
 # Logs
 logs
