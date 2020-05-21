@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
-const project = require('../../helpers/project');
-const store = require('../../helpers/store');
-const discussionComments = require('../../helpers/discussionComments');
-const fetchUsers = require('./users');
+const project = require('./project');
+const store = require('./store');
+const discussionComments = require('./discussionComments');
+const awaitUsers = require('./users');
 
 function discussionTags(comments) {
   let allTags = [];
@@ -16,14 +16,14 @@ function discussionTags(comments) {
   return allTags;
 }
 
-module.exports = async function fetchCollections() {
+async function fetchCollections() {
   if (Object.keys(store.userCollections).length === 0) {
     const { name } = await project;
-    const users = await fetchUsers();
+    const users = await awaitUsers;
     const collections = [];
 
     const rl = readline.createInterface({
-        input: fs.createReadStream(path.resolve(__dirname, '../../../.data', `${name}_collections.json`)),
+        input: fs.createReadStream(path.resolve(__dirname, '../../.data', `${name}_collections.json`)),
         output: process.stdout,
         terminal: false
     });
@@ -52,5 +52,7 @@ module.exports = async function fetchCollections() {
     });
   }
 
-  return store.userCollections;
+  return store.collections;
 }
+
+module.exports = fetchCollections();
