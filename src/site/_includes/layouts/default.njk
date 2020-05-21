@@ -4,22 +4,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% set metaDesc = renderData.description or description %}
-
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Science Gossip Talk" />
+    <meta property="og:site_name" content="{{ project.display_name }} Talk" />
     <meta property='og:url' content="https://talk.sciencegossip.org{{ page.url }}" />
-    <meta property='og:title' content="{{ renderData.title or title }}" />
+    <meta property='og:title' content="{{ title }}" />
 
-    {% if metaDesc %}
-    <meta name="description" content="{{ metaDesc }}" />
-    <meta name='twitter:description' content="{{ metaDesc }}" />
-    <meta property='og:description' content="{{ metaDesc }}" />
+    {% if description %}
+    <meta name="description" content="{{ description }}" />
+    <meta name='twitter:description' content="{{ description }}" />
+    <meta property='og:description' content="{{ description }}" />
     {% endif %}
 
-    {% if renderData.ogImage %}
-    <meta property='og:image' content="{{ renderData.ogImage }}" />
-    <meta name='twitter:image' content="{{ renderData.ogImage }}" />
+    {% if ogImage %}
+    <meta property='og:image' content="{{ ogImage }}" />
+    <meta name='twitter:image' content="{{ ogImage }}" />
     {% endif %}
 
     <meta name="twitter:card" content="summary" />
@@ -29,7 +27,7 @@
     <link rel="icon" href="/img/favicon.ico">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700">
     <link rel="stylesheet" href="{% webpackAsset 'main.css' %}">
-    <title>{{ renderData.title or title }}</title>
+    <title>{{ title }}</title>
   </head>
   <body>
     <header>
@@ -42,7 +40,7 @@
         </g>
       </svg>
       <p>
-        Science Gossip Talk
+        {{ project.display_name }} Talk
       </p>
       <nav>
         <ul>

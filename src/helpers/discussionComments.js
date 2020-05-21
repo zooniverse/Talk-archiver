@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
+const project = require('./project');
 
 async function discussionComments() {
 /*
@@ -9,13 +10,14 @@ async function discussionComments() {
     - collection comments.
     - subject comments.
 */
+  const { name } = await project;
   const discussions = [];
   let boards = [];
   let collections = [];
   let subjects = [];
 
   const rl = readline.createInterface({
-      input: fs.createReadStream(path.resolve(__dirname, '../../.data', 'illustratedlife_discussions.json')),
+      input: fs.createReadStream(path.resolve(__dirname, '../../.data', `${name}_discussions.json`)),
       output: process.stdout,
       terminal: false
   });

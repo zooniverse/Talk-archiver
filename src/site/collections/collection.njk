@@ -6,7 +6,7 @@ pagination:
   size: 1
   alias: userCollection
 permalink: "/collections/{{ userCollection.zooniverse_id}}/"
-renderData:
+eleventyComputed:
   title: "{{ userCollection.title }}"
   description: "{{ userCollection.description }}"
   ogImage: "{{ userCollection.subjects[0].location.thumb }}"

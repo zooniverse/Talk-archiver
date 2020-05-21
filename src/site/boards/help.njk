@@ -6,7 +6,7 @@ pagination:
   size: 1
   alias: board
 permalink: "/boards/{{ board.zooniverse_id }}/"
-renderData:
+eleventyComputed:
   title: "{{ board.title }}"
   description: "{{ board.description }}"
 ---
