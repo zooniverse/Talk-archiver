@@ -34,9 +34,6 @@ module.exports = function(eleventyConfig) {
   // Copy external dependencies to dist.
   eleventyConfig.addPassthroughCopy({ "src/vendor": "vendor" });
 
-  // Copy API data files to dist.
-  eleventyConfig.addPassthroughCopy({ "src/site/_data": "api" });
-
   // Reload the page every time the JS/CSS are changed.
   eleventyConfig.setBrowserSyncConfig({ files: [manifestPath] });
 

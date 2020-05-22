@@ -1,6 +1,4 @@
 # Data build directory
-src/site/_data
-src/site/api
 .data
 src/site/.data-bkup
 
