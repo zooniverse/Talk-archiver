@@ -9,17 +9,17 @@
     "url": "https://github.com/zooniverse/Talk-archiver"
   },
   "scripts": {
-    "build": "npm-run-all clean build:assets build:site",
+    "build": "npm-run-all clean clean:api build:assets build:api build:site",
     "build:assets": "NODE_ENV=production webpack --mode=production",
-    "build:data": "npm-run-all clean:data build:api",
     "build:api": "NODE_ENV=production node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/api --output=src/site/_data",
     "build:site": "NODE_ENV=production node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js",
     "clean": "rm -rf ./dist",
-    "clean:data": "rm -rf ./src/site/_data",
+    "clean:api": "rm -rf ./src/site/_data",
     "deploy": "s3-batch-upload -b zooniverse-static -r talk.sciencegossip.org -p ./dist -C 200 -acl 'public-read'",
-    "dev": "npm-run-all clean webpack:assets --parallel dev:*",
+    "dev": "npm-run-all clean clean:api webpack:assets dev:api --parallel dev:assets dev:site ",
+    "dev:api": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/api --output=src/site/_data",
     "dev:assets": "yarn run webpack:assets --watch",
-    "dev:site": "NODE_ENV=development node --max-old-space-size=6000 ./node_modules/@11ty/eleventy/cmd.js --serve",
+    "dev:site": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --serve",
     "webpack:assets": "NODE_ENV=development webpack --mode=development"
   },
   "dependencies": {
