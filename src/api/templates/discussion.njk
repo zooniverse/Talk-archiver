@@ -5,6 +5,6 @@ pagination:
   resolve: values
   size: 1
   alias: discussion
-permalink: "/discussions/{{ discussion.zooniverse_id}}.json"
+permalink: "/api/discussions/{{ discussion.zooniverse_id}}.json"
 ---
 {{ discussion | dump | safe }}

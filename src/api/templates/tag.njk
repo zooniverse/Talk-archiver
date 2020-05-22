@@ -5,6 +5,6 @@ pagination:
   resolve: values
   size: 1
   alias: tag
-permalink: "/userTags/{{ tag.name }}.json"
+permalink: "/api/tags/{{ tag.name }}.json"
 ---
 {{ tag | dump | safe }}
