@@ -10,20 +10,32 @@ yarn install
 Install the dependencies.
 
 ```
-yarn build:data
+yarn build:api
 ```
 
-Run this to build the `src/site/_data` directory from the Ouroboros API. It can be very slow, as it fetches resources one at a time. Run this once to avoid having to rebuild the site data on every development build.
+Run this to build `/dist/api` directory from the Ouroboros API, without building the entire site. It can be very slow on first run, as it fetches resources one at a time. API responses are cached in `.cache` for 30 days.
+
+```
+yarn build:site
+```
+
+Run this to build static HTML pages in `/dist`. It can be very slow on first run, as it fetches resources one at a time. API responses are cached in `.cache` for 30 days.
 
 ```
 yarn dev
 ```
 
-Build and start a development site on http://localhost:8080. Make sure that the site data directory has been build first.
+Build and start a development site on http://localhost:8080.
 
 ```
 yarn build
 ```
 
-Build the full site. Output will be in `/dist`.
+Cache the API data from Ouroboros, then build the full API and site. Output will be in `/dist`.
+
+```
+yarn deploy
+```
+
+Copy the site from `/dist` to S3.
 

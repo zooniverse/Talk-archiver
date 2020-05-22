@@ -30,6 +30,8 @@ async function fetchCollections() {
 
     rl.on('line', (line) => {
       const collection = JSON.parse(line);
+      collection.discussion = {};
+      collection.tags = [];
       console.log('Read collection', collection.zooniverse_id);
       store.userCollections[collection.zooniverse_id] = collection;
       const owner = users[collection.user_name];
@@ -52,7 +54,7 @@ async function fetchCollections() {
     });
   }
 
-  return store.collections;
+  return store.userCollections;
 }
 
 module.exports = fetchCollections();

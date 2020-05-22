@@ -55,9 +55,9 @@ async function tags() {
   await Promise.all([awaitCollections, awaitSubjects]);
   const tagNames = allUniqueTags();
   for (tag of tagNames) {
-    store.tags[tag] = buildTagCollection(tag);
+    store.userTags[tag] = buildTagCollection(tag);
   }
-  return store.tags;
+  return store.userTags;
 }
 
 module.exports = tags();

@@ -1,9 +1,10 @@
 ---
+eleventyExcludeFromCollections: true
 pagination:
   data: boards.chat
   resolve: values
   size: 1
   alias: board
-permalink: "/boards/{{ board.zooniverse_id }}.json"
+permalink: "/api/boards/{{ board.zooniverse_id }}.json"
 ---
 {{ board | dump | safe }}
