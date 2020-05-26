@@ -1,6 +1,6 @@
-const store = require('./store');
 const awaitBoards = require('./boards');
 const awaitCollections = require('./collections');
+const discussionComments = require('./discussionComments');
 const awaitSubjects = require('./subjects');
 
 function hasTag(item, tag) {
@@ -26,7 +26,7 @@ function allUniqueTags({ discussions, subjects, userCollections }) {
 
   tags = uniqueTags(Object.values(subjects), tags);
 
-  for (discussion of Object.values(discussions)) {
+  for (discussion of discussions) {
     tags = uniqueTags(discussion.comments, tags);
   }
 
@@ -38,7 +38,7 @@ function allUniqueTags({ discussions, subjects, userCollections }) {
 function buildTagCollection(tag, data) {
   // console.log('building tag', tag);
   const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
-  const discussions = Object.values(data.discussions).filter(discussion => {
+  const discussions = data.discussions.filter(discussion => {
     const taggedComments = discussion.comments.filter(comment => hasTag(comment, tag));
     return taggedComments.length > 0;
   });
@@ -54,7 +54,7 @@ function buildTagCollection(tag, data) {
 async function tags() {
   const userTags = {};
   const [ boards, userCollections, subjects ] = await Promise.all([awaitBoards, awaitCollections, awaitSubjects]);
-  const { discussions } = store;
+  const { boards: discussions } = await discussionComments;
   const tagNames = allUniqueTags({ discussions, subjects, userCollections });
   for (tag of tagNames) {
     userTags[tag] = buildTagCollection(tag, { discussions, subjects, userCollections });
