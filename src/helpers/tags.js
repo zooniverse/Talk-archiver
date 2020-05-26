@@ -36,7 +36,7 @@ function allUniqueTags({ discussions, subjects, userCollections }) {
 }
 
 function buildTagCollection(tag, data) {
-  console.log('building tag', tag);
+  // console.log('building tag', tag);
   const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
   const discussions = Object.values(data.discussions).filter(discussion => {
     const taggedComments = discussion.comments.filter(comment => hasTag(comment, tag));
@@ -52,13 +52,15 @@ function buildTagCollection(tag, data) {
 }
 
 async function tags() {
+  const userTags = {};
   const [ boards, userCollections, subjects ] = await Promise.all([awaitBoards, awaitCollections, awaitSubjects]);
   const { discussions } = store;
   const tagNames = allUniqueTags({ discussions, subjects, userCollections });
   for (tag of tagNames) {
-    store.userTags[tag] = buildTagCollection(tag, { discussions, subjects, userCollections });
+    userTags[tag] = buildTagCollection(tag, { discussions, subjects, userCollections });
   }
-  return store.userTags;
+  console.log('read', Object.keys(userTags).length, 'tags');
+  return userTags;
 }
 
 module.exports = tags();
