@@ -31,7 +31,7 @@ async function fetchCollections() {
     const collection = JSON.parse(line);
     collection.discussion = {};
     collection.tags = [];
-    console.log('Read collection', collection.zooniverse_id);
+    // console.log('Read collection', collection.zooniverse_id);
     userCollections[collection.zooniverse_id] = collection;
     const owner = users[collection.user_name];
     const collectionExists = owner && owner.my_collections.find(userCollection => userCollection.zooniverse_id === collection.zooniverse_id);
@@ -48,6 +48,7 @@ async function fetchCollections() {
         collection.discussion = discussion;
         collection.tags = discussionTags(discussion.comments);
       }
+      console.log('read', Object.keys(userCollections).length, 'collections');
       resolve(userCollections);
     });
   });
