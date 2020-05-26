@@ -1,4 +1,5 @@
 const store = require('./store');
+const awaitBoards = require('./boards');
 const awaitCollections = require('./collections');
 const awaitSubjects = require('./subjects');
 
@@ -51,7 +52,7 @@ function buildTagCollection(tag, data) {
 }
 
 async function tags() {
-  const [ userCollections, subjects ] = await Promise.all([awaitCollections, awaitSubjects]);
+  const [ boards, userCollections, subjects ] = await Promise.all([awaitBoards, awaitCollections, awaitSubjects]);
   const { discussions } = store;
   const tagNames = allUniqueTags({ discussions, subjects, userCollections });
   for (tag of tagNames) {
