@@ -30,10 +30,11 @@ async function fetchSubjects() {
   })
 
   const urls = await parseData;
-  const subjects = await API.batchedGet(urls);
+  const APIsubjects = await API.batchedGet(urls);
+  const subjects = {};
 
-  for (subject of subjects) {
-    store.subjects[subject.zooniverse_id] = subject;
+  for (subject of APIsubjects) {
+    subjects[subject.zooniverse_id] = subject;
     for (comment of subject.discussion.comments) {
       const author = store.users[comment.user_name];
       const focus = {
@@ -55,7 +56,7 @@ async function fetchSubjects() {
     });
   }
 
-  return store.subjects;
+  return subjects;
 }
 
 module.exports = fetchSubjects();

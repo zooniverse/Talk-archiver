@@ -20,9 +20,8 @@ function uniqueTags(items, tags) {
   return tags;
 }
 
-function allUniqueTags() {
+function allUniqueTags({ discussions, subjects, userCollections }) {
   let tags = {};
-  const { discussions, subjects, userCollections } = store;
 
   tags = uniqueTags(Object.values(subjects), tags);
 
@@ -35,14 +34,14 @@ function allUniqueTags() {
   return Object.keys(tags);
 }
 
-function buildTagCollection(tag) {
+function buildTagCollection(tag, data) {
   console.log('building tag', tag);
-  const subjects = Object.values(store.subjects).filter(subject => hasTag(subject, tag));
-  const discussions = Object.values(store.discussions).filter(discussion => {
+  const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
+  const discussions = Object.values(data.discussions).filter(discussion => {
     const taggedComments = discussion.comments.filter(comment => hasTag(comment, tag));
     return taggedComments.length > 0;
   });
-  const userCollections = Object.values(store.userCollections).filter(userCollection => hasTag(userCollection, tag));
+  const userCollections = Object.values(data.userCollections).filter(userCollection => hasTag(userCollection, tag));
   return {
     name: tag,
     discussions: discussions.map(discussion => discussion.zooniverse_id),
@@ -52,10 +51,11 @@ function buildTagCollection(tag) {
 }
 
 async function tags() {
-  await Promise.all([awaitCollections, awaitSubjects]);
-  const tagNames = allUniqueTags();
+  const [ userCollections, subjects ] = await Promise.all([awaitCollections, awaitSubjects]);
+  const { discussions } = store;
+  const tagNames = allUniqueTags({ discussions, subjects, userCollections });
   for (tag of tagNames) {
-    store.userTags[tag] = buildTagCollection(tag);
+    store.userTags[tag] = buildTagCollection(tag, { discussions, subjects, userCollections });
   }
   return store.userTags;
 }
