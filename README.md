@@ -39,3 +39,9 @@ yarn deploy
 
 Copy the site from `/dist` to S3.
 
+## Run with Docker
+
+Get a bash session in the container:
+``` bash
+docker-compose run --service-ports --rm talk-archiver bash
+```
