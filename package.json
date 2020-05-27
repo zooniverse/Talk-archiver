@@ -17,12 +17,12 @@
     "build:site": "NODE_ENV=production node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js",
     "clean": "rm -rf ./dist",
     "deploy": "s3-batch-upload -b zooniverse-static -r talk.sciencegossip.org -p ./dist -C 200 -acl 'public-read'",
-    "dev": "npm-run-all clean webpack:assets --parallel dev:assets dev:api dev:site dev:boards dev:subjects",
-    "dev:api": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/api",
-    "dev:boards": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/boards",
-    "dev:subjects": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/subjects --serve",
+    "dev": "npm-run-all clean webpack:assets --parallel dev:*",
+    "dev:api": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/api --watch",
+    "dev:boards": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/boards --serve",
+    "dev:subjects": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --input=src/subjects --watch",
     "dev:assets": "yarn run webpack:assets --watch",
-    "dev:site": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js",
+    "dev:site": "NODE_ENV=development node --max-old-space-size=12000 ./node_modules/@11ty/eleventy/cmd.js --watch",
     "webpack:assets": "NODE_ENV=development webpack --mode=development"
   },
   "dependencies": {
