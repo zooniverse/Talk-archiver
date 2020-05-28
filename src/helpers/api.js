@@ -11,7 +11,7 @@ const requestQueue = new RequestQueue({
   maxSocketsPerHost: 10
 })
 .on(ITEM_EVENT, async function handleURL(url, promise, done) {
-  console.log('Requesting', url.toString());
+  // console.log('Requesting', url.toString());
   try {
     const data = await CacheAsset(url.toString(), {
     	duration: "30d",

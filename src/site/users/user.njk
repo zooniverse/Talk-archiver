@@ -25,7 +25,7 @@ eleventyComputed:
         <p>
           Posted in
           <a href="/boards/{{ discussion.board._id }}">{{ discussion.focus.name }}</a>
-          <time datetime={{ discussion.last_comment.created_at }}>{{ discussion.last_comment.created_at | date }}</time>
+          <time datetime={{ discussion.comment.created_at }}>{{ discussion.comment.created_at | date }}</time>
         </p>
       </li>
     {% endfor %}

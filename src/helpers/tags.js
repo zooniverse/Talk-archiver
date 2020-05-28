@@ -1,5 +1,6 @@
-const store = require('./store');
+const awaitBoards = require('./boards');
 const awaitCollections = require('./collections');
+const discussionComments = require('./discussionComments');
 const awaitSubjects = require('./subjects');
 
 function hasTag(item, tag) {
@@ -20,13 +21,12 @@ function uniqueTags(items, tags) {
   return tags;
 }
 
-function allUniqueTags() {
+function allUniqueTags({ discussions, subjects, userCollections }) {
   let tags = {};
-  const { discussions, subjects, userCollections } = store;
 
   tags = uniqueTags(Object.values(subjects), tags);
 
-  for (discussion of Object.values(discussions)) {
+  for (discussion of discussions) {
     tags = uniqueTags(discussion.comments, tags);
   }
 
@@ -35,14 +35,14 @@ function allUniqueTags() {
   return Object.keys(tags);
 }
 
-function buildTagCollection(tag) {
-  console.log('building tag', tag);
-  const subjects = Object.values(store.subjects).filter(subject => hasTag(subject, tag));
-  const discussions = Object.values(store.discussions).filter(discussion => {
+function buildTagCollection(tag, data) {
+  // console.log('building tag', tag);
+  const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
+  const discussions = data.discussions.filter(discussion => {
     const taggedComments = discussion.comments.filter(comment => hasTag(comment, tag));
     return taggedComments.length > 0;
   });
-  const userCollections = Object.values(store.userCollections).filter(userCollection => hasTag(userCollection, tag));
+  const userCollections = Object.values(data.userCollections).filter(userCollection => hasTag(userCollection, tag));
   return {
     name: tag,
     discussions: discussions.map(discussion => discussion.zooniverse_id),
@@ -52,12 +52,15 @@ function buildTagCollection(tag) {
 }
 
 async function tags() {
-  await Promise.all([awaitCollections, awaitSubjects]);
-  const tagNames = allUniqueTags();
+  const userTags = {};
+  const [ boards, userCollections, subjects ] = await Promise.all([awaitBoards, awaitCollections, awaitSubjects]);
+  const { boards: discussions } = await discussionComments;
+  const tagNames = allUniqueTags({ discussions, subjects, userCollections });
   for (tag of tagNames) {
-    store.userTags[tag] = buildTagCollection(tag);
+    userTags[tag] = buildTagCollection(tag, { discussions, subjects, userCollections });
   }
-  return store.userTags;
+  console.log('read', Object.keys(userTags).length, 'tags');
+  return userTags;
 }
 
 module.exports = tags();

@@ -1,5 +1,17 @@
 const moment = require('moment');
 
+function authorCount(discussion) {
+  if (discussion.users) {
+    return discussion.users;
+  }
+
+  const authors = {};
+  for (comment of discussion.comments) {
+    authors[comment.user_name] = null;
+  }
+  return Object.keys(authors).length;
+}
+
 function discussionSummary(discussion) {
   const lastPost = moment(discussion.last_comment.created_at).format('LLL');
   const posts = discussion.comments.length || discussion.comments;
@@ -9,7 +21,7 @@ function discussionSummary(discussion) {
         ${ discussion.title }
       </a>
     </p>
-    <p>${ posts } posts / ${ discussion.users } participants</p>
+    <p>${ posts } posts / ${ authorCount(discussion) } participants</p>
     <p>
       Last post
       <time datetime="${discussion.last_comment.created_at}">${ lastPost }</time>
