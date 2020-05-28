@@ -10,7 +10,7 @@ permalink: "/users/{{ user.name }}/comments.html"
 eleventyComputed:
   title: "Profile: {{ user.name }}: comments"
   description: "Subject comments by {{ user.name }} on {{ project.display_name }}."
-  ogImage: "{{ user.subjects[0].focus.location.thumb }}"
+  ogImage: "{{ user.subjects[0].focus.location.standard }}"
 ---
 <main>
   <h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
@@ -19,7 +19,7 @@ eleventyComputed:
   {%- for subject in user.subjects -%}
     <li id={{ subject.focus.zooniverse_id }}>
       <a href="/subjects/{{ subject.focus.zooniverse_id }}">
-        <img alt="Subject {{ subject.focus.zooniverse_id }}" src={{ subject.focus.location.thumb}}>
+        {% subjectImage subject.focus %}
       </a>
       <p>
         {%- markdown -%}

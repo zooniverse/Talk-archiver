@@ -10,7 +10,7 @@ permalink: "/tags/{{ tag.name }}/subjects.html"
 eleventyComputed:
   title: "Tag: {{ tag.name }}"
   description: "Subjects tagged with #{{ tag.name }} on {{ project.display_name }}."
-  ogImage: "{{ subjects[tag.subjects[0]].location.thumb }}"
+  ogImage: "{{ subjects[tag.subjects[0]].location.standard }}"
 ---
 <main>
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
@@ -19,7 +19,7 @@ eleventyComputed:
     {% for subject in tag.subjects | mapKeys(subjects) %}
       <li class="subject">
         <a href="/subjects/{{ subject.zooniverse_id }}">
-          <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+          {% subjectImage subject %}
         </a> 
       </li>
     {% endfor %}

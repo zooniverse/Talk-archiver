@@ -10,7 +10,7 @@ permalink: "/collections/{{ userCollection.zooniverse_id}}/"
 eleventyComputed:
   title: "{{ userCollection.title }}"
   description: "{{ userCollection.description }}"
-  ogImage: "{{ userCollection.subjects[0].location.thumb }}"
+  ogImage: "{{ userCollection.subjects[0].location.standard }}"
 ---
 <main class="page-grid">
   <div>
@@ -68,7 +68,7 @@ eleventyComputed:
   {%- for subject in userCollection.subjects -%}
     <li class="subject">
       <a href="/subjects/{{ subject.zooniverse_id }}">
-        <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+        {% subjectImage subject %}
       </a> 
     </li>
   {%- endfor -%}

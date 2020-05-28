@@ -94,7 +94,7 @@ eleventyComputed:
     {%- for subject in discussion.focus.subjects | limit(4) -%}
       <li id={{ subject.zooniverse_id }} class="subject">
         <a href="/subjects/{{ subject.zooniverse_id }}">
-          <img src={{ subject.location.thumb}}>
+          {% subjectImage subject %}
         </a>
       </li>
     {%- endfor -%}

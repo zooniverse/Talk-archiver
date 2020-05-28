@@ -10,7 +10,7 @@ permalink: "/tags/{{ tag.name }}/discussions.html"
 eleventyComputed:
   title: "Tag: {{ tag.name }}"
   description: "Discussions tagged with #{{ tag.name }} on {{ project.display_name }}."
-  ogImage: "{{ subjects[tag.subjects[0]].location.thumb }}"
+  ogImage: "{{ subjects[tag.subjects[0]].location.standard }}"
 ---
 <main>
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>

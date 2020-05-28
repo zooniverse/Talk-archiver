@@ -10,7 +10,7 @@ permalink: "/tags/{{ tag.name }}/collections.html"
 eleventyComputed:
   title: "Tag: {{ tag.name }}"
   description: "Collections tagged with #{{ tag.name }} on {{ project.display_name }}."
-  ogImage: "{{ subjects[tag.subjects[0]].location.thumb }}"
+  ogImage: "{{ subjects[tag.subjects[0]].location.standard }}"
 ---
 <main>
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
@@ -23,7 +23,7 @@ eleventyComputed:
           {%- for collectionSubject in collection.subjects | limit(4) -%}
             <li class="subject">
               <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-                <img alt="Subject {{ collectionSubject.zooniverse_id }}" src={{ collectionSubject.location.thumb}}>
+                {% subjectImage collectionSubject %}
               </a>
             </li>
           {%- endfor -%}

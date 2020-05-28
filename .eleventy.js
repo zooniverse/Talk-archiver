@@ -88,6 +88,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addShortcode('avatar', require('./src/components/avatar'));
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/components/featuredDiscussions'));
+  eleventyConfig.addShortcode('subjectImage', require('./src/components/subjectImage'));
   eleventyConfig.addShortcode('tags', require('./src/components/tagList'));
 
   // custom markdown setup
