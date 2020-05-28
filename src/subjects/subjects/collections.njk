@@ -25,7 +25,7 @@ eleventyComputed:
     <li id={{ comment._id }} class="comment">
       <p>
         <a href="/users/{{ comment.user_name }}">
-          {% avatar comment.user_name, users[comment.user_zooniverse_id].avatar_url %}
+          {% avatar comment.user_name, users[comment.user_id].avatar_url %}
         </a>
         by
         <a href="/users/{{ comment.user_name }}">

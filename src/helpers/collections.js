@@ -33,7 +33,7 @@ async function fetchCollections() {
     collection.tags = [];
     // console.log('Read collection', collection.zooniverse_id);
     userCollections[collection.zooniverse_id] = collection;
-    const owner = users[collection.user_name];
+    const owner = users[collection.user_id];
     const collectionExists = owner && owner.my_collections.find(userCollection => userCollection.zooniverse_id === collection.zooniverse_id);
     if (owner && !collectionExists) {
       owner.my_collections.push(collection);

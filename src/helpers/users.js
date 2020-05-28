@@ -32,14 +32,14 @@ async function fetchUsers() {
 
   for (user of APIusers) {
     if (user.name) {
-      users[user.name] = user;
+      users[user.id] = user;
     }
   }
 
   const { subjects } = await discussionComments;
   for (subjectDiscussion of subjects ) {
     for (comment of subjectDiscussion.comments) {
-      const author = users[comment.user_name];
+      const author = users[comment.user_id];
       const focus = {
         location: subjectDiscussion.focus.location,
         zooniverse_id: subjectDiscussion.focus._id
