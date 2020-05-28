@@ -86,9 +86,9 @@ module.exports = function(eleventyConfig) {
 
   // custom tags
 
-  eleventyConfig.addShortcode('avatar', require('./src/site/components/avatar'));
-  eleventyConfig.addShortcode('featuredDiscussions', require('./src/site/components/featuredDiscussions'));
-  eleventyConfig.addShortcode('tags', require('./src/site/components/tagList'));
+  eleventyConfig.addShortcode('avatar', require('./src/components/avatar'));
+  eleventyConfig.addShortcode('featuredDiscussions', require('./src/components/featuredDiscussions'));
+  eleventyConfig.addShortcode('tags', require('./src/components/tagList'));
 
   // custom markdown setup
   const markdownIt = require("markdown-it");
