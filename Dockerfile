@@ -5,9 +5,6 @@ WORKDIR /app/
 
 ENV NODE_ENV production
 
-RUN chown -R node:node /app
-USER node
-
 ADD package.json .
 ADD yarn.lock .
 
