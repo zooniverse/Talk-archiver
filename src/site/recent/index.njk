@@ -19,7 +19,7 @@ eleventyComputed:
     {%- for subject in recents.subjects -%}
       <li>
         <a href="/subjects/{{ subject.focus._id }}">
-          <img alt="Subject {{ subject.focus._id }}" src={{ subject.focus.location.thumb}}>
+          {% subjectImage subject.focus, 'thumb' %}
         </a>
         <p>
           {%- markdown -%}
@@ -66,7 +66,7 @@ eleventyComputed:
             {%- for subject in collection.focus.subjects | limit(4) -%}
               <li class="subject">
                 <a href="/subjects/{{ subject.zooniverse_id }}">
-                  <img alt="Subject {{ subject.zooniverse_id }}" src={{ subject.location.thumb}}>
+                  {% subjectImage subject, 'thumb' %}
                 </a>
               </li>
             {%- endfor -%}

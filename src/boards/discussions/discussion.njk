@@ -55,7 +55,7 @@ eleventyComputed:
       </a>
     </h2>
     <a href="/subjects/{{ discussion.focus.zooniverse_id }}">
-      <img alt="Subject {{ discussion.focus.zooniverse_id }}" src={{ discussion.focus.location.standard }}>
+      {% subjectImage discussion.focus, 'standard', 'subject' %}
     </a>
 
     <h3>Comments</h3>
@@ -94,7 +94,7 @@ eleventyComputed:
     {%- for subject in discussion.focus.subjects | limit(4) -%}
       <li id={{ subject.zooniverse_id }} class="subject">
         <a href="/subjects/{{ subject.zooniverse_id }}">
-          <img src={{ subject.location.thumb}}>
+          {% subjectImage subject, 'thumb' %}
         </a>
       </li>
     {%- endfor -%}

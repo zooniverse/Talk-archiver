@@ -10,14 +10,15 @@ permalink: "/subjects/{{ subject.zooniverse_id }}/collections.html"
 eleventyComputed:
   title: "Subject {{ subject.zooniverse_id }}: Collections"
   description: "Collections that include subject {{ subject.zooniverse_id }} from {{ project.display_name }}."
-  ogImage: "{{ subject.location.thumb }}"
+  ogImage: "{{ subject.location.standard }}"
 ---
 <div class="page-grid">
   <aside class=" focus">
     <h1>
       <a href="/subjects/{{ subject.zooniverse_id }}">Subject: {{ subject.zooniverse_id }}</a>
     </h1>
-    <img class="subject" src={{ subject.location.standard }} >
+
+    {% subjectImage subject, 'standard', 'subject' %}
 
     <h2>Comments</h2>
     <ul>
@@ -56,7 +57,7 @@ eleventyComputed:
             {%- for collectionSubject in collection.subjects | limit(4) -%}
               <li class="subject">
                 <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-                  <img alt="Subject {{ collectionSubject.zooniverse_id }}" src={{ collectionSubject.location.thumb}}>
+                  {% subjectImage collectionSubject, 'thumb' %}
                 </a>
               </li>
             {%- endfor -%}
