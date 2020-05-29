@@ -2,7 +2,7 @@ const CacheAsset = require("@11ty/eleventy-cache-assets");
 const { default: RequestQueue, END_EVENT, ITEM_EVENT } = require('limited-request-queue');
 const PROJECT = require('./project')
 
-const HOSTS = ['https://www.penguinwatch.org'];
+const ApiHost = 'https://api.zooniverse.org';
 
 let requestCount = 0;
 
@@ -27,11 +27,10 @@ const requestQueue = new RequestQueue({
 .on(END_EVENT, () => console.log(requestCount, 'requests completed.'));
 
 async function getURL(url) {
-  const host = HOSTS[requestCount % HOSTS.length];
   const { name } = await PROJECT;
   requestCount++;
   return new Promise((resolve, reject) => {
-    requestQueue.enqueue(new URL(`${host}/_ouroboros_api/projects/${name}/talk/${url}`), { resolve, reject });
+    requestQueue.enqueue(new URL(`${ApiHost}/projects/${name}/talk/${url}`), { resolve, reject });
   });
 }
 
