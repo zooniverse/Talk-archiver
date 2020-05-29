@@ -6,11 +6,11 @@ services:
       context: .
     volumes:
       - node_modules:/app/node_modules
-      - api_data_cache:/app/cache
       - ./:/app
     ports:
       - "8080:8080"
+    environment:
+      - "NODE_RAM=8192" # https://nodejs.org/api/cli.html#cli_max_old_space_size_size_in_mbytes
 
 volumes:
   node_modules:
-  api_data_cache:
