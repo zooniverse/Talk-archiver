@@ -68,7 +68,7 @@ eleventyComputed:
   {%- for subject in userCollection.subjects -%}
     <li class="subject">
       <a href="/subjects/{{ subject.zooniverse_id }}">
-        {% subjectImage subject %}
+        {% subjectImage subject, 'thumb' %}
       </a> 
     </li>
   {%- endfor -%}

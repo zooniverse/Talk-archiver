@@ -19,7 +19,7 @@ eleventyComputed:
   {%- for subject in user.subjects -%}
     <li id={{ subject.focus.zooniverse_id }}>
       <a href="/subjects/{{ subject.focus.zooniverse_id }}">
-        {% subjectImage subject.focus %}
+        {% subjectImage subject.focus, 'thumb' %}
       </a>
       <p>
         {%- markdown -%}

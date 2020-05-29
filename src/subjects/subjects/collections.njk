@@ -17,7 +17,8 @@ eleventyComputed:
     <h1>
       <a href="/subjects/{{ subject.zooniverse_id }}">Subject: {{ subject.zooniverse_id }}</a>
     </h1>
-    <img class="subject" src={{ subject.location.standard }} >
+
+    {% subjectImage subject, 'standard' %}
 
     <h2>Comments</h2>
     <ul>
@@ -56,7 +57,7 @@ eleventyComputed:
             {%- for collectionSubject in collection.subjects | limit(4) -%}
               <li class="subject">
                 <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-                  {% subjectImage collectionSubject %}
+                  {% subjectImage collectionSubject, 'thumb' %}
                 </a>
               </li>
             {%- endfor -%}

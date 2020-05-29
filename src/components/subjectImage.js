@@ -1,8 +1,7 @@
-module.exports = function subjectImage(subject) {
+module.exports = function subjectImage(subject, size='standard') {
   try {
-    let url = subject.location.standard;
-    const passThrough = url.endsWith('.png');
-    url = url.replace('http://', 'https://');
+    let url = subject.location.standard.replace('http://', 'https://');
+    const passThrough = (size === 'standard') || url.endsWith('.png');
     const zooniverseID = subject.zooniverse_id || subject._id;
     const staticRoot = 'zooniverse-static.s3.amazonaws.com/';
     const thumbnailPath = url.replace('https://', '');

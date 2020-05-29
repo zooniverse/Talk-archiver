@@ -24,7 +24,7 @@ eleventyComputed:
       {% for subject in tag.subjects | limit(6) | mapKeys(subjects) %}
         <li class="subject">
           <a href="/subjects/{{ subject.zooniverse_id }}">
-            {% subjectImage subject %}
+            {% subjectImage subject, 'thumb' %}
           </a> 
         </li>
       {% endfor %}
@@ -39,7 +39,7 @@ eleventyComputed:
             {%- for collectionSubject in collection.subjects | limit(4) -%}
               <li class="subject">
                 <a href="/subjects/{{ collectionSubject.zooniverse_id }}">
-                  {% subjectImage collectionSubject %}
+                  {% subjectImage collectionSubject, 'thumb' %}
                 </a>
               </li>
             {%- endfor -%}

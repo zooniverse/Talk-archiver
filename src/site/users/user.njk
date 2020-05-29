@@ -37,7 +37,7 @@ eleventyComputed:
     {%- for subject in user.subjects | limit(5) -%}
       <li id={{ subject.focus.zooniverse_id }}>
         <a href="/subjects/{{ subject.focus.zooniverse_id }}">
-          {% subjectImage subject.focus %}
+          {% subjectImage subject.focus, 'thumb' %}
         </a>
         <p>
           {%- markdown -%}
@@ -58,7 +58,7 @@ eleventyComputed:
           {%- for subject in collection.subjects | limit(4) -%}
             <li class="subject">
               <a href="/subjects/{{ subject.zooniverse_id }}">
-                {% subjectImage subject %}
+                {% subjectImage subject, 'thumb' %}
               </a>
             </li>
           {%- endfor -%}
