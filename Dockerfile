@@ -12,4 +12,4 @@ RUN yarn install
 
 ADD . /app
 
-CMD ["yarn dev"]
+CMD ["yarn", "dev"]
