@@ -9,6 +9,7 @@ services:
       - ./:/app
     ports:
       - "8080:8080"
+      - "3001:3001"
     environment:
       - "NODE_RAM=8192" # https://nodejs.org/api/cli.html#cli_max_old_space_size_size_in_mbytes
       - "AWS_DEFAULT_REGION=${AWS_REGION:-us-east-1}"
