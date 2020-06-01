@@ -33,7 +33,7 @@ It can be very slow on first run, as it fetches resources one at a time. API res
 4. `yarn build:boards` to build `dist/boards`, `dist/api/boards` and `dist/api/discussions` resources.
 5. `yarn build:subjects` builds `dist/api/subjects` and `dist/subjects` resources.
 
-Alternatively run those scripts individually to build the API data in `.dist/api/` and HTML content in `dist/` and cache the API responses in `.cache`.
+Alternatively run those scripts individually to build the API data in `dist/api/` and HTML content in `dist/` and cache the API responses in `.cache`.
 
 ```
 yarn deploy
