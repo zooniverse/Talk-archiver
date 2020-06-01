@@ -13,14 +13,16 @@ Install the dependencies.
 yarn dev
 ```
 
+Use this script for local development.
+
 Build and start a development site on http://localhost:8080.
 
-Cache the API data from Ouroboros, then build the full API and site. Output will be in `/dist`.
-
+This will run all `dev:*` scripts from `package.json` in parallel to build the HTML & JSON resources. It will also cache the API request data in `.cache`.
 
 ```
 yarn build
 ```
+Use this script to create resource pages prior to deploying.
 
 Will run the following build scripts in order:
 1. `yarn build:assets` to build the `dist/assets/` directory for static site
