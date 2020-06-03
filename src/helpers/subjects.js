@@ -5,7 +5,6 @@ const path = require('path');
 const API = require('./api');
 const project = require('./project');
 const store = require('./store');
-const awaitUsers = require('./users');
 
 const subjectURLs = [];
 

@@ -1,5 +1,5 @@
 # Talk-archiver
-A static site generator for old Ouroboros project Talk forums, based on elevenpack.
+A static site generator for old Ouroboros project Talk forums, based on [elevenpack](https://github.com/deviousdodo/elevenpack).
 
 ## Usage
 
@@ -17,21 +17,28 @@ Use this script for local development.
 
 Build and start a development site on http://localhost:8080.
 
-This will run all `dev:*` scripts from `package.json` in parallel to build the HTML & JSON resources. It will also cache the API request data in `.cache`.
+This will run all `dev:*` scripts from `package.json` in parallel to build the HTML & JSON resources. API responses are cached in `.cache/` for 30 days using [`eleventy-cache-assets`](https://github.com/11ty/eleventy-cache-assets).
+
+```
+yarn dev:boards
+```
+
+Build development versions of `dist/boards`, `dist/api/boards` and `dist/api/discussions` then run a local Browsersync server. Useful if you want to test a build on `http://localhost:8080` without cleaning the `dist/` directory first.
 
 ```
 yarn build
 ```
-Use this script to create resource pages prior to deploying.
+Use this script to create resource pages prior to deploying. API responses are cached in `.cache/` for 30 days using [`eleventy-cache-assets`](https://github.com/11ty/eleventy-cache-assets).
 
 Will run the following build scripts in order:
 
-1. `yarn build:assets` to build the `dist/assets/` directory for static site
-2. `yarn build:api` builds `collections, users tags and project.json` files in `dist/api/` directory from the Ouroboros API but without building the entire site. It can be very slow on first run, as it fetches resources one at a time. API responses are cached in `.cache/` for 30 days.
-3. `yarn build:site` builds `dist/collections`, `dist/recent`, `dist/users` and `dist/tags` resources.
-It can be very slow on first run, as it fetches resources one at a time. API responses are cached in `.cache/` for 30 days.
-4. `yarn build:boards` to build `dist/boards`, `dist/api/boards` and `dist/api/discussions` resources.
-5. `yarn build:subjects` builds `dist/api/subjects` and `dist/subjects` resources.
+1. `yarn build:assets` to build the `dist/assets/` directory for static site.
+1. `yarn build:boards` to build `dist/boards`, `dist/api/boards` and `dist/api/discussions` resources.
+1. `yarn build:api` builds `collections`, `users` and `project.json` files in `dist/api/`.
+1. `yarn build:site` builds `dist/collections`, `dist/recent`, and `dist/users` pages.
+1. `yarn build:tags` builds JSON files in `dist/api/tags` and HTML pages in `dist/tags`.
+1. `yarn build:subjects:api` builds `dist/api/subjects` JSON files.
+1. `yarn build:subjects` builds `dist/subjects` pages.
 
 Alternatively run those scripts individually to build the API data in `dist/api/` and HTML content in `dist/` and cache the API responses in `.cache`.
 
