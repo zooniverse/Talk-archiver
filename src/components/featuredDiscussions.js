@@ -1,9 +1,5 @@
 const moment = require('moment');
-const slugify = require('slugify');
-
-function slug(string) {
-  return slugify(string, { lower: true });
-}
+const slug = require('../helpers/slug');
 
 function authorCount(discussion) {
   if (discussion.users) {
