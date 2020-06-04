@@ -104,7 +104,12 @@ module.exports = function(eleventyConfig) {
     breaks: true,
     linkify: true
   };
-  const slug = require('./src/helpers/slug');
+
+  const slugify = require('slugify');
+
+  function slug(string) {
+    return slugify(string, { lower: true });
+  }
 
   const mentionUsers = {
     name: 'mentionUsers',
