@@ -1,4 +1,9 @@
 const moment = require('moment');
+const slugify = require('slugify');
+
+function slug(string) {
+  return slugify(string, { lower: true });
+}
 
 function authorCount(discussion) {
   if (discussion.users) {
@@ -26,7 +31,7 @@ function discussionSummary(discussion) {
       Last post
       <time datetime="${discussion.last_comment.created_at}">${ lastPost }</time>
       by
-      <a href="/users/${discussion.last_comment.user_name}">
+      <a href="/users/${slug(discussion.last_comment.user_name)}">
         ${ discussion.last_comment.user_name }
       </a>
     </p>
