@@ -32,6 +32,9 @@ async function fetchUsers() {
 
   for (user of APIusers) {
     if (user.name) {
+      // remove the domain from email addresses in usernames.
+      user.name = user.name.split('@');
+      user.name = user.name[0];
       users[user.id] = user;
     }
   }
