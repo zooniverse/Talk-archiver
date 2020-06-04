@@ -6,12 +6,12 @@ pagination:
   resolve: values
   size: 1
   alias: user
-permalink: "/users/{{ user.name }}/collections.html"
+permalink: "/users/{{ user.name | slug }}/collections.html"
 eleventyComputed:
   title: "Profile: {{ user.name }}: collections"
 ---
 <main>
-  <h1><a href="/users/{{ user.name }}">Profile: {{ user.name }}</a></h1>
+  <h1><a href="/users/{{ user.name | slug }}">Profile: {{ user.name }}</a></h1>
   <h2>Collections ({{ user.my_collections.length }})</h2>
   <ul>
   {%- for collection in user.my_collections -%}

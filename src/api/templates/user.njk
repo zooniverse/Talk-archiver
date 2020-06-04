@@ -5,6 +5,6 @@ pagination:
   resolve: values
   size: 1
   alias: user
-permalink: "/api/users/{{ user.name }}.json"
+permalink: "/api/users/{{ user.name | slug }}.json"
 ---
 {{ user | dump | safe }}
