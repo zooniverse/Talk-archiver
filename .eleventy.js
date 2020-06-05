@@ -89,6 +89,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addShortcode('avatar', require('./src/components/avatar'));
   eleventyConfig.addShortcode('collectionSummary', require('./src/components/collectionSummary'));
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/components/featuredDiscussions'));
+  eleventyConfig.addAsyncShortcode('pageHeader', require('./src/components/pageHeader'));
   eleventyConfig.addAsyncShortcode('pageMetadata', require('./src/components/pageMetadata'));
   eleventyConfig.addShortcode('subjectImage', require('./src/components/subjectImage'));
   eleventyConfig.addShortcode('tags', require('./src/components/tagList'));
