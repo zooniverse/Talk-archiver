@@ -88,6 +88,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addShortcode('avatar', require('./src/components/avatar'));
   eleventyConfig.addShortcode('collectionSummary', require('./src/components/collectionSummary'));
+  eleventyConfig.addShortcode('discussionSummary', require('./src/components/discussionSummary'));
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/components/featuredDiscussions'));
   eleventyConfig.addAsyncShortcode('pageHeader', require('./src/components/pageHeader'));
   eleventyConfig.addAsyncShortcode('pageMetadata', require('./src/components/pageMetadata'));
@@ -103,12 +104,13 @@ module.exports = function(eleventyConfig) {
     breaks: true,
     linkify: true
   };
+  const slug = require('./src/helpers/slug');
 
   const mentionUsers = {
     name: 'mentionUsers',
     regex: /@(\w+)\b/,
     replace: (match) => {
-      const url = `/users/${match}`;
+      const url = `/users/${slug(match)}`;
       return `<a href="${url}">@${match}</a>`;
     }
   }
