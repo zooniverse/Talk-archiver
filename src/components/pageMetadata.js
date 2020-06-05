@@ -15,7 +15,7 @@ function metaImage(ogImage) {
   `;
 }
 
-module.exports = async function(page, title, description, ogImage){
+module.exports = async function({ page, title, description, ogImage }){
   const project = await awaitProject;
   return `
     <meta charset="utf-8">
