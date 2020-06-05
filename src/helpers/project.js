@@ -8,7 +8,9 @@ async function fetchProject(name) {
 }
 
 async function project() {
-  return await fetchProject(config.project.name);
+  const project = await fetchProject(config.project.name);
+  project.domain = config.project.domain;
+  return project;
 }
 
 module.exports = project();

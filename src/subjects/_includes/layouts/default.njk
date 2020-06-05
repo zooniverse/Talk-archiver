@@ -1,33 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="{{ project.display_name }} Talk" />
-    <meta property='og:url' content="https://talk.sciencegossip.org{{ page.url }}" />
-    <meta property='og:title' content="{{ title }}" />
-
-    {% if description %}
-    <meta name="description" content="{{ description }}" />
-    <meta name='twitter:description' content="{{ description }}" />
-    <meta property='og:description' content="{{ description }}" />
-    {% endif %}
-
-    {% if ogImage %}
-    <meta property='og:image' content="{{ ogImage }}" />
-    <meta name='twitter:image' content="{{ ogImage }}" />
-    {% endif %}
-
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:creator" content="@the_zooniverse" />
-    <meta name="twitter:site" content="@the_zooniverse" />
-
-    <link rel="icon" href="/img/favicon.ico">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karla:400,700">
+    {% pageMetadata page=page, title=title, description=description, ogImage=ogImage %}
     <link rel="stylesheet" href="{% webpackAsset 'main.css' %}">
-    <title>{{ title }}</title>
   </head>
   <body>
     <header>
