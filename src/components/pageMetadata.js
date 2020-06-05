@@ -23,7 +23,7 @@ module.exports = async function(page, title, description, ogImage){
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="${ project.display_name } Talk" />
-    <meta property='og:url' content="https://talk.sciencegossip.org${ page.url }" />
+    <meta property='og:url' content="https://talk.${ project.domain }${ page.url }" />
     <meta property='og:title' content="${ title }" />
 
     ${ description ? metaDesc(description) : ''}
