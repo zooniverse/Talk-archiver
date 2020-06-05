@@ -87,6 +87,7 @@ module.exports = function(eleventyConfig) {
   // custom tags
 
   eleventyConfig.addShortcode('avatar', require('./src/components/avatar'));
+  eleventyConfig.addShortcode('collectionSummary', require('./src/components/collectionSummary'));
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/components/featuredDiscussions'));
   eleventyConfig.addShortcode('subjectImage', require('./src/components/subjectImage'));
   eleventyConfig.addShortcode('tags', require('./src/components/tagList'));

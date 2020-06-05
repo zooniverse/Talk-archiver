@@ -61,16 +61,7 @@ eleventyComputed:
       <ul class="comments-list grid-cols-2">
       {%- for collection in recents.collections -%}
         <li>
-          <p><a href="/collections/{{ collection.focus._id }}">{{ collection.focus._id }} {{ collection.focus.name }}</a></p>
-          <ul class="collection grid-cols-4">
-            {%- for subject in collection.focus.subjects | limit(4) -%}
-              <li class="subject">
-                <a href="/subjects/{{ subject.zooniverse_id }}">
-                  {% subjectImage subject, 'thumb' %}
-                </a>
-              </li>
-            {%- endfor -%}
-          </ul>
+           {% collectionSummary collection.focus, 4, 'grid-cols-4' %}
           <p>
           {%- markdown -%}
             {{ collection.comment.body }}

@@ -16,16 +16,7 @@ eleventyComputed:
   <ul>
   {%- for collection in user.my_collections -%}
     <li>
-      <p><a href="/collections/{{ collection.zooniverse_id }}">{{ collection.zooniverse_id }} {{ collection.title }}</a></p>
-      <ul class="collection">
-        {%- for subject in collection.subjects | limit(4) -%}
-          <li class="subject">
-            <a href="/subjects/{{ subject.zooniverse_id }}">
-              {% subjectImage subject, 'thumb' %}
-            </a>
-          </li>
-        {%- endfor -%}
-      </ul>
+       {% collectionSummary collection, 4 %}
     </li>
   {%- endfor -%}
   </ul>

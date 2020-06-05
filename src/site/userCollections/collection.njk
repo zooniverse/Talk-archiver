@@ -14,8 +14,9 @@ eleventyComputed:
 ---
 <main class="page-grid">
   <div>
-    <h1>Collection: {{ userCollection.title }}</h1>
-    <p>{{ userCollection.description }}</p>
+    <h1 class="mb-0">Collection: {{ userCollection.title }}</h1>
+    <p class="mb-2">by <a href="/users/{{ userCollection.user_name }}">{{ userCollection.user_name }}</a></p>
+    <p class="mb-4">{{ userCollection.description }}</p>
     <h2>Tags</h2>
     <ul class="tag-list">
       {% for tag in userCollection.tags %}
