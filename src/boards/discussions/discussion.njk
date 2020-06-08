@@ -26,10 +26,10 @@ eleventyComputed:
     {%- for comment in discussion.comments -%}
       <li id={{ comment._id }} class="comment">
         <p>
-          <a href="/users/{{ comment.user_name }}">
+          <a href="/users/{{ comment.user_name | slug }}">
             {% avatar comment.user_name, users[comment.user_id].avatar_url %}
           </a> by
-          <a href="/users/{{ comment.user_name }}">
+          <a href="/users/{{ comment.user_name | slug }}">
             {{ comment.user_name }}
           </a>
           {% if comment.response_to %}
@@ -63,11 +63,11 @@ eleventyComputed:
     {%- for comment in discussion.focus.discussion.comments | reverse -%}
     <li id={{ comment._id }} class="comment">
       <p>
-        <a href="/users/{{ comment.user_name }}">
+        <a href="/users/{{ comment.user_name | slug }}">
           {% avatar comment.user_name, users[comment.user_id].avatar_url %}
         </a>
         by
-        <a href="/users/{{ comment.user_name }}">
+        <a href="/users/{{ comment.user_name | slug }}">
           {{ comment.user_name }}
         </a>
         {% if comment.response_to %}
@@ -105,11 +105,11 @@ eleventyComputed:
     {%- for comment in discussion.focus.discussion.comments | reverse -%}
     <li id={{ comment._id }} class="comment">
       <p>
-        <a href="/users/{{ comment.user_name }}">
+        <a href="/users/{{ comment.user_name | slug }}">
           {% avatar comment.user_name, users[comment.user_id].avatar_url %}
         </a>
         by
-        <a href="/users/{{ comment.user_name }}">
+        <a href="/users/{{ comment.user_name | slug }}">
           {{ comment.user_name }}
         </a>
         {% if comment.response_to %}

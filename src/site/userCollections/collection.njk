@@ -15,7 +15,7 @@ eleventyComputed:
 <main class="page-grid">
   <div>
     <h1 class="mb-0">Collection: {{ userCollection.title }}</h1>
-    <p class="mb-2">by <a href="/users/{{ userCollection.user_name }}">{{ userCollection.user_name }}</a></p>
+    <p class="mb-2">by <a href="/users/{{ userCollection.user_name | slug }}">{{ userCollection.user_name }}</a></p>
     <p class="mb-4">{{ userCollection.description }}</p>
     <h2>Tags</h2>
     <ul class="tag-list">
@@ -29,11 +29,11 @@ eleventyComputed:
     {%- for comment in userCollection.discussion.comments | reverse -%}
     <li id={{ comment._id }} class="comment">
       <p>
-        <a href="/users/{{ comment.user_name }}">
+        <a href="/users/{{ comment.user_name | slug }}">
           {% avatar comment.user_name, users[comment.user_id].avatar_url %}
         </a>
         by
-        <a href="/users/{{ comment.user_name }}">
+        <a href="/users/{{ comment.user_name | slug }}">
           {{ comment.user_name }}
         </a>
         {% if comment.response_to %}

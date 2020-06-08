@@ -29,7 +29,7 @@ eleventyComputed:
         <p>
           <time datetime="{{ subject.comment.created_at }}">{{ subject.comment.created_at | date }}</time>
           by
-          <a href="/users/{{ subject.comment.user_name }}">{{ subject.comment.user_name }}</a>
+          <a href="/users/{{ subject.comment.user_name | slug }}">{{ subject.comment.user_name }}</a>
         </p>
       </li>
     {%- endfor -%}
@@ -50,7 +50,7 @@ eleventyComputed:
             <p>
               <time datetime="{{ discussion.comment.created_at }}">{{ discussion.comment.created_at | date }}</time>
               by
-              <a href="/users/{{ discussion.comment.user_name }}">{{ discussion.comment.user_name }}</a>
+              <a href="/users/{{ discussion.comment.user_name | slug }}">{{ discussion.comment.user_name }}</a>
             </p>
           </li>
         {% endfor  %}
@@ -70,7 +70,7 @@ eleventyComputed:
           <p>
             <time datetime="{{ collection.comment.created_at }}">{{ collection.comment.created_at | date }}</time>
             by
-            <a href="/users/{{ collection.comment.user_name }}">{{ collection.comment.user_name }}</a>
+            <a href="/users/{{ collection.comment.user_name | slug }}">{{ collection.comment.user_name }}</a>
           </p>
         </li>
       {%- endfor -%}
