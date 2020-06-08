@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const moment = require('moment');
-const config = require('./src/config');
 
 let manifest = {};
 const manifestPath = path.resolve(__dirname, "dist", "assets", "manifest.json");
@@ -12,8 +11,6 @@ try {
 } catch (e) {
   console.log(e);
 }
-
-const PREFIX = config.project.prefix;
 
 module.exports = function(eleventyConfig) {
   // Layout aliases make templates more portable.
@@ -90,73 +87,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addShortcode('collectionSummary', require('./src/components/collectionSummary'));
   eleventyConfig.addShortcode('discussionSummary', require('./src/components/discussionSummary'));
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/components/featuredDiscussions'));
+  eleventyConfig.addPairedAsyncShortcode("markdown", require('./src/components/markdown'));
   eleventyConfig.addAsyncShortcode('pageHeader', require('./src/components/pageHeader'));
   eleventyConfig.addAsyncShortcode('pageMetadata', require('./src/components/pageMetadata'));
   eleventyConfig.addShortcode('subjectImage', require('./src/components/subjectImage'));
   eleventyConfig.addShortcode('tags', require('./src/components/tagList'));
-
-  // custom markdown setup
-  const markdownIt = require("markdown-it");
-  const markdownItEmoji = require("markdown-it-emoji");
-  const markdownItRegex = require('markdown-it-regex').default;
-  const options = {
-    html: true,
-    breaks: true,
-    linkify: true
-  };
-
-  const slug = require('./src/helpers/slug');
-
-  const mentionUsers = {
-    name: 'mentionUsers',
-    regex: /@(\w+)\b/,
-    replace: (match) => {
-      const url = `/users/${slug(match)}`;
-      return `<a href="${url}">@${match}</a>`;
-    }
-  }
-
-  const mentionTags = {
-    name: 'mentionTags',
-    regex: /#(\w+)\b/,
-    replace: (match) => {
-      const url = `/tags/${match.toLowerCase()}`;
-      return `<a href="${url}">#${match}</a>`;
-    }
-  }
-
-  const subjectRegex = new RegExp(`\\b(?<!\\/)(A${PREFIX}\\w+)(?!\\])\\b`);
-  const collectionRegex = new RegExp(`\\b(?<!\\/)(C${PREFIX}\\w+)(?!\\])\\b`);
-
-  const mentionSubjects = {
-    name: 'mentionSubjects',
-    // match any subject ID that doesn't begin with / or end in ]
-    regex: subjectRegex,
-    replace: (match) => {
-      const url = `/subjects/${match}`;
-      return `<a href="${url}">${match}</a>`;
-    }
-  }
-
-  const mentionCollections = {
-    name: 'mentionCollections',
-    regex: collectionRegex,
-    replace: (match) => {
-      const url = `/collections/${match}`;
-      return `<a href="${url}">${match}</a>`;
-    }
-  }
-
-  const md = markdownIt(options)
-    .use(markdownItEmoji)
-    .use(markdownItRegex, mentionUsers)
-    .use(markdownItRegex, mentionTags)
-    .use(markdownItRegex, mentionSubjects)
-    .use(markdownItRegex, mentionCollections);
-  eleventyConfig.setLibrary("md", md);
-  eleventyConfig.addPairedShortcode("markdown", content => {
-    return md.render(content.trim());
-  });
 
   return {
     dir: {
