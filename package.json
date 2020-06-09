@@ -9,8 +9,7 @@
     "url": "https://github.com/zooniverse/Talk-archiver"
   },
   "scripts": {
-    "build": "npm-run-all clean build:assets build:boards build:api build:site build:tags build:subjects:api build:subjects",
-    "build:assets": "NODE_ENV=production webpack --mode=production",
+    "build": "npm-run-all clean webpack:build:assets --parallel \"build:* {1}\" -- ",
     "build:api": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/api",
     "build:boards": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/boards",
     "build:subjects": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/subjects",
@@ -19,15 +18,15 @@
     "build:tags": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/tags",
     "clean": "rm -rf ./dist",
     "deploy": "s3-batch-upload -b zooniverse-static -r talk.sciencegossip.org -p ./dist -C 200 -acl 'public-read'",
-    "dev": "npm-run-all clean webpack:assets --parallel dev:*",
+    "dev": "npm-run-all clean webpack:dev:assets --parallel \"webpack:dev:assets --watch\" \"dev:* {1}\" -- ",
     "dev:api": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/api --watch",
     "dev:boards": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/boards --serve",
     "dev:subjects": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/subjects --watch",
     "dev:subjects:api": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/subjects:api --watch",
-    "dev:assets": "yarn run webpack:assets --watch",
     "dev:site": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --watch",
     "dev:tags": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/tags --watch",
-    "webpack:assets": "NODE_ENV=development webpack --mode=development"
+    "webpack:build:assets": "NODE_ENV=production webpack --mode=production",
+    "webpack:dev:assets": "NODE_ENV=development webpack --mode=development"
   },
   "dependencies": {
     "@11ty/eleventy": "^0.11.0",
