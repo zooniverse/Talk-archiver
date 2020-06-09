@@ -17,7 +17,7 @@
     "build:site": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js",
     "build:tags": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/tags",
     "clean": "rm -rf ./dist",
-    "deploy": "s3-batch-upload -b zooniverse-static -r talk.sciencegossip.org -p ./dist -C 200 -acl 'public-read'",
+    "deploy": "s3-batch-upload -b zooniverse-static -p ./dist -C 200 -acl 'public-read'",
     "dev": "npm-run-all clean webpack:dev:assets --parallel \"webpack:dev:assets --watch\" \"dev:* {1}\" -- ",
     "dev:api": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/api --watch",
     "dev:boards": "NODE_ENV=development node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/boards --serve",
