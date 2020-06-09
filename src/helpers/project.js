@@ -1,15 +1,18 @@
 const awaitProjects = require('./projects');
-const config = require('../config');
 
-async function fetchProject(name) {
+const args = process.argv.slice(2);
+const talkDomain = args[args.length - 1];
+
+async function fetchProject() {
   const projects = await awaitProjects;
-  const [ project ] = projects.filter(project => project.name === name);
+  const domain = talkDomain.replace('talk.', '');
+  const [ project ] = projects.filter(project => project.bucket_path === `www.${domain}`);
   return project;
 }
 
 async function project() {
-  const project = await fetchProject(config.project.name);
-  project.domain = config.project.domain;
+  const project = await fetchProject();
+  project.domain = talkDomain;
   return project;
 }
 
