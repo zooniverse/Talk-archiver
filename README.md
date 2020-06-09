@@ -10,7 +10,7 @@ yarn install
 Install the dependencies.
 
 ```
-yarn dev
+yarn dev talk.sciencegossip.org
 ```
 
 Use this script for local development.
@@ -20,13 +20,13 @@ Build and start a development site on http://localhost:8080.
 This will run all `dev:*` scripts from `package.json` in parallel to build the HTML & JSON resources. API responses are cached in `.cache/` for 30 days using [`eleventy-cache-assets`](https://github.com/11ty/eleventy-cache-assets).
 
 ```
-yarn dev:boards
+yarn dev:boards talk.sciencegossip.org
 ```
 
 Build development versions of `dist/boards`, `dist/api/boards` and `dist/api/discussions` then run a local Browsersync server. Useful if you want to test a build on `http://localhost:8080` without cleaning the `dist/` directory first.
 
 ```
-yarn build
+yarn build talk.sciencegossip.org
 ```
 Use this script to create resource pages prior to deploying. API responses are cached in `.cache/` for 30 days using [`eleventy-cache-assets`](https://github.com/11ty/eleventy-cache-assets).
 
@@ -43,7 +43,7 @@ Will run the following build scripts in order:
 Alternatively run those scripts individually to build the API data in `dist/api/` and HTML content in `dist/` and cache the API responses in `.cache`.
 
 ```
-yarn deploy
+yarn deploy -r talk.sciencegossip.org
 ```
 
 Copy the site from `/dist` to S3.
