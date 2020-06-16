@@ -1,9 +1,7 @@
 // console.log("Elevenpack javascript is loaded");
 import slug from '../helpers/slug';
 
-function rewriteHashes() {
-  const { hash } = window.location;
-
+function rewriteHashes(hash) {
   const paths = hash.split('/');
   switch (paths[1]) {
     case "subjects":
@@ -31,9 +29,12 @@ function rewriteHashes() {
 }
 
 function onLoad() {
-  const redirectPath = rewriteHashes();
-  if (redirectPath.length) {
-    window.location.assign(`${window.location.origin}${redirectPath}`);
+  const { hash } = window.location;
+  if (hash.startsWith('#/')) {
+    const redirectPath = rewriteHashes(hash);
+    if (redirectPath.length) {
+      window.location.replace(`${window.location.origin}${redirectPath}`);
+    }
   }
 }
 
