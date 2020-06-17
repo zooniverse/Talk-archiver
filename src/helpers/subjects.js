@@ -32,6 +32,9 @@ async function fetchSubjects() {
   const subjects = {};
 
   for (subject of APIsubjects) {
+    if (subject.url !== `subjects/${subject.zooniverse_id}`) {
+      throw new Error(`Subject mismatch: ${subject.url} ${subject.zooniverse_id}`);
+    }
     subjects[subject.zooniverse_id] = subject;
   }
 
