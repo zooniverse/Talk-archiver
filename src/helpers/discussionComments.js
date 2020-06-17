@@ -32,7 +32,6 @@ async function discussionComments() {
       collections = discussions.filter(discussion => !discussion.board._id && discussion.focus.base_type === 'Collection');
       subjects = discussions.filter(discussion => !discussion.board._id && discussion.focus.base_type === 'Subject');
       boards = discussions.filter(discussion => !!discussion.board._id);
-      console.log('collection discussions', collections.length)
       resolve({ boards, collections, subjects });
     });
   });

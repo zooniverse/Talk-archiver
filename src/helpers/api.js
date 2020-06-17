@@ -25,7 +25,6 @@ const requestQueue = new RequestQueue({
   }
   done();
 })
-.on(END_EVENT, () => console.log(requestCount, 'requests completed.'));
 
 async function getURL(url) {
   const { name } = await PROJECT;

@@ -9,7 +9,7 @@
     "url": "https://github.com/zooniverse/Talk-archiver"
   },
   "scripts": {
-    "build": "npm-run-all clean webpack:build:assets --parallel \"build:* {1}\" -- ",
+    "build": "npm-run-all clean webpack:build:assets --parallel \"build:* --quiet {1}\" -- ",
     "build:api": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/api",
     "build:boards": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/boards",
     "build:subjects": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/subjects",
