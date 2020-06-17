@@ -117,6 +117,10 @@ div.page-grid > nav {
   max-width: 6rem;
 }
 
+.collection-link {
+  @apply pb-2;
+}
+
 .comments-list {
   @apply grid gap-6 grid-cols-5 grid-flow-row;
 }

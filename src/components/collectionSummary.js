@@ -18,7 +18,7 @@ module.exports = function collectionSummary(collection, limit, className='') {
   const plural = collection.subjects && collection.subjects.length > 1 ? 's' : '';
   const size = collection.subjects && collection.subjects.length ? `(${ collection.subjects.length } subject${ plural })` : '';
   return `
-    <p>
+    <p class="collection-link">
       <a href="/collections/${ zooniverse_id }">${ title }${ attribution }</a> ${ size }
     </p>
     <ul class="collection ${className}">
