@@ -4,9 +4,10 @@ import slug from '../helpers/slug';
 function rewriteHashes(hash) {
   const paths = hash.split('/');
   switch (paths[1]) {
+    case "boards":
     case "subjects":
     case "collections": {
-      return `/${paths[1]}/${paths[2]}/`;
+      return hash.slice(1);
     }
     case "users": {
       return `/${paths[1]}/${slug(paths[2])}/`;
