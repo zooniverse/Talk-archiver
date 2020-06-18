@@ -22,7 +22,7 @@ async function fetchUsers() {
       .on('data', parseRow)
       .on('end', (rowCount) => {
         resolve(userURLs);
-        console.log(`Parsed ${rowCount} users`)
+        console.log('read', rowCount, 'users');
       });
   })
 
@@ -65,6 +65,7 @@ async function fetchUsers() {
     });
   }
 
+  console.log('loaded', Object.keys(users).length, 'users');
   return users;
 }
 

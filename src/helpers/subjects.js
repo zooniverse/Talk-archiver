@@ -23,7 +23,7 @@ async function fetchSubjects() {
       .on('data', parseRow)
       .on('end', (rowCount) => {
         resolve(subjectURLs);
-        console.log(`Parsed ${rowCount} subjects`)
+        console.log('read', rowCount, 'subjects')
       });
   })
 
@@ -38,6 +38,7 @@ async function fetchSubjects() {
     subjects[subject.zooniverse_id] = subject;
   }
 
+  console.log('loaded', Object.keys(subjects).length, 'subjects');
   return subjects;
 }
 
