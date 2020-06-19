@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const manifest = require('./dist/manifest/build');
 
+let error = null;
 console.log(`Verifying JSON output.`);
 let source = path.resolve(__dirname, './dist/api');
 let dirs = fs.readdirSync(source, { withFileTypes: true })
@@ -16,6 +17,7 @@ dirs.forEach(dir => {
     console.log(logSymbols.success, dir.name, files.length)
   } else {
     console.error(logSymbols.error, dir.name, files.length, '(', manifest[dir.name], ')');
+    error = new Error('JSON output verification failed.');
   }
 });
 
@@ -49,4 +51,7 @@ if (discussionsCount === manifest.discussions) {
   console.log(logSymbols.success, 'discussions', discussionsCount);
 } else {
   console.error(logSymbols.error, 'discussions', discussionsCount, '(', manifest.discussions, ')');
+  error = new Error('HTML output verification failed.');
 }
+
+if (error) throw error;
