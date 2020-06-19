@@ -17,20 +17,20 @@ const requestQueue = new RequestQueue({
     	duration: "30d",
     	type: "json"
     });
+    data.url = promise.url;
     promise.resolve(data);
   } catch (e) {
     console.log(e.message);
-    promise.resolve({});
+    promise.resolve({ url: promise.url });
   }
   done();
 })
-.on(END_EVENT, () => console.log(requestCount, 'requests completed.'));
 
 async function getURL(url) {
   const { name } = await PROJECT;
   requestCount++;
   return new Promise((resolve, reject) => {
-    requestQueue.enqueue(new URL(`${ApiHost}/projects/${name}/talk/${url}`), { resolve, reject });
+    requestQueue.enqueue(new URL(`${ApiHost}/projects/${name}/talk/${url}`), { resolve, reject, url });
   });
 }
 

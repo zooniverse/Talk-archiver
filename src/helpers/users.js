@@ -22,7 +22,7 @@ async function fetchUsers() {
       .on('data', parseRow)
       .on('end', (rowCount) => {
         resolve(userURLs);
-        console.log(`Parsed ${rowCount} users`)
+        console.log('read', rowCount, 'users');
       });
   })
 
@@ -32,6 +32,9 @@ async function fetchUsers() {
 
   for (user of APIusers) {
     if (user.name) {
+      if (user.url !== `users/${user.id}`) {
+        throw new Error(`User mismatch: ${user.url} ${user.name}`);
+      }
       // remove the domain from email addresses in usernames.
       user.name = user.name.split('@');
       user.name = user.name[0];
@@ -62,6 +65,7 @@ async function fetchUsers() {
     });
   }
 
+  console.log('loaded', Object.keys(users).length, 'users');
   return users;
 }
 

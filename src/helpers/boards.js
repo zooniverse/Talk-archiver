@@ -21,12 +21,17 @@ async function discussionBoard(board) {
 
 async function fetchBoards() {
   const boards = await API.get('boards/');
+  let boardCount = 0;
   for (category of CATEGORIES) {
     const categoryBoards = await Promise.all(boards[category].map(discussionBoard));
     boards[category] = categoryBoards;
+    boardCount = boardCount + categoryBoards.length;
   }
   store.boards.featured = boards.featured;
   store.boards.tags = boards.tags;
+  console.log('loaded', boardCount, 'boards');
+  const discussionCount = Object.values(store.discussions).length;
+  console.log('loaded', discussionCount, 'discussions');
   return store.boards;
 }
 

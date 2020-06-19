@@ -9,7 +9,6 @@ async function fetchPage(boardID, page) {
 
 module.exports = async function fetchBoard(board, pages) {
   const discussions = [];
-  console.log('build discussions', board.zooniverse_id, board.discussions, pages);
 
   let fullBoard = {};
   for (let page = 1; page <= pages; page++) {

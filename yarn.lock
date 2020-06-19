@@ -7,17 +7,6 @@
   resolved "https://registry.yarnpkg.com/@11ty/dependency-tree/-/dependency-tree-1.0.0.tgz#b1fa53da49aafe0ab3fe38bc6b6058b704aa59a1"
   integrity sha512-2FWYlkphQ/83MG7b9qqBJfJJ0K9zupNz/6n4EdDuNLw6hQHGp4Sp4UMDRyBvA/xCTYDBaPSuSjHuu45tSujegg==
 
-"@11ty/eleventy-cache-assets@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@11ty/eleventy-cache-assets/-/eleventy-cache-assets-2.0.2.tgz#9a7300f1116bbb72f02c68ae4afce33a0fa85d2e"
-  integrity sha512-25ZVZtORPj2e5/cFITpFo/zVp5wiQF5apFPzpP7zMLdEno75MlUDVszXKzxKEengIhxGKi5x8MfYrDKU3SSymg==
-  dependencies:
-    debug "^4.1.1"
-    flat-cache "^2.0.1"
-    node-fetch "^2.6.0"
-    p-queue "^6.3.0"
-    short-hash "^1.0.0"
-
 "@11ty/eleventy-cache-assets@zooniverse/eleventy-cache-assets#sha1":
   version "2.0.2"
   resolved "https://codeload.github.com/zooniverse/eleventy-cache-assets/tar.gz/1cd3e586f0a870810fd39cce6205aebf85d963d1"
@@ -4225,11 +4214,6 @@ hash-base@^3.0.0:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-hash-string@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/hash-string/-/hash-string-1.0.0.tgz#c3fa15f078ddd16bc150b4176fde7091620f2c7f"
-  integrity sha1-w/oV8Hjd0WvBULQXb95wkWIPLH8=
-
 hash.js@^1.0.0, hash.js@^1.0.3:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/hash.js/-/hash.js-1.1.7.tgz#0babca538e8d4ee4a0f8988d68866537a003cf42"
@@ -5663,6 +5647,13 @@ log-symbols@^2.2.0:
   integrity sha512-VeIAFslyIerEJLXHziedo2basKbMKtTw3vfn5IzG0XTjhAVEJyNHnL2p7vc+wBDSdQuUpNw3M2u6xb9QsAY5Eg==
   dependencies:
     chalk "^2.0.1"
+
+log-symbols@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-4.0.0.tgz#69b3cc46d20f448eccdb75ea1fa733d9e821c920"
+  integrity sha512-FN8JBzLx6CzeMrB0tg6pqlGU1wCrXW+ZXGH481kfsBqer0hToTIiHdjH4Mq8xJUbvATujKCvaREGWpGUionraA==
+  dependencies:
+    chalk "^4.0.0"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -8175,13 +8166,6 @@ shellwords@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
-
-short-hash@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/short-hash/-/short-hash-1.0.0.tgz#3f491d728fcc777ec605bbaf7f83f23712f42050"
-  integrity sha1-P0kdco/Md37GBbuvf4PyNxL0IFA=
-  dependencies:
-    hash-string "^1.0.0"
 
 sigmund@^1.0.1:
   version "1.0.1"
