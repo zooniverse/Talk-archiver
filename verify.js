@@ -14,7 +14,7 @@ dirs.forEach(dir => {
   const dirPath = path.resolve(source, dir.name);
   const files = fs.readdirSync(dirPath).filter(file => file.endsWith('.json'));
   if (files.length === manifest[dir.name]) {
-    console.log(logSymbols.success, dir.name, files.length)
+    console.log(logSymbols.success, dir.name, files.length, '/', manifest[dir.name])
   } else {
     console.error(logSymbols.error, dir.name, files.length, '(', manifest[dir.name], ')');
     error = new Error('JSON output verification failed.');
@@ -30,7 +30,7 @@ dirs.forEach(dir => {
   const dirPath = path.resolve(source, dir.name);
   const files = fs.readdirSync(dirPath, { withFileTypes: true }).filter(dirent => dirent.isDirectory());
   if (files.length === manifest[dir.name]) {
-    console.log(logSymbols.success, dir.name, files.length)
+    console.log(logSymbols.success, dir.name, files.length, '/', manifest[dir.name])
   } else {
     console.error(logSymbols.error, dir.name, files.length, '(', manifest[dir.name], ')');
   }
@@ -48,7 +48,7 @@ boards.forEach(board => {
 });
 
 if (discussionsCount === manifest.discussions) {
-  console.log(logSymbols.success, 'discussions', discussionsCount);
+  console.log(logSymbols.success, 'discussions', discussionsCount, '/', manifest.discussions);
 } else {
   console.error(logSymbols.error, 'discussions', discussionsCount, '(', manifest.discussions, ')');
   error = new Error('HTML output verification failed.');
