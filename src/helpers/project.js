@@ -5,8 +5,8 @@ const talkDomain = args[args.length - 1];
 
 async function fetchProject() {
   const projects = await awaitProjects;
-  const domain = talkDomain.replace('talk.', '');
-  const [ project ] = projects.filter(project => project.bucket_path === `www.${domain}`);
+  const domain = talkDomain.replace('talk.', 'www.');
+  const [ project ] = projects.filter(project => project.bucket_path === domain);
   return project;
 }
 
