@@ -39,6 +39,13 @@ module.exports = function(eleventyConfig) {
 //     return util.inspect(obj);
 //   });
 
+  const slug = require('./src/helpers/slug');
+
+  eleventyConfig.addFilter("slug", string => {
+    const safeString = slug(string);
+    return safeString || string;
+  });
+
   eleventyConfig.addFilter("log", obj => {
     console.log(obj);
   });
