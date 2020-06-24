@@ -92,6 +92,7 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addShortcode('avatar', require('./src/components/avatar'));
   eleventyConfig.addShortcode('collectionSummary', require('./src/components/collectionSummary'));
+  eleventyConfig.addAsyncShortcode('discussionComment', require('./src/components/discussionComment'));
   eleventyConfig.addShortcode('discussionSummary', require('./src/components/discussionSummary'));
   eleventyConfig.addShortcode('featuredDiscussions', require('./src/components/featuredDiscussions'));
   eleventyConfig.addPairedAsyncShortcode("markdown", require('./src/components/markdown'));
