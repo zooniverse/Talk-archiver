@@ -37,8 +37,9 @@ Will run the following build scripts in order:
 1. `yarn build:api` builds `collections`, `users` and `project.json` files in `dist/api/`.
 1. `yarn build:site` builds `dist/collections`, `dist/recent`, and `dist/users` pages.
 1. `yarn build:tags` builds JSON files in `dist/api/tags` and HTML pages in `dist/tags`.
-1. `yarn build:subjects:api` builds `dist/api/subjects` JSON files.
-1. `yarn build:subjects` builds `dist/subjects` pages.
+1. `yarn build:subjects-api` builds `dist/api/subjects` JSON files.
+1. `yarn build:subjects` builds `dist/subjects` index pages.
+1. `yarn build:subjectCollections` builds `dist/subjects` collection pages (the full list of collections for each subject.)
 
 Alternatively run those scripts individually to build the API data in `dist/api/` and HTML content in `dist/` and cache the API responses in `.cache`.
 
