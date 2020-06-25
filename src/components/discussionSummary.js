@@ -13,8 +13,20 @@ function authorCount(discussion, className) {
   return Object.keys(authors).length;
 }
 
+function lastPost(comment) {
+  return `
+    <p>
+      Last post
+      <time datetime="${comment.created_at}">${ moment(comment.created_at).format('LLL') }</time>
+      by
+      <a href="/users/${slug(comment.user_name)}">
+        ${ comment.user_name }
+      </a>
+    </p>
+  `;
+}
+
 module.exports = function discussionSummary({ discussion, className }) {
-  const lastPost = moment(discussion.last_comment.created_at).format('LLL');
   const posts = discussion.comments.length || discussion.comments;
   const classAttr = className ? `class="${className}"` : '';
   return `
@@ -24,14 +36,6 @@ module.exports = function discussionSummary({ discussion, className }) {
       </a>
     </p>
     <p>${ posts } posts / ${ authorCount(discussion) } participants</p>
-    <p>
-      Last post
-      <time datetime="${discussion.last_comment.created_at}">${ lastPost }</time>
-      by
-      <a href="/users/${slug(discussion.last_comment.user_name)}">
-        ${ discussion.last_comment.user_name }
-      </a>
-    </p>
-  </p>
+    ${ discussion.last_comment ? lastPost(discussion.last_comment) : ''}
   `
 }
