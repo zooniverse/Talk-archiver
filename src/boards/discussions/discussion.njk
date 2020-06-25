@@ -24,26 +24,7 @@ eleventyComputed:
     <p>{{ discussion.description }}</p>
     <ul>
     {%- for comment in discussion.comments -%}
-      <li id={{ comment._id }} class="comment">
-        <p>
-          <a href="/users/{{ comment.user_name | slug }}">
-            {% avatar comment.user_name, users[comment.user_id].avatar_url %}
-          </a> by
-          <a href="/users/{{ comment.user_name | slug }}">
-            {{ comment.user_name }}
-          </a>
-          {% if comment.response_to %}
-            <a href="#{{ comment.response_to._id }}">
-              in response to {{ comment.response_to.user_name}}'s comment.
-            </a>
-          {% endif %}
-        </p>
-
-        {% markdown %}
-          {{ comment.body | safe }}
-        {% endmarkdown %}
-        <p>Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time></p>
-      </li>
+      {% discussionComment comment=comment %}
     {%- endfor -%}
     </ul>
   </main>
@@ -61,26 +42,7 @@ eleventyComputed:
     <h3>Comments</h3>
     <ul>
     {%- for comment in discussion.focus.discussion.comments | reverse -%}
-    <li id={{ comment._id }} class="comment">
-      <p>
-        <a href="/users/{{ comment.user_name | slug }}">
-          {% avatar comment.user_name, users[comment.user_id].avatar_url %}
-        </a>
-        by
-        <a href="/users/{{ comment.user_name | slug }}">
-          {{ comment.user_name }}
-        </a>
-        {% if comment.response_to %}
-          <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
-        {% endif %}
-      </p>
-
-      {%- markdown -%}
-        {{ comment.body | safe }}
-      {%- endmarkdown -%}
-
-        <p>Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time></p>
-    </li>
+      {% discussionComment comment=comment %}
     {%- endfor -%}
     </ul>
   {% endif %}
@@ -103,26 +65,7 @@ eleventyComputed:
     <h3>Comments</h3>
     <ul>
     {%- for comment in discussion.focus.discussion.comments | reverse -%}
-    <li id={{ comment._id }} class="comment">
-      <p>
-        <a href="/users/{{ comment.user_name | slug }}">
-          {% avatar comment.user_name, users[comment.user_id].avatar_url %}
-        </a>
-        by
-        <a href="/users/{{ comment.user_name | slug }}">
-          {{ comment.user_name }}
-        </a>
-        {% if comment.response_to %}
-          <a href="#{{ comment.response_to._id }}">in response to {{ comment.response_to.user_name}}'s comment.</a>
-        {% endif %}
-      </p>
-
-      {%- markdown -%}
-        {{ comment.body | safe }}
-      {%- endmarkdown -%}
-
-        <p>Posted <time datetime={{ comment.created_at }}>{{ comment.created_at | date }}</time></p>
-    </li>
+      {% discussionComment comment=comment %}
     {%- endfor -%}
     </ul>
   {% endif %}
