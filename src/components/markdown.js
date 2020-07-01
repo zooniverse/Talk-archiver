@@ -71,5 +71,5 @@ module.exports = async function markdown(content) {
   const md = baseMd
     .use(markdownItRegex, mentionSubjects)
     .use(markdownItRegex, mentionCollections);
-  return md.render(content.trim());
+  return content ? md.render(content.trim()) : '';
 }
