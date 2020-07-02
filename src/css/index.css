@@ -114,7 +114,7 @@ div.page-grid > nav {
 
 .collection li img {
   max-height: 6rem;
-  max-width: 6rem;
+  max-width: 100%;
 }
 
 .collection-link {
@@ -127,7 +127,7 @@ div.page-grid > nav {
 
 .comments-list img {
   max-height: 10rem;
-  max-width: 10rem;
+  max-width: 100%;
 }
 
 .comment {
