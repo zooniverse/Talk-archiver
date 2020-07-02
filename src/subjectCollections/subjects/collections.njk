@@ -7,10 +7,6 @@ pagination:
   size: 1
   alias: subject
 permalink: "/subjects/{{ subject.zooniverse_id }}/collections.html"
-eleventyComputed:
-  title: "Subject {{ subject.zooniverse_id }}: Collections"
-  description: "Collections that include subject {{ subject.zooniverse_id }} from {{ project.display_name }}."
-  ogImage: "{{ subject.location.standard }}"
 ---
 <div class="page-grid">
   <aside class=" focus">

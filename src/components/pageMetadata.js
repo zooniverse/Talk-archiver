@@ -1,4 +1,5 @@
 const awaitProject = require('../helpers/project');
+const subjectLocation = require("../helpers/subjectLocation");
 
 function metaDesc(description) {
   return `
@@ -10,8 +11,8 @@ function metaDesc(description) {
 
 function metaImage(ogImage) {
   return `
-    <meta property='og:image' content="${ ogImage }" />
-    <meta name='twitter:image' content="${ ogImage }" />
+    <meta property='og:image' content="${ subjectLocation(ogImage) }" />
+    <meta name='twitter:image' content="${ subjectLocation(ogImage) }" />
   `;
 }
 

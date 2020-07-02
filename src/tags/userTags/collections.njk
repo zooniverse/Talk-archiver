@@ -7,10 +7,6 @@ pagination:
   size: 1
   alias: tag
 permalink: "/tags/{{ tag.name }}/collections.html"
-eleventyComputed:
-  title: "Tag: {{ tag.name }}"
-  description: "Collections tagged with #{{ tag.name }} on {{ project.display_name }}."
-  ogImage: "{{ subjects[tag.subjects[0]].location.standard }}"
 ---
 <main>
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
