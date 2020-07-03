@@ -32,10 +32,11 @@ async function fetchSubjects() {
   const subjects = {};
 
   for (subject of APIsubjects) {
-    if (subject.url !== `subjects/${subject.zooniverse_id}`) {
-      throw new Error(`Subject mismatch: ${subject.url} ${subject.zooniverse_id}`);
+    if (subject && subject.url !== `subjects/${subject.zooniverse_id}`) {
+      console.error(`Subject mismatch: ${subject.url} ${subject.zooniverse_id}`);
+    } else {
+      subjects[subject.zooniverse_id] = subject;
     }
-    subjects[subject.zooniverse_id] = subject;
   }
 
   console.log('loaded', Object.keys(subjects).length, 'subjects');
