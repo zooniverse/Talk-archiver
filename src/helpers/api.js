@@ -35,8 +35,8 @@ async function getURL(url) {
 }
 
 async function batchedGet(urls) {
-  const uniqueURLs = urls.filter((url, index, self) => self.indexOf(url) === index);
-  const promises = uniqueURLs.map(getURL)
+  // const uniqueURLs = urls.filter((url, index, self) => self.indexOf(url) === index);
+  const promises = urls.map(getURL)
   return Promise.all(promises);
 }
 
