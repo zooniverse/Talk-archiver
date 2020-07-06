@@ -1,5 +1,5 @@
 module.exports = function subjectLocation(location) {
-  let url = location;
+  let url = location.mp4 || location;
   if ( Array.isArray(location) ) {
     url = location[0];
   }
