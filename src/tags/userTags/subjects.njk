@@ -12,9 +12,9 @@ permalink: "/tags/{{ tag.name }}/subjects.html"
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
   <h2>Subjects</h2>
   <ul class="collection">
-    {% for subject in tag.subjects | mapKeys(subjects) %}
+    {% for subject in tag.subjects %}
       <li class="subject">
-        <a href="/subjects/{{ subject.zooniverse_id }}">
+        <a href="/subjects/{{ subject._id }}">
           {% subjectImage subject, 'thumb' %}
         </a> 
       </li>

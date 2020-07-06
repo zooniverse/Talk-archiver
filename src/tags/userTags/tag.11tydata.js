@@ -1,6 +1,5 @@
-function ogImage({ subjects, tag }) {
-  const subjectID = tag.subjects[0];
-  const subject = subjects[subjectID];
+function ogImage({ tag }) {
+  const subject = tag.subjects[0];
   return subject ? subject.location.standard : undefined;
 }
 

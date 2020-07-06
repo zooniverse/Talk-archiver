@@ -1,14 +1,14 @@
-const awaitBoards = require('./boards');
-const awaitCollections = require('./collections');
 const discussionComments = require('./discussionComments');
-const awaitSubjects = require('./subjects');
 
-function hasTag(item, tag) {
-  if (item.tags && item.tags.indexOf(tag) > -1) {
-    return true;
-  }
-  const matchingTags = item.tags && item.tags.filter(itemTag => tag === itemTag._id);
-  return matchingTags && matchingTags.length > 0;
+function hasTag(discussion, tag) {
+  const taggedComments = discussion.comments.filter(function(comment) {
+    if (comment.tags && comment.tags.indexOf(tag) > -1) {
+      return true;
+    }
+    const matchingTags = comment.tags && comment.tags.filter(itemTag => tag === itemTag._id);
+    return matchingTags && matchingTags.length > 0;
+  });
+  return taggedComments.length > 0;
 }
 
 function uniqueTags(items, tags) {
@@ -21,43 +21,42 @@ function uniqueTags(items, tags) {
   return tags;
 }
 
-function allUniqueTags({ discussions, subjects, userCollections }) {
+function allUniqueTags({ discussions, subjects, collections }) {
   let tags = {};
 
-  tags = uniqueTags(Object.values(subjects), tags);
+  for (discussion of subjects) {
+    tags = uniqueTags(discussion.comments, tags);
+  }
 
   for (discussion of discussions) {
     tags = uniqueTags(discussion.comments, tags);
   }
 
-  tags = uniqueTags(Object.values(userCollections), tags);
+  for (discussion of collections) {
+    tags = uniqueTags(discussion.comments, tags);
+  }
 
   return Object.keys(tags);
 }
 
 function buildTagCollection(tag, data) {
-  // console.log('building tag', tag);
-  const subjects = Object.values(data.subjects).filter(subject => hasTag(subject, tag));
-  const discussions = data.discussions.filter(discussion => {
-    const taggedComments = discussion.comments.filter(comment => hasTag(comment, tag));
-    return taggedComments.length > 0;
-  });
-  const userCollections = Object.values(data.userCollections).filter(userCollection => hasTag(userCollection, tag));
+  const subjects = data.subjects.filter(discussion => hasTag(discussion, tag));
+  const discussions = data.discussions.filter(discussion => hasTag(discussion, tag));
+  const userCollections = data.collections.filter(discussion => hasTag(discussion, tag));
   return {
     name: tag,
-    discussions: discussions.map(discussion => discussion.zooniverse_id),
-    subjects: subjects.map(subject => subject.zooniverse_id),
-    userCollections: userCollections.map(collection => collection.zooniverse_id)
+    discussions,
+    subjects: subjects.map(subject => subject.focus),
+    userCollections: userCollections.map(collection => collection.focus)
   };
 }
 
 async function tags() {
   const userTags = {};
-  const [ boards, userCollections, subjects ] = await Promise.all([awaitBoards, awaitCollections, awaitSubjects]);
-  const { boards: discussions } = await discussionComments;
-  const tagNames = allUniqueTags({ discussions, subjects, userCollections });
+  const { boards: discussions, collections, subjects } = await discussionComments;
+  const tagNames = allUniqueTags({ discussions, subjects, collections });
   for (tag of tagNames) {
-    userTags[tag] = buildTagCollection(tag, { discussions, subjects, userCollections });
+    userTags[tag] = buildTagCollection(tag, { discussions, subjects, collections });
   }
   console.log('read', Object.keys(userTags).length, 'tags');
   return userTags;

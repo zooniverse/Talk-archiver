@@ -11,5 +11,5 @@ permalink: "/tags/{{ tag.name }}/discussions.html"
 <main>
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
   <h2>Discussions</h2>
-  {% featuredDiscussions tag.discussions | mapKeys(discussions) %}
+  {% featuredDiscussions tag.discussions %}
 </main>

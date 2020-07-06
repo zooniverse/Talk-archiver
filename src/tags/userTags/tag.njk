@@ -12,14 +12,14 @@ permalink: "/tags/{{ tag.name }}/"
   <h1>Tag: {{ tag.name }}</h1>
   <div>
     <h2><a href="/tags/{{ tag.name }}/discussions.html">Discussions</a> ({{ tag.discussions.length }})</h2>
-    {% featuredDiscussions tag.discussions | limit(2) | mapKeys(discussions) %}
+    {% featuredDiscussions tag.discussions | limit(2) %}
   </div>
   <div>
     <h2><a href="/tags/{{ tag.name }}/subjects.html">Subjects</a> ({{ tag.subjects.length }})</h2>
     <ul class="collection">
-      {% for subject in tag.subjects | limit(6) | mapKeys(subjects) %}
+      {% for subject in tag.subjects | limit(6) %}
         <li class="subject">
-          <a href="/subjects/{{ subject.zooniverse_id }}">
+          <a href="/subjects/{{ subject._id }}">
             {% subjectImage subject, 'thumb' %}
           </a> 
         </li>
@@ -28,7 +28,7 @@ permalink: "/tags/{{ tag.name }}/"
 
     <h2><a href="/tags/{{ tag.name }}/collections.html">Collections</a> ({{ tag.userCollections.length }})</h2>
     <ul>
-      {% for collection in tag.userCollections | limit(6) | mapKeys(userCollections) %}
+      {% for collection in tag.userCollections | limit(6) %}
         <li>
            {% collectionSummary collection, 4 %}
         </li>
