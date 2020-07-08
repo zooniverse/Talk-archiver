@@ -11,19 +11,5 @@ permalink: "/users/{{ user.name | slug }}/comments.html"
 <main>
   <h1><a href="/users/{{ user.name | slug }}">Profile: {{ user.name }}</a></h1>
   <h2>Subject comments ({{ user.subjects.length }})</h2>
-  <ul class="comments-list">
-  {%- for subject in user.subjects -%}
-    <li id={{ subject.focus.zooniverse_id }}>
-      <a href="/subjects/{{ subject.focus.zooniverse_id }}">
-        {% subjectImage subject.focus, 'thumb' %}
-      </a>
-      <p>
-        {%- markdown -%}
-          {{ subject.comment.body }}
-        {%- endmarkdown -%}
-      </p>
-      <time datetime={{ subject.comment.created_at }}>{{ subject.comment.created_at | date }}</time>
-    </li>
-  {%- endfor -%}
-  </ul>
+  {% subjectCommentsList subjects=user.subjects  %}
 </main>

@@ -98,6 +98,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPairedAsyncShortcode("markdown", require('./src/components/markdown'));
   eleventyConfig.addAsyncShortcode('pageHeader', require('./src/components/pageHeader'));
   eleventyConfig.addAsyncShortcode('pageMetadata', require('./src/components/pageMetadata'));
+  eleventyConfig.addAsyncShortcode('subjectComment', require('./src/components/subjectComment'));
+  eleventyConfig.addAsyncShortcode('subjectCommentsList', require('./src/components/subjectCommentsList'));
   eleventyConfig.addShortcode('subjectImage', require('./src/components/subjectImage'));
   eleventyConfig.addShortcode('tags', require('./src/components/tagList'));
 
