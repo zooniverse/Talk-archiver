@@ -63,3 +63,10 @@ yarn build
 # and deploy the resources
 yarn deploy
 ```
+
+## Debugging performance
+
+Set the `DEBUG` environment variable to [debug performance](https://www.11ty.dev/docs/debugging/).
+```
+DEBUG=Eleventy:Benchmark* yarn build talk.sciencegossip.org
+```
