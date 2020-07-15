@@ -1,14 +1,15 @@
 const awaitProjects = require('./projects');
+const talkDomain = require('./talkDomain')
 
 const args = process.argv.slice(2);
-const talkDomain = args[args.length - 1];
+const buildName = args[args.length - 1];
 
 async function fetchProject() {
   const projects = await awaitProjects;
-  const domain = talkDomain.replace('talk.', 'www.');
-  let [ project ] = projects.filter(project => project.bucket_path === domain);
+  const bucketPath = buildName.replace('talk.', 'www.');
+  let [ project ] = projects.filter(project => project.bucket_path === bucketPath);
   if (!project) {
-    const namedProjects= projects.filter(project => project.name === domain);
+    const namedProjects= projects.filter(project => project.name === buildName);
     project = namedProjects[0];
   }
   return project;
@@ -16,7 +17,7 @@ async function fetchProject() {
 
 async function project() {
   const project = await fetchProject();
-  project.domain = talkDomain.replace('www.', 'talk.');
+  project.domain = talkDomain(project);
   return project;
 }
 
