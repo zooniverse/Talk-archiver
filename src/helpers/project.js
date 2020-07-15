@@ -16,7 +16,7 @@ async function fetchProject() {
 
 async function project() {
   const project = await fetchProject();
-  project.domain = talkDomain;
+  project.domain = talkDomain.replace('www.', 'talk.');
   return project;
 }
 
