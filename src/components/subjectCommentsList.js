@@ -9,7 +9,7 @@ module.exports = async function subjectCommentsList({ subjects }) {
         <li>
           ${comment}
         </li>
-      `)}
+      `).join('\n')}
     </ul>
   `
 }
