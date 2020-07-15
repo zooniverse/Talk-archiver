@@ -134,6 +134,9 @@ div.page-grid > nav {
   @apply mb-4 border-b border-light-3;
 }
 
+.comment blockquote {
+  @apply pl-2 border-l border-light-4;
+}
 .comment p {
   @apply mb-2;
 }
