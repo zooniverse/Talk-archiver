@@ -14,7 +14,7 @@ const requestQueue = new RequestQueue({
   // console.log('Requesting', url.toString());
   try {
     const data = await CacheAsset(url.toString(), {
-    	duration: "30d",
+    	duration: "90d",
     	type: "json"
     });
     data.url = promise.url;
