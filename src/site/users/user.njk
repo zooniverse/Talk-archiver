@@ -9,6 +9,7 @@ pagination:
 permalink: "/users/{{ user.name | slug }}/"
 eleventyComputed:
   title: "Profile: {{ user.name }}"
+  description: "Comments, discussions and collections by {{ user.name }} at {{ project.display_name }}"
   ogImage: "{{ user.avatar_url }}"
 ---
 <main class="page-grid">

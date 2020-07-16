@@ -9,6 +9,8 @@ pagination:
 permalink: "/users/{{ user.name | slug }}/collections.html"
 eleventyComputed:
   title: "Profile: {{ user.name }}: collections"
+  description: "Collections by {{ user.name }} at {{ project.display_name }}"
+  ogImage: "{{ user.avatar_url }}"
 ---
 <main>
   <h1><a href="/users/{{ user.name | slug }}">Profile: {{ user.name }}</a></h1>
