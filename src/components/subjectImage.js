@@ -19,9 +19,14 @@ module.exports = function subjectImage(subject, size='standard', className) {
     const zooniverseID = subject.zooniverse_id || subject._id;
     const staticRoot = 'static.zooniverse.org';
     const thumbnailPath = url.replace('https://', '');
-    const src =  passThrough ? url : `https://thumbnails.zooniverse.org/150x150/${thumbnailPath.replace(staticRoot, '')}`;
+    let src =  passThrough ? url : `https://thumbnails.zooniverse.org/150x150/${thumbnailPath.replace(staticRoot, '')}`;
     const classAttr = className ? `class="${className}"` : '';
     const alt = `Subject ${zooniverseID}`;
+    const { metadata } = subject;
+    const counters = metadata && metadata.counters;
+    if (counters && counters.human) {
+      src = 'https://placehold.it/300x215&text=Human'
+    }
     return src.endsWith('.mp4') ? video(classAttr, alt, src) : img(classAttr, alt, src);
   } catch (e) {
     console.log(e.message);
