@@ -1,6 +1,6 @@
 function ogImage({ userCollection }) {
   const subject = userCollection.subjects && userCollection.subjects[0];
-  return subject ? subject.location.standard : undefined
+  return subject ? subject.location : undefined
 }
 
 module.exports = {

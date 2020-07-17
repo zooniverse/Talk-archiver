@@ -14,7 +14,7 @@ function video(classAttr, alt, src) {
 
 module.exports = function subjectImage(subject, size='standard', className) {
   try {
-    let url = subjectLocation(subject.location.standard);
+    let url = subjectLocation(subject.location.standard || subject.location);
     const passThrough = (size === 'standard') || url.endsWith('.png') || url.endsWith('.mp4');
     const zooniverseID = subject.zooniverse_id || subject._id;
     const staticRoot = 'static.zooniverse.org';

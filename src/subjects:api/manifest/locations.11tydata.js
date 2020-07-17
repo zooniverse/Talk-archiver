@@ -6,7 +6,7 @@ module.exports = async function () {
   const hosts = {};
 
   Object.values(subjects).forEach(function (subject) {
-    const location = subjectLocation(subject.location.standard);
+    const location = subjectLocation(subject.location.standard || subject.location);
     const url = new URL(location);
     if (hosts[url.host]) {
       hosts[url.host] = hosts[url.host] + 1;

@@ -1,6 +1,6 @@
 function ogImage({ user }) {
   const subject = user.subjects[0];
-  return subject ? subject.focus.location.standard : undefined
+  return subject ? subject.focus.location : undefined
 }
 
 module.exports = {

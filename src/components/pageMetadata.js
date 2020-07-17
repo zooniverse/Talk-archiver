@@ -11,8 +11,8 @@ function metaDesc(description) {
 
 function metaImage(ogImage) {
   return `
-    <meta property='og:image' content="${ subjectLocation(ogImage) }" />
-    <meta name='twitter:image' content="${ subjectLocation(ogImage) }" />
+    <meta property='og:image' content="${ subjectLocation(ogImage.standard || ogImage) }" />
+    <meta name='twitter:image' content="${ subjectLocation(ogImage.standard || ogImage) }" />
   `;
 }
 

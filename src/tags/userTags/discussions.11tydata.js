@@ -1,6 +1,6 @@
 function ogImage({ tag }) {
   const subject = tag.subjects[0];
-  return subject ? subject.location.standard : undefined;
+  return subject ? subject.location : undefined;
 }
 
 module.exports = {
