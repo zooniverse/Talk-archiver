@@ -10,7 +10,7 @@
   },
   "scripts": {
     "_build": "npm-run-all clean webpack:build:assets \"_build:pages {1}\" verify > build.log --",
-    "_build:pages": "npm-run-all --parallel \"build:* --quiet {1}\" -- ",
+    "_build:pages": "npm-run-all \"build:* --quiet {1}\" -- ",
     "_dev": "npm-run-all --parallel \"webpack:dev:assets --watch\" \"dev:* {1}\" -- ",
     "build": "npm-run-all \"_build {1}\" copy-logs -- ",
     "build:api": "NODE_ENV=production node --max-old-space-size=${NODE_RAM:-12000} ./node_modules/@11ty/eleventy/cmd.js --input=src/api",
