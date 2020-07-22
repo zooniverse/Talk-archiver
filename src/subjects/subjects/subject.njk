@@ -11,9 +11,12 @@ permalink: "/subjects/{{ subject.zooniverse_id }}/"
 <div class="page-grid subject-page-grid">
   <main class="focus">
     <h1>Subject: {{ subject.zooniverse_id }}</h1>
-
-    {% subjectImage subject, 'standard', 'subject' %}
-
+    <p class="subject">
+      {% subjectImage subject, 'standard' %}
+      <a href="/api/subjects/{{ subject.zooniverse_id }}.json">
+        Full subject data (<abbr title="JavaScript Object Notation">JSON</abbr>)
+      </a>
+    </p>
     <h2>Comments</h2>
     <ul>
     {%- for comment in subject.discussion.comments | reverse -%}
