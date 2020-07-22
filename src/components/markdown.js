@@ -20,7 +20,7 @@ const mentionUsers = {
 
 const mentionTags = {
   name: 'mentionTags',
-  regex: /#(\w+)\b/,
+  regex: /#([\w-]+)\b/,
   replace: (match) => {
     const url = `/tags/${match.toLowerCase()}`;
     return `<a href="${url}">#${match}</a>`;
