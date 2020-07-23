@@ -2,11 +2,10 @@
 eleventyExcludeFromCollections: true
 layout: default
 pagination:
-  data: subjects
-  resolve: values
+  data: subjectURLs
   size: 1
-  alias: subject
-permalink: "/subjects/{{ subject.zooniverse_id }}/collections.html"
+  alias: subjectURL
+permalink: "/{{ subjectURL }}/collections.html"
 ---
 <div class="page-grid">
   <aside class=" focus">
