@@ -1,9 +1,9 @@
-const awaitBoards = require('../../helpers/boards');
-const awaitCollections = require('../../helpers/collections');
-const awaitSubjects = require('../../helpers/subjects');
-const awaitTags = require('../../helpers/tags');
-const awaitUsers = require('../../helpers/users');
-const store = require('../../helpers/store');
+const awaitBoards = require('../helpers/boards');
+const awaitCollections = require('../helpers/collections');
+const awaitSubjects = require('../helpers/subjects');
+const awaitTags = require('../helpers/tags');
+const awaitUsers = require('../helpers/users');
+const store = require('../helpers/store');
 
 const CATEGORIES = [
   'chat',
