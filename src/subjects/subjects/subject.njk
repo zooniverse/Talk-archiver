@@ -47,7 +47,7 @@ permalink: "/{{ subjectURL }}/"
     </div>
 
     <h2>Board Discussions</h2>
-    {% for category, categoryDiscussions in discussions | focus(subject.zooniverse_id) %}
+    {% for category, categoryDiscussions in subject.zooniverse_id | boardDiscussions %}
       <h3>{{ category | capitalize }}</h3>
       {% featuredDiscussions categoryDiscussions %}
     {% endfor %}

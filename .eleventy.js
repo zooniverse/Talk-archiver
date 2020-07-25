@@ -58,17 +58,19 @@ module.exports = function(eleventyConfig) {
     return (array && array.slice) ? array.slice(0, limit) : array;
   });
 
-  eleventyConfig.addFilter("focus", (discussions, focusID) => {
+  const discussionComments = require('./src/helpers/discussionComments');
+  eleventyConfig.addNunjucksAsyncFilter("boardDiscussions", async (focusID, callback) => {
+    const { boards: discussions } = await discussionComments;
     const boards = {
       chat: [],
       science: [],
       help: []
     }
-    const focusDiscussions = Object.values(discussions).filter(item => item.focus._id === focusID);
+    const focusDiscussions = discussions.filter(item => item.focus._id === focusID);
     focusDiscussions.forEach(discussion => {
       boards[discussion.board.category].push(discussion);
     });
-    return boards;
+    callback(null, boards);
   });
 
   eleventyConfig.addFilter("pinned", (discussions, boardID) => {
