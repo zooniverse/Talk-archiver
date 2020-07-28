@@ -38,6 +38,7 @@ async function fetchUsers() {
       // remove the domain from email addresses in usernames.
       user.name = user.name.split('@');
       user.name = user.name[0];
+      user.subjects = [];
       users[user.id] = user;
     }
   }
@@ -50,8 +51,7 @@ async function fetchUsers() {
         location: subjectDiscussion.focus.location,
         zooniverse_id: subjectDiscussion.focus._id
       };
-      const commentExists = author && author.subjects.find(userSubject => userSubject.comment._id === comment._id);
-      if (author && !commentExists) {
+      if (author) {
         author.subjects.push({ comment, focus });
       }
     }
