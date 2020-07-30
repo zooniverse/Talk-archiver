@@ -1,5 +1,5 @@
-const awaitSubjects = require('../../helpers/subjects');
-const subjectLocation = require('../../helpers/subjectLocation');
+const awaitSubjects = require('../helpers/subjects');
+const subjectLocation = require('../helpers/subjectLocation');
 
 module.exports = async function () {
   const subjects = await awaitSubjects;

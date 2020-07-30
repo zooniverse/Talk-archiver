@@ -2,11 +2,10 @@
 eleventyExcludeFromCollections: true
 layout: default
 pagination:
-  data: subjects
-  resolve: values
+  data: subjectURLs
   size: 1
-  alias: subject
-permalink: "/subjects/{{ subject.zooniverse_id }}/"
+  alias: subjectURL
+permalink: "/{{ subjectURL }}/"
 ---
 <div class="page-grid subject-page-grid">
   <main class="focus">
@@ -48,7 +47,7 @@ permalink: "/subjects/{{ subject.zooniverse_id }}/"
     </div>
 
     <h2>Board Discussions</h2>
-    {% for category, categoryDiscussions in discussions | focus(subject.zooniverse_id) %}
+    {% for category, categoryDiscussions in subject.zooniverse_id | boardDiscussions %}
       <h3>{{ category | capitalize }}</h3>
       {% featuredDiscussions categoryDiscussions %}
     {% endfor %}

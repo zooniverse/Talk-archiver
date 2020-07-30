@@ -1,10 +1,9 @@
 ---
 eleventyExcludeFromCollections: true
 pagination:
-  data: subjects
-  resolve: values
+  data: subjectURLs
   size: 1
-  alias: subject
-permalink: "/api/subjects/{{ subject.zooniverse_id }}.json"
+  alias: subjectURL
+permalink: "/api/{{ subjectURL }}.json"
 ---
 {{ subject | dump | safe }}

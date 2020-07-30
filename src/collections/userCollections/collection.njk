@@ -47,7 +47,7 @@ permalink: "/collections/{{ userCollection.zooniverse_id}}/"
     </ul>
 
     <h2>Board Discussions</h2>
-    {% for category, categoryDiscussions in discussions | focus(userCollection.zooniverse_id) %}
+    {% for category, categoryDiscussions in userCollection.zooniverse_id | boardDiscussions %}
       <h3>{{ category | capitalize }}</h3>
       <ul>
         {% for discussion in categoryDiscussions %}

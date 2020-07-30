@@ -21,6 +21,8 @@ async function fetchCollections() {
   const users = await awaitUsers;
   const collections = [];
 
+  Object.values(users).forEach(user => user.my_collections = []);
+
   const rl = readline.createInterface({
       input: fs.createReadStream(path.resolve(__dirname, '../../.data', `${name}_collections.json`)),
       output: process.stdout,
@@ -34,8 +36,7 @@ async function fetchCollections() {
     // console.log('Read collection', collection.zooniverse_id);
     userCollections[collection.zooniverse_id] = collection;
     const owner = users[collection.user_id];
-    const collectionExists = owner && owner.my_collections.find(userCollection => userCollection.zooniverse_id === collection.zooniverse_id);
-    if (owner && !collectionExists) {
+    if (owner) {
       owner.my_collections.push(collection);
     }
   });
