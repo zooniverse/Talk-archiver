@@ -20,7 +20,7 @@ permalink: "/{{ subjectURL }}/collections.html"
     </p>
     <h2>Comments</h2>
     <ul>
-    {%- for comment in subject.discussion.comments | reverse -%}
+    {%- for comment in subject.discussion.comments -%}
       {% discussionComment comment=comment %}
     {%- endfor -%}
     </ul>
