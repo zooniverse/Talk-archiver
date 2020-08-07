@@ -60,16 +60,20 @@ async function projectCollections() {
 
 const awaitMentionCollections = projectCollections();
 
-const baseMd = markdownIt(options)
-  .use(markdownItEmoji)
-  .use(markdownItRegex, mentionUsers)
-  .use(markdownItRegex, mentionTags);
-
-module.exports = async function markdown(content) {
+async function zooMd() {
   const mentionSubjects = await awaitMentionSubjects;
   const mentionCollections = await awaitMentionCollections;
-  const md = baseMd
+  return markdownIt(options)
+    .use(markdownItEmoji)
+    .use(markdownItRegex, mentionUsers)
+    .use(markdownItRegex, mentionTags)
     .use(markdownItRegex, mentionSubjects)
     .use(markdownItRegex, mentionCollections);
+}
+
+const awaitMd = zooMd();
+
+module.exports = async function markdown(content) {
+  const md = await awaitMd;
   return content ? md.render(content.trim()) : '';
 }
