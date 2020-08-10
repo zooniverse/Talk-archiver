@@ -2,7 +2,6 @@
 eleventyExcludeFromCollections: true
 pagination:
   data: users
-  resolve: values
   size: 1
   alias: user
 permalink: "/api/users/{{ user.name | slug }}.json"
