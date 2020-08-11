@@ -33,7 +33,7 @@ module.exports = function subjectImage(subject, size='standard', className) {
     const alt = `Subject ${zooniverseID}`;
     const { metadata } = subject;
     const counters = metadata && metadata.counters;
-    const poster = previewLocation[0] && previewLocation[0][0];
+    const poster = subjectLocation(previewLocation || subject.location);
     if (counters && counters.human) {
       src = 'https://placehold.it/300x215&text=Human'
     }
