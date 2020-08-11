@@ -6,6 +6,13 @@ function URLFromLocation(location) {
   }
 
   if ( Array.isArray(location) ) {
+  /*
+    Chimp & See uses arrays of arrays of image URLs.
+    Catch those before going to process arrays of strings.
+  */
+    if (Array.isArray(location[0])) {
+      return location[0][0] || PLACEHOLDER;
+    }
     return location[0] || PLACEHOLDER;
   }
 
