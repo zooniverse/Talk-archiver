@@ -19,7 +19,8 @@ module.exports = function subjectImage(subject, size='standard', className) {
       (size === 'standard') ||
       url.endsWith('.png') ||
       url.endsWith('.mp4') ||
-      url.startsWith('https://placehold.it');
+      url.startsWith('https://placehold.it') ||
+      url.includes('s3.amazonaws.com');
     const zooniverseID = subject.zooniverse_id || subject._id;
     const staticRoot = 'static.zooniverse.org';
     const thumbnailPath = url.replace('https://', '');
