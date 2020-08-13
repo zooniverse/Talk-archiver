@@ -20,6 +20,7 @@ function URLFromLocation(location) {
 module.exports = function subjectLocation(location) {
   let url = URLFromLocation(location);
   url = url.replace('zooniverse-static.s3.amazonaws.com', 'static.zooniverse.org');
+  url = url.replace('www.galaxyzoo.org.s3.amazonaws.com', 's3.amazonaws.com/www.galaxyzoo.org');
   url = url.replace('http://', 'https://');
   return url;
 }
