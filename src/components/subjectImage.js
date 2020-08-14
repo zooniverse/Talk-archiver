@@ -4,9 +4,9 @@ function img(classAttr, alt, src) {
   return `<img ${classAttr} loading=lazy alt="${alt}" src=${src}>`
 }
 
-function video(classAttr, alt, src) {
+function video(classAttr, alt, src, poster) {
   return `
-    <video ${classAttr} src=${src}>
+    <video ${classAttr} controls poster=${poster} preload="none" src=${src}>
       <p>${alt}</p>
     </video>
   `
@@ -14,12 +14,18 @@ function video(classAttr, alt, src) {
 
 module.exports = function subjectImage(subject, size='standard', className) {
   try {
-    let url = subjectLocation(subject.location.standard || subject.location);
+/*
+  Chimp & See stores videos in location.standard and images in location.previews.
+*/
+    let previewLocation = subject.location.previews || subject.location.standard;
+    let standardLocation = size === 'standard' ? subject.location.standard : previewLocation;
+    let url = subjectLocation(standardLocation || subject.location);
     const passThrough = 
       (size === 'standard') ||
       url.endsWith('.png') ||
       url.endsWith('.mp4') ||
-      url.startsWith('https://placehold.it');
+      url.startsWith('https://placehold.it') ||
+      url.includes('s3.amazonaws.com');
     const zooniverseID = subject.zooniverse_id || subject._id;
     const staticRoot = 'static.zooniverse.org';
     const thumbnailPath = url.replace('https://', '');
@@ -28,10 +34,11 @@ module.exports = function subjectImage(subject, size='standard', className) {
     const alt = `Subject ${zooniverseID}`;
     const { metadata } = subject;
     const counters = metadata && metadata.counters;
+    const poster = subjectLocation(previewLocation || subject.location);
     if (counters && counters.human) {
       src = 'https://placehold.it/300x215&text=Human'
     }
-    return src.endsWith('.mp4') ? video(classAttr, alt, src) : img(classAttr, alt, src);
+    return src.endsWith('.mp4') ? video(classAttr, alt, src, poster) : img(classAttr, alt, src);
   } catch (e) {
     console.log(e.message);
     console.log(subject);

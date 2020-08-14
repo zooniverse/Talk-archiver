@@ -39,14 +39,14 @@ async function fetchUsers() {
       user.name = user.name.split('@');
       user.name = user.name[0];
       user.subjects = [];
-      users[user.id] = user;
+      users[`${user.name}`] = user;
     }
   }
 
   const { subjects } = await discussionComments;
   for (subjectDiscussion of subjects ) {
     for (comment of subjectDiscussion.comments) {
-      const author = users[comment.user_id];
+      const author = users[comment.user_name];
       const focus = {
         location: subjectDiscussion.focus.location,
         zooniverse_id: subjectDiscussion.focus._id

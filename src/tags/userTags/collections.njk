@@ -12,7 +12,7 @@ permalink: "/tags/{{ tag.name }}/collections.html"
   <h1><a href="/tags/{{ tag.name }}">Tag: {{ tag.name }}</a></h1>
   <h2>Collections</h2>
   <ul>
-    {% for collection in tag.collections %}
+    {% for collection in tag.userCollections %}
       <li>
          {% collectionSummary collection, 4 %}
       </li>

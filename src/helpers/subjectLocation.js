@@ -6,6 +6,13 @@ function URLFromLocation(location) {
   }
 
   if ( Array.isArray(location) ) {
+  /*
+    Chimp & See uses arrays of arrays of image URLs.
+    Catch those before going to process arrays of strings.
+  */
+    if (Array.isArray(location[0])) {
+      return location[0][0] || PLACEHOLDER;
+    }
     return location[0] || PLACEHOLDER;
   }
 
@@ -20,6 +27,7 @@ function URLFromLocation(location) {
 module.exports = function subjectLocation(location) {
   let url = URLFromLocation(location);
   url = url.replace('zooniverse-static.s3.amazonaws.com', 'static.zooniverse.org');
+  url = url.replace('www.galaxyzoo.org.s3.amazonaws.com', 's3.amazonaws.com/www.galaxyzoo.org');
   url = url.replace('http://', 'https://');
   return url;
 }
