@@ -17,7 +17,7 @@ module.exports = function subjectImage(subject, size='standard', className) {
 /*
   Chimp & See stores videos in location.standard and images in location.previews.
 */
-    let previewLocation = subject.location.previews || subject.location.standard;
+    let previewLocation = subject.location.previews || subject.location.thumbnail || subject.location.standard;
     let standardLocation = size === 'standard' ? subject.location.standard : previewLocation;
     let url = subjectLocation(standardLocation || subject.location);
     const passThrough = 
@@ -25,6 +25,7 @@ module.exports = function subjectImage(subject, size='standard', className) {
       url.endsWith('.png') ||
       url.endsWith('.mp4') ||
       url.startsWith('https://placehold.it') ||
+      url.startsWith('https://www.galaxyzoo.org') ||
       url.includes('s3.amazonaws.com');
     const zooniverseID = subject.zooniverse_id || subject._id;
     const staticRoot = 'static.zooniverse.org';
