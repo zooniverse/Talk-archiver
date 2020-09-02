@@ -1,6 +1,7 @@
 const awaitProject = require('../helpers/project');
 const markdownIt = require("markdown-it");
 const markdownItEmoji = require("markdown-it-emoji");
+const markdownItImsize = require("markdown-it-imsize");
 const markdownItRegex = require('markdown-it-regex').default;
 const options = {
   html: true,
@@ -65,6 +66,7 @@ async function zooMd() {
   const mentionCollections = await awaitMentionCollections;
   return markdownIt(options)
     .use(markdownItEmoji)
+    .use(markdownItImsize)
     .use(markdownItRegex, mentionUsers)
     .use(markdownItRegex, mentionTags)
     .use(markdownItRegex, mentionSubjects)
@@ -75,5 +77,7 @@ const awaitMd = zooMd();
 
 module.exports = async function markdown(content) {
   const md = await awaitMd;
+  const sizedImages = /\.(jpg|png|gif)=/gi;
+  content = content.replace(sizedImages, '.$1 =');
   return content ? md.render(content.trim()) : '';
 }
